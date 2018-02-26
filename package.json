@@ -1,21 +1,25 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "vws-js-app",
+  "version": "0.0.1",
+  "description": "VWS Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": {
+    "type": "git",
+    "url": "git+https://rvillamil@bitbucket.org/rvillamil/vws-js-app.git"
+  },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "scrapping",
+    "torrent",
+    "portal",
+    "video",
+    "Electron"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Rodrigo Villamil Pérez",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/rvillamil/vws-js-app#readme",
   "devDependencies": {
     "electron": "~1.8.2"
   }
