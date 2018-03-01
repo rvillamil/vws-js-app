@@ -9,7 +9,7 @@ function loadContent() {
 
 var crawlVideoPremieres = function () {
     console.log("crawlVideoPremieres...");
-    document.getElementById("videopremieres-content").innerHTML = "Cargando estrenos de Video ...";
+    document.getElementById("videopremieres-content").innerHTML = htmlWithTextInTheMiddle("Cargando estrenos de Video ...");
     vwstools.parseVideoPremieres()
         .then(function (urlList) {
             document.getElementById("videopremieres-content").innerHTML = "";
@@ -23,7 +23,7 @@ var crawlVideoPremieres = function () {
 
 var crawlBillboardFilms = function () {
     console.log("crawlBillboardFilms...");
-    document.getElementById("billboardfilms-content").innerHTML = "Cargando estrenos del Cine ...";
+    document.getElementById("billboardfilms-content").innerHTML = htmlWithTextInTheMiddle("Cargando estrenos del Cine ...");
     vwstools.parseBillboardFilms()
         .then(function (urlList) {
             document.getElementById("billboardfilms-content").innerHTML = "";
@@ -140,4 +140,11 @@ function setAboutShow(title, description, sinopsis) {
     document.getElementById("about-show-title").innerHTML = "<p>Titulo</p>" + title;
     document.getElementById("about-show-description").innerHTML = "<p>Descripcion</p>" + description;
     document.getElementById("about-show-sinopsis").innerHTML = "<p>Sinopsis</p>" + sinopsis;
+}
+/**
+ * @param {*} text String with the text 
+ * @returns html <div> to write the text in the middle of the screen
+ */
+function htmlWithTextInTheMiddle(text) {
+    return "<div class=\"center\">" + text + "<div>"
 }

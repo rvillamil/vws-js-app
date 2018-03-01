@@ -1,6 +1,6 @@
 /* Vars section */
 
- :root {
+:root {
     --site-background-color: rgb(79, 80, 82);
     --topbar-background-color: #333;
     --topbar-text-color: rgb(246, 189, 4);
@@ -49,6 +49,17 @@ a:active {
     text-decoration: underline;
 }
 
+.center {
+    position: absolute;
+    height: X px;
+    width: Y px;
+    left: 30%;
+    top: 50%;
+    margin-top: - X/2 px;
+    margin-left: - Y/2 px;
+    color: var(--topbar-text-color);
+    font-size: 1.50em
+}
 
 /* -------------------------- Zone: Top ------------------------- */
 
@@ -94,7 +105,6 @@ div.form-logout {
     top: 15px;
 }
 
-
 /* --------------------- Zone: Left (Button zone) -------------------------- */
 
 div.menubar {
@@ -106,7 +116,6 @@ div.menubar {
     top: var(--topbar-height);
     height: 100vh;
 }
-
 
 /* Style the buttons inside the tab */
 
@@ -124,7 +133,6 @@ div.menubar button {
     font-size: var(--menubar-font-size);
 }
 
-
 /* Change background color of buttons on hover */
 
 div.menubar button:hover {
@@ -132,13 +140,11 @@ div.menubar button:hover {
     color: white;
 }
 
-
 /* Create an active/current "tab button" class */
 
 div.menubar button.active {
     color: var(--topbar-text-color);
 }
-
 
 /* -------------------------- Zone: CENTER ------------------------- */
 
@@ -158,7 +164,6 @@ div.menubar button.active {
     height: 90vh;
     overflow: scroll;
 }
-
 
 /* -------------------------- Zone: Right -------------------------- */
 
@@ -218,7 +223,6 @@ div.about-show {
     color: var(--topbar-text-color);
 }
 
-
 /* ------------------------ Component: Show ------------------------- */
 
 .show-container {
@@ -232,7 +236,6 @@ div.about-show {
     border: 1px solid #fa8072;
 }
 
-
 /* Elemento de texto dentro del show-container con la fecha, formato ..*/
 
 .show-box-text {
@@ -243,7 +246,6 @@ div.about-show {
     text-align: center;
     font-size: 0.775em;
 }
-
 
 /* Titulo del show con Tooltip y recortado por puntos */
 
@@ -286,7 +288,6 @@ div.about-show {
     overflow: hidden;
 }
 
-
 /* Campo con la portada del show-container */
 
 .show-box-img img {
@@ -325,7 +326,6 @@ div.about-show {
     padding: 0px;
     font-size: 0.875em;
 }
-
 
 /* ---------- Component: tvshow follow form --------------- */
 
