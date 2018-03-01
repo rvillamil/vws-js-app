@@ -1,4 +1,4 @@
-var vwstools = require('../vws-js-lib/lib/tumejortorrent');
+var tumejortorrent_scraper = require('../vws-js-lib/lib/tumejortorrent');
 
 /**
  * Init home
@@ -10,11 +10,11 @@ function loadContent() {
 var crawlVideoPremieres = function () {
     console.log("crawlVideoPremieres...");
     document.getElementById("videopremieres-content").innerHTML = htmlWithTextInTheMiddle("Cargando estrenos de Video ...");
-    vwstools.parseVideoPremieres()
+    tumejortorrent_scraper.parseVideoPremieres()
         .then(function (urlList) {
             document.getElementById("videopremieres-content").innerHTML = "";
             urlList.forEach(function (currentValue) {
-                vwstools.parseShow(currentValue).then(function (show) {
+                tumejortorrent_scraper.parseShow(currentValue).then(function (show) {
                     document.getElementById("videopremieres-content").innerHTML += newHTMLShow(show, null);
                 });
             });
@@ -24,11 +24,11 @@ var crawlVideoPremieres = function () {
 var crawlBillboardFilms = function () {
     console.log("crawlBillboardFilms...");
     document.getElementById("billboardfilms-content").innerHTML = htmlWithTextInTheMiddle("Cargando estrenos del Cine ...");
-    vwstools.parseBillboardFilms()
+    tumejortorrent_scraper.parseBillboardFilms()
         .then(function (urlList) {
             document.getElementById("billboardfilms-content").innerHTML = "";
             urlList.forEach(function (currentValue) {
-                vwstools.parseShow(currentValue).then(function (show) {
+                tumejortorrent_scraper.parseShow(currentValue).then(function (show) {
                     document.getElementById("billboardfilms-content").innerHTML += newHTMLShow(show, null);
                 });
             });
