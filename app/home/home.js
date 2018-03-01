@@ -60,10 +60,8 @@ function getShows(evt, htmlElementID) {
         crawlBillboardFilms();
     } else if (htmlElementID == "videopremieres-content") {
         crawlVideoPremieres();
-    } else if (htmlElementID == "tvshows-content") {
-        console.log('tvshows-content');
     } else {
-        showAlertWindow("ERROR!! 'main-content' not exists " + htmlElementID)
+        alert("ERROR!! 'main-content' not exists " + htmlElementID)
     }
 }
 
