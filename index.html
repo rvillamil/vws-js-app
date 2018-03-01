@@ -8,36 +8,21 @@
   <!-- CSS -->
   <link rel="stylesheet" href="app/home/home.css">
   <link rel="stylesheet" href="app/modal/modal.css">
-
   <!-- JavaScript -->
-  <script src="app/shared/config.js"></script>
-  <script src="app/shared/core.js"></script>
-
   <script src="app/home/home.js"></script>
-  <script src="app/home/favorites.js"></script>
-
   <script src="app/modal/modal.js"></script>
 
 </head>
 
 
-<body onload="init()">
+<body onload="loadContent()">
   <!-- Zone: Top -->
   <div class="topbar">
     <p>VWS: Video websites scraper</p>
-    <div class="form-logout">
-      <form name="form-logout-name" action="javascript:doLogout();">
-        <div id="username-txt">Username</div>
-        <label id="lbl-logout">
-          <input name="submit-logout" type="submit" value="Log out">
-        </label>
-      </form>
-    </div>
   </div>
 
   <!-- Zone: Left (Button zone) -->
   <div class="menubar">
-    <button class="tablinks" onclick="getShows(event, 'tvshows-content')">Series favoritas</button>
     <button class="tablinks" onclick="getShows(event, 'billboardfilms-content')">Estrenos de cine</button>
     <button class="tablinks" onclick="getShows(event, 'videopremieres-content')">Estrenos de Video</button>
   </div>
@@ -45,22 +30,6 @@
   <!-- Zone: Center  -->
   <div id="billboardfilms-content" class="main-content"></div>
   <div id="videopremieres-content" class="main-content"></div>
-  <div id="tvshows-content" class="main-content">
-    <div id="box-with-form-tvshows-follow">
-      <form id="form-tvshows-follow" class="form-shows">
-        Seguir serie
-        <input id="form-tvshows-name" type="text" name="name" class="rounded-element">
-        <input type="submit" value="seguir">
-      </form>
-
-      <div class="text-with-tvshows-following">
-        Series actualmente en seguimiento:
-      </div>
-      <div id="number-tvshows-following" class="text-with-tvshows-following">0</div>
-
-    </div>
-    <div id="box-with-tvshows-follow"></div>
-  </div>
 
   <!-- Zone: Right  -->
   <div class="about-show">
@@ -94,14 +63,11 @@
     </div>
   </div>
 
-  <!-- Form submit - seguir - Action ( This script here mandatory ) -->
   <script>
-    document.getElementById("form-tvshows-follow").addEventListener("submit", sendFormWithTVShowFollow);
     // You can also require other files to run in this process
     require('./renderer.js')
   </script>
 
 </body>
-
 
 </html>

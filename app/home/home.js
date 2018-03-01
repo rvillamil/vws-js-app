@@ -1,9 +1,39 @@
+var vwstools = require('../vws-js-lib/lib/tumejortorrent');
+
 /**
  * Init home
  */
-function init() {
-    getShows(event, 'tvshows-content');
+function loadContent() {
+    getShows(event, 'billboardfilms-content');
 }
+
+var crawlVideoPremieres = function () {
+    console.log("crawlVideoPremieres...");
+    document.getElementById("videopremieres-content").innerHTML = "Cargando estrenos de Video ...";
+    vwstools.parseVideoPremieres()
+        .then(function (urlList) {
+            document.getElementById("videopremieres-content").innerHTML = "";
+            urlList.forEach(function (currentValue) {
+                vwstools.parseShow(currentValue).then(function (show) {
+                    document.getElementById("videopremieres-content").innerHTML += newHTMLShow(show, null);
+                });
+            });
+        });
+};
+
+var crawlBillboardFilms = function () {
+    console.log("crawlBillboardFilms...");
+    document.getElementById("billboardfilms-content").innerHTML = "Cargando estrenos del Cine ...";
+    vwstools.parseBillboardFilms()
+        .then(function (urlList) {
+            document.getElementById("billboardfilms-content").innerHTML = "";
+            urlList.forEach(function (currentValue) {
+                vwstools.parseShow(currentValue).then(function (show) {
+                    document.getElementById("billboardfilms-content").innerHTML += newHTMLShow(show, null);
+                });
+            });
+        });
+};
 
 /**
  * Replace de tabcontent with name 'htmlElementID' with HTML show list
@@ -27,140 +57,17 @@ function getShows(evt, htmlElementID) {
     evt.currentTarget.className += " active";
 
     if (htmlElementID == "billboardfilms-content") {
-        doRequest(
-            'GET',
-            url_base_billboard_films,
-            onSuccessGetShows,
-            null,
-            function (resourcePath, htmlFragment) {
-                document.getElementById("billboardfilms-content").innerHTML = htmlFragment;
-            },
-            function (resourcePath, htmlFragment) {
-                showAlertWindow("ERROR!: El servidor ha retornado 0 peliculas de cine! Revisa el log del servidor..");
-            });
-
+        crawlBillboardFilms();
     } else if (htmlElementID == "videopremieres-content") {
-        doRequest(
-            'GET',
-            url_base_video_premieres,
-            onSuccessGetShows,
-            null,
-            function (resourcePath, htmlFragment) {
-                document.getElementById("videopremieres-content").innerHTML = htmlFragment;
-            },
-            function (resourcePath, htmlFragment) {
-                showAlertWindow("ERROR!: El servidor ha retornado 0 peliculas de video! Revisa el log del servidor ...");
-            });
-
+        crawlVideoPremieres();
     } else if (htmlElementID == "tvshows-content") {
-        doRequest(
-            'GET',
-            url_base_favorites,
-            onSuccessGetFavorites,
-            function () {
-                showAlertWindow("No tienes favoritos en la lista todavia. Busca las series que te interesa seguir ...");
-            },
-            function (resourcePath, htmlFragment) {
-                console.log("getShows - Favorites has been loaded sucessfully");
-            },
-            function (resourcePath, htmlFragment) {
-                console.log("getShows - Favorite show request problem!'" + resourcePath + "'");
-            });
+        console.log('tvshows-content');
     } else {
         showAlertWindow("ERROR!! 'main-content' not exists " + htmlElementID)
     }
-
-    setCurrentUserInTopBar();
 }
 
-function onSuccessGetShows(request) {
-    try {
-        var newHTML = "";
-        var shows = JSON.parse(request.responseText);
-        if (shows.length == 0) {
-            newHTML = null;
-        }
-        for (var i = 0; i < shows.length; i++) {
-            console.log("onSuccessGetShows - Processing show '" + shows[i]['title'] + "'");
-            newHTML += newHTMLShow(shows[i], null);
-        }
-    } catch (err) {
-        newHTML = null;
-        showAlertWindow("onSuccessGetShows - EXCEPTION!: " + err.message + " in " + request.responseText);
-    }
 
-    return newHTML;
-}
-
-function doRequest(operation, resourcePath, onSuccess, onError, onElementsFound, onElementsNotFound) {
-    console.log("doRequest '" + operation + "' to " + resourcePath);
-    var modal = null;
-    var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var htmlFragment = onSuccess(this);
-            if (htmlFragment != null) {
-                onElementsFound(resourcePath, htmlFragment)
-            } else {
-                onElementsNotFound(resourcePath, htmlFragment);
-            }
-        } else if (this.readyState == 4 && request.status === 0) {
-            showAlertWindow("ERROR!!! Backend down?");
-        } else if (this.readyState == 4) {
-            if (onError != null) {
-                onError(this);
-            } else {
-                showAlertWindow("doRequest ERROR: [readyState: " +
-                    this.readyState + ", status: " + this.status +
-                    ", statusText: '" + this.statusText + "']");
-            }
-        }
-    };
-    request.onloadstart = function () {
-        modal = showModalWindow("Espere por favor..", "Obteniendo las peliculas del servidor..", "");
-    };
-    request.onloadend = function () {
-        modal.style.display = "none";
-    };
-
-    request.open(operation, server + resourcePath, true);
-    request.setRequestHeader("Authorization", getAuthToken());
-    request.send();
-}
-
-/**
- * Request to get tvshow from a 'Form' called 'form-tvshows-name'
- * @param event: form event 
- */
-function sendFormWithTVShowFollow(event) {
-    //console.log("sendTVShowFollowForm...");
-    // to stop the form from submitting
-    if (event.preventDefault) {
-        event.preventDefault();
-    }
-    // The value of input text
-    var name = document.getElementById("form-tvshows-name").value;
-    // Para añadir favoritos hacemos los siguiente: buscamos con la lista 
-    // de favoritos para ver si ya lo tenemos . Si no lo tenemos , 
-    // buscamos en el portal de torrents si existe el tvshow. Si existe lo añadimos a favoritos
-    doRequest(
-        'GET',
-        "/api/favorites/" + name,
-        function (request) {
-            return "OK"; // --> fuerza a que llame a la funcion de abajo y pinte en el log "Favorite already exist"
-        },
-        onErrorGetFavorite,
-        function (resourcePath, htmlFragment) {
-            console.log("sendFormWithTVShowFollow - Favorite already exists: '" + resourcePath + "'");
-        },
-        function (resourcePath, htmlFragment) {
-            console.log("sendFormWithTVShowFollow - Favorite does not exists: '" + resourcePath + "'");
-        });
-
-    // You must return false to prevent the default form behavior
-    return false;
-}
 
 /**
  * Create HTML text with show
@@ -176,7 +83,7 @@ function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
         "," + '"' + jsonShow["description"] + '"' +
         "," + '"' + jsonShow["sinopsis"] + '"' + ")'" +
         ">";
-    // console.log("Titulo: " + jsonShow["title"] + "- descr" + jsonShow["description"] + "- sinopsis: " + jsonShow["sinopsis"]);
+    //console.log("Titulo: " + jsonShow["title"] + "- descr" + jsonShow["description"] + "- sinopsis: " + jsonShow["sinopsis"]);
 
 
     // Filmaffinity Points
@@ -235,8 +142,4 @@ function setAboutShow(title, description, sinopsis) {
     document.getElementById("about-show-title").innerHTML = "<p>Titulo</p>" + title;
     document.getElementById("about-show-description").innerHTML = "<p>Descripcion</p>" + description;
     document.getElementById("about-show-sinopsis").innerHTML = "<p>Sinopsis</p>" + sinopsis;
-}
-
-function setCurrentUserInTopBar() {
-    document.getElementById("username-txt").innerHTML = getCurrentUsername();
 }
