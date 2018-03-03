@@ -12,6 +12,9 @@ local.properties
 .loadpath
 .recommenders
 
+# Electron pacakger
+release-builds/
+
 # External tool builders
 .externalToolBuilders/
 
