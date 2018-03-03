@@ -45,7 +45,7 @@ $npm start
 
 ### Electron packager
 
-We will look at how to create MacOS, Windows and Linux executables with an app icon. Maybe you need read [official documentation](https://github.com/electron-userland/electron-packager) on packagin problems
+We will look at how to create MacOS, Windows and Linux executables with an app icon. Maybe you need read [official documentation](https://github.com/electron-userland/electron-packager) on packaging problems
 
 #### OSX
 
