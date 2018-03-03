@@ -1,4 +1,13 @@
-var tumejortorrent_scraper = require('../vws-js-lib/lib/tumejortorrent');
+const tumejortorrent_scrapper_path = 'vws-js-lib/lib/tumejortorrent';
+
+try {
+    console.log("Loading 'vws-js-lib' npm module from Local in '../" + tumejortorrent_scrapper_path + "'")
+    var tumejortorrent_scraper = require('../' + tumejortorrent_scrapper_path);
+
+} catch (e) {
+    console.log("'vws-js-lib' not found in dir. Loading npm module from current 'node_modules/" + tumejortorrent_scrapper_path);
+    var tumejortorrent_scraper = require(tumejortorrent_scrapper_path);
+}
 
 /**
  * Init home
