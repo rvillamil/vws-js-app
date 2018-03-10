@@ -16,34 +16,6 @@ function loadContent() {
     getShows(event, 'billboardfilms-content');
 }
 
-var crawlVideoPremieres = function () {
-    console.log("crawlVideoPremieres...");
-    document.getElementById("videopremieres-content").innerHTML = htmlWithTextInTheMiddle("Cargando estrenos de Video ...");
-    tumejortorrent_scraper.parseVideoPremieres()
-        .then(function (urlList) {
-            document.getElementById("videopremieres-content").innerHTML = "";
-            urlList.forEach(function (currentValue) {
-                tumejortorrent_scraper.parseShow(currentValue).then(function (show) {
-                    document.getElementById("videopremieres-content").innerHTML += newHTMLShow(show, null);
-                });
-            });
-        });
-};
-
-var crawlBillboardFilms = function () {
-    console.log("crawlBillboardFilms...");
-    document.getElementById("billboardfilms-content").innerHTML = htmlWithTextInTheMiddle("Cargando estrenos del Cine ...");
-    tumejortorrent_scraper.parseBillboardFilms()
-        .then(function (urlList) {
-            document.getElementById("billboardfilms-content").innerHTML = "";
-            urlList.forEach(function (currentValue) {
-                tumejortorrent_scraper.parseShow(currentValue).then(function (show) {
-                    document.getElementById("billboardfilms-content").innerHTML += newHTMLShow(show, null);
-                });
-            });
-        });
-};
-
 /**
  * Replace de tabcontent with name 'htmlElementID' with HTML show list
  *
@@ -64,17 +36,32 @@ function getShows(evt, htmlElementID) {
     }
     document.getElementById(htmlElementID).style.display = "block";
     evt.currentTarget.className += " active";
-
+    var modalWinow = null;
     if (htmlElementID == "billboardfilms-content") {
-        crawlBillboardFilms();
+        modalWinow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
+        tumejortorrent_scraper.crawlBillboardFilms(
+            function (showObject) {
+                document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObject, null);
+            },
+            function () {
+                closeModalWindow(modalWinow);
+            }
+        );
     } else if (htmlElementID == "videopremieres-content") {
-        crawlVideoPremieres();
+        modalWinow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
+        tumejortorrent_scraper.crawlVideoPremieres(
+            function (showObject) {
+                document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObject, null);
+            },
+            function () {
+                closeModalWindow(modalWinow);
+            }
+        );
+
     } else {
         alert("ERROR!! 'main-content' not exists " + htmlElementID)
     }
 }
-
-
 
 /**
  * Create HTML text with show
