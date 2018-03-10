@@ -37,23 +37,23 @@ function getShows(evt, htmlElementID) {
     document.getElementById(htmlElementID).style.display = "block";
     evt.currentTarget.className += " active";
     var modalWinow = null;
+
     if (htmlElementID == "billboardfilms-content") {
         modalWinow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
         tumejortorrent_scraper.crawlBillboardFilms(
-            function (showObject) {
-                document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObject, null);
-            },
-            function () {
+            showObjectCrawled => document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObjectCrawled, null),
+            showListCrawled => {
+                console.log("billboardfilms length: " + showListCrawled.length)
                 closeModalWindow(modalWinow);
             }
         );
+
     } else if (htmlElementID == "videopremieres-content") {
         modalWinow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
         tumejortorrent_scraper.crawlVideoPremieres(
-            function (showObject) {
-                document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObject, null);
-            },
-            function () {
+            showObjectCrawled => document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObjectCrawled, null),
+            showListCrawled => {
+                console.log("videopremieres length: " + showListCrawled.length)
                 closeModalWindow(modalWinow);
             }
         );
