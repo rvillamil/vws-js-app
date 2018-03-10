@@ -1,6 +1,6 @@
 # VWS: Video WebSite Scraper - JS Version
 
-JavaScript version fos [VWS](https://github.com/rvillamil/vws) project. Another pet project more...
+JavaScript version for [VWS](https://github.com/rvillamil/vws) project. Another pet project more...
 
 Mainly uses my module called [wvs-js-lib](https://github.com/rvillamil/vws-js-lib) for web-scraping purposes.
 
