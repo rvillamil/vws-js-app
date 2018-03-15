@@ -162,9 +162,10 @@ div.menubar button.active {
     border-right: none;
     */
     height: 90vh;
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: hidden;
 }
+
 
 /* -------------------------- Zone: Right -------------------------- */
 
