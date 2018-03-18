@@ -13,7 +13,7 @@ try {
  * Init home
  */
 function loadContent() {
-    getShows(event, 'billboardfilms-content');
+    getShows(event, 'videopremieres-content');
 }
 
 /**
