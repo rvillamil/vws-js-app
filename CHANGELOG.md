@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-- No changes
+- Change order in menu bar. Video premieres first option
 
 ## [0.0.4] - 2018-03-16
 
