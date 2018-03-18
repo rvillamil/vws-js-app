@@ -24,6 +24,7 @@ function loadContent() {
  */
 function getShows(evt, htmlElementID) {
     console.log("getShows - Loading content .. '" + htmlElementID + "'");
+    document.getElementById(htmlElementID).innerHTML = "";
 
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("main-content");
@@ -73,12 +74,12 @@ function getShows(evt, htmlElementID) {
 function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
     var newHtml = "";
     newHtml += "<div class='show-container'" +
-        " onmouseover='setAboutShow(" + '"' + jsonShow["title"] + '"' +
-        "," + '"' + jsonShow["description"] + '"' +
-        "," + '"' + jsonShow["sinopsis"] + '"' + ")'" +
+        " onmouseover='setAboutShow(" + '"' + jsonShow.title + '"' +
+        "," + '"' + jsonShow.description + '"' +
+        "," + '"' + jsonShow.sinopsis + '"' + ")'" +
         ">";
-    //console.log("Titulo: " + jsonShow["title"] + "- descr" + jsonShow["description"] + "- sinopsis: " + jsonShow["sinopsis"]);
 
+    // console.log("TITULO->'" + jsonShow.title + "' DESCRIPTION ->'" + jsonShow.description + "' SINOPSIS ->" + jsonShow.sinopsis);
 
     // Filmaffinity Points
     if (jsonShow["filmaffinityPoints"] != null) {
@@ -91,13 +92,16 @@ function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
     newHtml += "<img src='" + jsonShow["urlwithCover"] + "'" +
         " alt='cover' " + "/>";
     newHtml += "</a>";
-    newHtml += "<span class='tooltiptext'>" + jsonShow["title"] +
-        "</span>";
+
+    var tooltiptexttitle = jsonShow.title;
+    if (jsonShow.originalTitle) {
+        tooltiptexttitle = jsonShow.title + "(" + jsonShow.originalTitle + ")";
+    }
+    newHtml += "<span class='tooltiptext'>" + tooltiptexttitle + "</span>";
     newHtml += "</div>";
 
     // Title
-    newHtml += "<div class='show-box-title'>" + jsonShow["title"] +
-        "</div>";
+    newHtml += "<div class='show-box-title'>" + jsonShow.title + "</div>";
 
     // Session
     if (jsonShow["session"] != null) {
