@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 - Change order in menu bar. Video premieres first option
+- New data Scraped : Original title and Year
+- Enhance sinopsis field crawling
+- Clean area when reload the same menu option (non duplicated shows)
 
 ## [0.0.4] - 2018-03-16
 
