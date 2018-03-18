@@ -74,7 +74,9 @@ function getShows(evt, htmlElementID) {
 function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
     var newHtml = "";
     newHtml += "<div class='show-container'" +
-        " onmouseover='setAboutShow(" + '"' + jsonShow.title + '"' +
+        " onmouseover='setAboutShow(" +
+        '"' + jsonShow.title + '"' +
+        "," + '"' + jsonShow.year + '"' +
         "," + '"' + jsonShow.description + '"' +
         "," + '"' + jsonShow.sinopsis + '"' + ")'" +
         ">";
@@ -136,8 +138,9 @@ function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
  * @param description The show description (actor, length..)
  * @param sinopsis The show sinopsis
  */
-function setAboutShow(title, description, sinopsis) {
+function setAboutShow(title, year, description, sinopsis) {
     document.getElementById("about-show-title").innerHTML = "<p>Titulo</p>" + title;
+    document.getElementById("about-show-year").innerHTML = "<p>Año</p>" + year;
     document.getElementById("about-show-description").innerHTML = "<p>Descripcion</p>" + description;
     document.getElementById("about-show-sinopsis").innerHTML = "<p>Sinopsis</p>" + sinopsis;
 }

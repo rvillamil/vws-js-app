@@ -166,7 +166,6 @@ div.menubar button.active {
     overflow-x: hidden;
 }
 
-
 /* -------------------------- Zone: Right -------------------------- */
 
 div.about-show {
@@ -194,6 +193,19 @@ div.about-show {
 }
 
 #about-show-title p {
+    margin: 0px;
+    font-size: 1.2em;
+    color: var(--topbar-text-color);
+}
+
+#about-show-year {
+    float: top;
+    border: 0px solid #ccc;
+    margin: 5px;
+    color: var(--about-show-text-color)
+}
+
+#about-show-year p {
     margin: 0px;
     font-size: 1.2em;
     color: var(--topbar-text-color);
