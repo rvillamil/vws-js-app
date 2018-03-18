@@ -302,6 +302,20 @@ div.about-show {
     overflow: hidden;
 }
 
+.show-box-rating {
+    width: auto;
+    margin: 1px;
+    padding: 1px;
+    border: 1px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0.875em;
+    font-weight: bold;
+    color: var(--menubar-button-text-color);
+}
+
 /* Campo con la portada del show-container */
 
 .show-box-img img {

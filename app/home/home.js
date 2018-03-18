@@ -1,12 +1,15 @@
 const tumejortorrent_scrapper_path = 'vws-js-lib/lib/tumejortorrent';
+const omdb_path = 'vws-js-lib/lib/omdb';
 
 try {
     console.log("Loading 'vws-js-lib' npm module from Local in '../" + tumejortorrent_scrapper_path + "'")
     var tumejortorrent_scraper = require('../' + tumejortorrent_scrapper_path);
+    var omdb = require('../' + omdb_path);
 
 } catch (e) {
     console.log("'vws-js-lib' not found in dir. Loading npm module from current 'node_modules/" + tumejortorrent_scrapper_path);
     var tumejortorrent_scraper = require(tumejortorrent_scrapper_path);
+    var omdb = require(omdb_path);
 }
 
 /**
@@ -14,6 +17,31 @@ try {
  */
 function loadContent() {
     getShows(event, 'videopremieres-content');
+}
+
+function searchShowRating(showListCrawled) {
+    showListCrawled.forEach(show => {
+        var theTitle = show.originalTitle;
+        if (!theTitle) {
+            theTitle = show.title;
+        }
+        omdb.searchShow(theTitle, show.year)
+            .then(function (response) {
+                /*
+                console.log("The data found for title '" + theTitle + "' and year '" +
+                    show.year + "' --> " + JSON.stringify(response));
+                */
+                var theHTMLShow = document.getElementById(getShowID(show.title, show.originalTitle, show.year));
+                if (response.imdbRating) {
+                    theHTMLShow.innerHTML = "IMDB " + response.imdbRating;
+                } else {
+                    theHTMLShow.innerHTML = "Desconocido";
+                }
+            })
+            .catch(function (err) {
+                console.log('Error: ' + err);
+            });
+    });
 }
 
 /**
@@ -41,11 +69,14 @@ function getShows(evt, htmlElementID) {
 
     if (htmlElementID == "billboardfilms-content") {
         modalWinow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
+
         tumejortorrent_scraper.crawlBillboardFilms(
+
             showObjectCrawled => document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObjectCrawled, null),
             showListCrawled => {
-                console.log("billboardfilms length: " + showListCrawled.length)
+                console.log("billboardfilms length: " + showListCrawled.length);
                 closeModalWindow(modalWinow);
+                searchShowRating(showListCrawled);
             }
         );
 
@@ -56,6 +87,7 @@ function getShows(evt, htmlElementID) {
             showListCrawled => {
                 console.log("videopremieres length: " + showListCrawled.length)
                 closeModalWindow(modalWinow);
+                searchShowRating(showListCrawled);
             }
         );
 
@@ -122,6 +154,10 @@ function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
     newHtml += "<div class='show-box-text'>" + jsonShow["releaseDate"] +
         " - " + jsonShow["fileSize"] + "</div>";
 
+    // Rating
+    var showID = getShowID(jsonShow.title, jsonShow.originalTitle, jsonShow.year);
+    newHtml += "<div id='" + showID + "' class='show-box-rating'>" + "Searching.." + "</div>";
+
     // Add html with episode list
     if (htmlWithEpisodeLinks != null) {
         newHtml += htmlWithEpisodeLinks;
@@ -129,6 +165,14 @@ function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
     newHtml += "</div>";
 
     return newHtml;
+}
+
+function getShowID(title, originalTitle, year) {
+    var theTitle = originalTitle;
+    if (!theTitle) {
+        theTitle = title;
+    }
+    return theTitle + "_" + year;
 }
 
 /**
