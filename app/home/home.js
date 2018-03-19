@@ -1,5 +1,6 @@
 const tumejortorrent_scrapper_path = 'vws-js-lib/lib/tumejortorrent';
 const omdb_path = 'vws-js-lib/lib/omdb';
+const IMDB_ICON_PATH = 'app/assets/images/icons8-imdb-50.png';
 
 try {
     console.log("Loading 'vws-js-lib' npm module from Local in '../" + tumejortorrent_scrapper_path + "'")
@@ -161,7 +162,7 @@ function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
 
     // Rating
     var showID = getShowID(jsonShow.title, jsonShow.originalTitle, jsonShow.year);
-    newHtml += "<div id='" + showID + "'>" + "Searching.." + "</div>";
+    newHtml += "<div class='show-box-rating' id='" + showID + "'>" + "Searching.." + "</div>";
 
     // Add html with episode list
     if (htmlWithEpisodeLinks != null) {
@@ -201,12 +202,11 @@ function htmlWithTextInTheMiddle(text) {
     return "<div class=\"center\">" + text + "<div>"
 }
 
-function htmlWithIMDbPoints(strPoints) {
-
-    return "<div>" +
-        "<img style=\"vertical-align:middle\" src=\"app/assets/images/icons8-imdb-50.png\" width=\"30\" height=\"30\">" +
-        "<span style=\"vertical-align:middle;font-weight: bold;font-size: 1.0em;color:yellow\">" +
-        strPoints +
-        "</span>" +
-        "</div>";
+/**
+ * Return html with IMDB icon and rating text
+ * @param {*} text Text next imdb icon 
+ */
+function htmlWithIMDbPoints(text) {
+    return "<img src=" + IMDB_ICON_PATH + " width=\"35\" height=\"30\">" +
+        "<span>" + text + "</span>"
 }

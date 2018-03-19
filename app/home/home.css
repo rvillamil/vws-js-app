@@ -302,22 +302,24 @@ div.about-show {
     overflow: hidden;
 }
 
-/*
 .show-box-rating {
-    width: auto;
-    display: inline-block;
-    margin: 1px;
+    display: block;
+    text-align: center;
+}
+
+.show-box-rating img {
+    vertical-align: middle;
+}
+
+.show-box-rating span {
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: var(--topbar-text-color);
+    margin: 4px;
     padding: 1px;
     border: 1px;
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    font-size: 0.875em;
-    font-weight: bold;
-    color: var(--menubar-button-text-color);
 }
-*/
 
 /* Campo con la portada del show-container */
 
