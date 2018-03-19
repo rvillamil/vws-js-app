@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- json-server support
 - IMDB Rating
 - Change order in menu bar. Video premieres first option
 - New data Scraped : Original title and Year

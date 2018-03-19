@@ -43,6 +43,15 @@ and finally...
 $npm start
 ```
 
+### Frontend developent: json-server utility
+
+If you need modify de UI, one way can be use [json-server](https://github.com/typicode/json-server) utility to run the site in http://localhost:8080, and test de result.
+
+```sh
+$npm run json-server
+```
+The data test are in 'test/assets/json-server/shows.json'
+
 ### Electron packager
 
 We will look at how to create MacOS, Windows and Linux executables with an app icon. Maybe you need read [official documentation](https://github.com/electron-userland/electron-packager) on packaging problems

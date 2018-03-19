@@ -19,8 +19,13 @@ function loadContent() {
     getShows(event, 'videopremieres-content');
 }
 
-function searchShowRating(showListCrawled) {
-    showListCrawled.forEach(show => {
+/**
+ * Search the show rating using omdb service
+ * 
+ * @param {*} showListCrawled Show objects list
+ */
+function searchShowRating(showList) {
+    showList.forEach(show => {
         var theTitle = show.originalTitle;
         if (!theTitle) {
             theTitle = show.title;
@@ -33,9 +38,9 @@ function searchShowRating(showListCrawled) {
                 */
                 var theHTMLShow = document.getElementById(getShowID(show.title, show.originalTitle, show.year));
                 if (response.imdbRating) {
-                    theHTMLShow.innerHTML = "IMDB " + response.imdbRating;
+                    theHTMLShow.innerHTML = htmlWithIMDbPoints(response.imdbRating);
                 } else {
-                    theHTMLShow.innerHTML = "Desconocido";
+                    theHTMLShow.innerHTML = htmlWithIMDbPoints("-");
                 }
             })
             .catch(function (err) {
@@ -156,7 +161,7 @@ function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
 
     // Rating
     var showID = getShowID(jsonShow.title, jsonShow.originalTitle, jsonShow.year);
-    newHtml += "<div id='" + showID + "' class='show-box-rating'>" + "Searching.." + "</div>";
+    newHtml += "<div id='" + showID + "'>" + "Searching.." + "</div>";
 
     // Add html with episode list
     if (htmlWithEpisodeLinks != null) {
@@ -194,4 +199,14 @@ function setAboutShow(title, year, description, sinopsis) {
  */
 function htmlWithTextInTheMiddle(text) {
     return "<div class=\"center\">" + text + "<div>"
+}
+
+function htmlWithIMDbPoints(strPoints) {
+
+    return "<div>" +
+        "<img style=\"vertical-align:middle\" src=\"app/assets/images/icons8-imdb-50.png\" width=\"30\" height=\"30\">" +
+        "<span style=\"vertical-align:middle;font-weight: bold;font-size: 1.0em;color:yellow\">" +
+        strPoints +
+        "</span>" +
+        "</div>";
 }

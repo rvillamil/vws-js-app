@@ -302,8 +302,10 @@ div.about-show {
     overflow: hidden;
 }
 
+/*
 .show-box-rating {
     width: auto;
+    display: inline-block;
     margin: 1px;
     padding: 1px;
     border: 1px;
@@ -315,6 +317,7 @@ div.about-show {
     font-weight: bold;
     color: var(--menubar-button-text-color);
 }
+*/
 
 /* Campo con la portada del show-container */
 
