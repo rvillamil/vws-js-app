@@ -1,6 +1,6 @@
 const tumejortorrent_scrapper_path = 'vws-js-lib/lib/tumejortorrent';
 const omdb_path = 'vws-js-lib/lib/omdb';
-const IMDB_ICON_PATH = 'app/assets/images/icons8-imdb-50.png';
+const IMDB_ICON_PATH = 'app/assets/images/IMDB_Logo_2016.svg.png';
 
 try {
     console.log("Loading 'vws-js-lib' npm module from Local in '../" + tumejortorrent_scrapper_path + "'")
@@ -207,6 +207,6 @@ function htmlWithTextInTheMiddle(text) {
  * @param {*} text Text next imdb icon 
  */
 function htmlWithIMDbPoints(text) {
-    return "<img src=" + IMDB_ICON_PATH + " width=\"35\" height=\"30\">" +
+    return "<img src=" + IMDB_ICON_PATH + " width=\"35\" height=\"16\">" +
         "<span>" + text + "</span>"
 }
