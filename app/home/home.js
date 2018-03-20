@@ -77,8 +77,9 @@ function getShows(evt, htmlElementID) {
         modalWinow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
 
         tumejortorrent_scraper.crawlBillboardFilms(
+            showObjectCrawled => document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObjectCrawled, null)
 
-            showObjectCrawled => document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObjectCrawled, null),
+        ).then(
             showListCrawled => {
                 console.log("billboardfilms length: " + showListCrawled.length);
                 closeModalWindow(modalWinow);
@@ -89,9 +90,11 @@ function getShows(evt, htmlElementID) {
     } else if (htmlElementID == "videopremieres-content") {
         modalWinow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
         tumejortorrent_scraper.crawlVideoPremieres(
-            showObjectCrawled => document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObjectCrawled, null),
+            showObjectCrawled => document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObjectCrawled, null)
+
+        ).then(
             showListCrawled => {
-                console.log("videopremieres length: " + showListCrawled.length)
+                console.log("videopremieres length: " + showListCrawled.length);
                 closeModalWindow(modalWinow);
                 searchShowRating(showListCrawled);
             }
