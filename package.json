@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://rvillamil@bitbucket.org/rvillamil/vws-js-app.git"
+    "url": "git+https://github.com/rvillamil/vws-js-app.git"
   },
   "keywords": [
     "scrapping",
@@ -24,13 +24,14 @@
   ],
   "author": "Rodrigo Villamil Pérez",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/rvillamil/vws-js-app#readme",
+  "homepage": "https://github.com/rvillamil/vws-js-app",
   "devDependencies": {
     "electron": "~1.8.2",
-    "electron-packager": "^11.0.1"
+    "electron-packager": "^11.0.1"    
   },
 
   "dependencies": {
+    "nedb":"*",
     "vws-js-app": "git+https://github.com/rvillamil/vws-js-lib.git"
   }
 }
