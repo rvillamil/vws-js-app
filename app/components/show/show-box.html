@@ -12,20 +12,36 @@
             padding: var(--space);
             text-align: center;
         }
+        
+        .show-container {
+            display: inline-block;
+            margin: 5px;
+            border: 1px solid #ccc;
+            width: 140px;
+        }
 
-        .btn {
-            background-color: var(--orange);
-            border: 0;
-            border-radius: 5px;
-            color: white;
-            padding: var(--space);
-            text-transform: uppercase;
+        .show-container:hover {
+            border: 1px solid #fa8072;
         }
     </style>
 
-    <div class="btn-container">
-        <button class="btn">Comprar Ahora</button>
+    <div class="show-container">
+        <button class="btn">Show container</button>
     </div>
+
+    <div class="show-container">
+        <h2 class="card__name">
+          <span class="card__full-name"></span> (
+          <span class="card__user-name"></span>)
+        </h2>
+        <p>Website: <a class="card__website"></a></p>
+        <div class="card__hidden-content">
+          <p class="card__address"></p>
+        </div>
+        <button class="card__details-btn">More Details</button>
+      </div>
+
+
 </template>
 
 <script>
@@ -33,11 +49,17 @@
      * Webcomponent to show info about films or TV-shows.
      * 
      * https://carlosazaustre.es/como-crear-webcomponent-de-forma-nativa/
+     * 
      */
     class ShowBox extends HTMLElement {
         constructor() {
             super();
             this.importDocument = document.currentScript.ownerDocument;
+
+            // Events
+            this.addEventListener('click', e => {
+                console.log("Element was clicked!");
+            });
         }
 
         /**
@@ -52,7 +74,11 @@
             const t = this.importDocument.querySelector('#showBox');
             const instance = t.content.cloneNode(true);
             shadowRoot.appendChild(instance);
+
+            //this.render(); ---> https://www.codementor.io/ayushgupta/vanilla-js-web-components-chguq8goz
+
         }
+        
     }
 
     window.customElements.define('show-box', ShowBox);
