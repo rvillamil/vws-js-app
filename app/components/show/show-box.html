@@ -7,12 +7,6 @@
             --space: 1.5em;
         }
 
-        .btn-container {
-            border: 2px dashed var(--orange);
-            padding: var(--space);
-            text-align: center;
-        }
-        
         .show-container {
             display: inline-block;
             margin: 5px;
@@ -23,23 +17,156 @@
         .show-container:hover {
             border: 1px solid #fa8072;
         }
+
+        /* Elemento de texto dentro del show-container con la fecha, formato ..*/
+
+        .show-box-date-and-size {
+            display: block;
+            margin: 1px;
+            padding: 1px;
+            border: 1px;
+            text-align: center;
+            font-size: 0.775em;
+        }
+
+        /* Titulo del show con Tooltip y recortado por puntos */
+
+        .show-box-title {
+            width: auto;
+            margin: 1px;
+            padding: 1px;
+            border: 1px;
+            text-align: center;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 0.875em;
+            font-weight: bold;
+            color: var(--menubar-button-text-color);
+        }
+
+        .show-box-session {
+            width: auto;
+            margin: 1px;
+            padding: 1px;
+            border: 1px;
+            text-align: center;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 0.875em;
+            font-weight: bold;
+        }
+
+        .show-box-quality {
+            display: block;
+            margin: 1px;
+            padding: 1px;
+            border: 1px;
+            text-align: center;
+            font-size: 0.775em;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .show-box-rating {
+            display: block;
+            text-align: center;
+        }
+
+        .show-box-rating img {
+            vertical-align: middle;
+        }
+
+        .show-box-rating span {
+            vertical-align: middle;
+            font-weight: bold;
+            font-size: 0.9em;
+            color: var(--topbar-text-color);
+            margin: 4px;
+            padding: 1px;
+            border: 1px;
+        }
+
+        /* Campo con la portada del show-container */
+
+        .show-box-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        .show-box-img .tooltiptext {
+            visibility: hidden;
+            width: auto;
+            background-color: var(--topbar-background-color);
+            color: #fff;
+            text-align: center;
+            border-radius: 3px;
+            padding: 5px;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            margin-left: -120px;
+        }
+
+        .show-box-img:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .showtv-episodes-container {
+            text-align: center;
+            margin: 1px;
+            border: 0px solid #ccc;
+            width: auto;
+        }
+
+        .showtv-episodes-container p {
+            margin: 2px;
+            border: 0px solid #ccc;
+            padding: 0px;
+            font-size: 0.875em;
+        }
     </style>
 
     <div class="show-container">
-        <button class="btn">Show container</button>
-    </div>
+        <div class="show-box-img">
+            <a href="none">
+                <img src="none" alt="cover" />
+            </a>
 
-    <div class="show-container">
-        <h2 class="card__name">
-          <span class="card__full-name"></span> (
-          <span class="card__user-name"></span>)
-        </h2>
-        <p>Website: <a class="card__website"></a></p>
-        <div class="card__hidden-content">
-          <p class="card__address"></p>
+            <!--
+            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/">
+                <img src="http://tumejortorrent.com/pictures/c/2261_modern-family.jpg" alt="cover" />
+            </a>
+            -->
+            <span class="tooltiptext"></span>
         </div>
-        <button class="card__details-btn">More Details</button>
-      </div>
+
+        <div class="show-box-title"></div>
+        <div class="show-box-session"></div>
+        <div class="show-box-quality"></div>
+        <div class="show-box-date-and-size"></div>
+        <div class="showtv-episodes-container">
+            <!--
+            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/">
+                <p>Episodio 3</p>
+            </a>
+            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/99762_modern-family-temporada-9-hdtv-720p-cap-902-ac3-5-1-espaa-a-ol-castellano/">
+                <p>Episodio 2</p>
+            </a>
+            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/99436_modern-family-temporada-9-hdtv-720p-cap-901-ac3-5-1-espaa-a-ol-castellano/">
+                <p>Episodio 1</p>
+            </a>
+            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/96214_modern-family-temporada-8-hdtv-720p-cap-822-ac3-5-1-espaa-ol-castellano/">
+                <p>Episodio 22</p>
+            </a>
+            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/95977_modern-family-temporada-8-hdtv-720p-cap-821-ac3-5-1-espaa-ol-castellano/">
+                <p>Episodio 21</p>
+            </a>
+        -->
+        </div>
+    </div>
 
 
 </template>
@@ -49,7 +176,7 @@
      * Webcomponent to show info about films or TV-shows.
      * 
      * https://carlosazaustre.es/como-crear-webcomponent-de-forma-nativa/
-     * 
+     * https://www.codementor.io/ayushgupta/vanilla-js-web-components-chguq8goz 
      */
     class ShowBox extends HTMLElement {
         constructor() {
@@ -74,14 +201,76 @@
             const t = this.importDocument.querySelector('#showBox');
             const instance = t.content.cloneNode(true);
             shadowRoot.appendChild(instance);
-
-            //this.render(); ---> https://www.codementor.io/ayushgupta/vanilla-js-web-components-chguq8goz
-
+            // Imagen
+            /*
+            console.log("DATA: " +
+                this.shadowRoot.querySelector('.show-box-img').getAttribute('href')
+            );
+            */
+            // Titulo --> Modern Family
+            this.shadowRoot.querySelector('.show-box-title').innerHTML = this.getAttribute('title');
+            // Session --> e.g. Tempora da 9
+            const session = this.getAttribute('session');
+            if (session) {
+                this.shadowRoot.querySelector('.show-box-session').innerHTML = session;
+            }
+            // Quality --> e.g. HDTV 720p
+            const quality = this.getAttribute('quality');
+            if (quality) {
+                this.shadowRoot.querySelector('.show-box-quality').innerHTML = quality;
+            }
+            // Date and Size -->  e.g. 29-10-2017 - 700 MB            
+            var date = this.getAttribute('date');
+            if (date == null) {
+                date = 'unknow';
+            }
+            var size = this.getAttribute('size');
+            if (size == null) {
+                size = 'unknow';
+            }
+            this.shadowRoot.querySelector('.show-box-date-and-size').innerHTML = date + " - " + size;
+            // Episode list
+            //this.shadowRoot.querySelector('.showtv-episodes-container').innerHTML = "none";
         }
-        
     }
 
     window.customElements.define('show-box', ShowBox);
 </script>
 
 </html>
+
+<!--
+<div class='show-container' 
+    onmouseover='setAboutShow("Modern Family",
+                              "Director Steven Levitan (Creator)'>
+    <div class='show-box-img'>
+        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/'>
+            <img src='http://tumejortorrent.com/pictures/c/2261_modern-family.jpg' alt='cover' />
+        </a>
+        <span class='tooltiptext'>Modern Family</span>
+    </div>
+
+    <div class='show-box-title'>Modern Family</div>
+    <div class='show-box-session'>Temporada 9</div>
+    <div class='show-box-quality'>HDTV 720p</div>
+    <div class='show-box-text'>29-10-2017 - 700 MB</div>
+    <div class='showtv-episodes-container'>
+        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/'>
+            <p>Episodio 3</p>
+        </a>
+        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/99762_modern-family-temporada-9-hdtv-720p-cap-902-ac3-5-1-espaa-a-ol-castellano/'>
+            <p>Episodio 2</p>
+        </a>
+        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/99436_modern-family-temporada-9-hdtv-720p-cap-901-ac3-5-1-espaa-a-ol-castellano/'>
+            <p>Episodio 1</p>
+        </a>
+        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/96214_modern-family-temporada-8-hdtv-720p-cap-822-ac3-5-1-espaa-ol-castellano/'>
+            <p>Episodio 22</p>
+        </a>
+        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/95977_modern-family-temporada-8-hdtv-720p-cap-821-ac3-5-1-espaa-ol-castellano/'>
+            <p>Episodio 21</p>
+        </a>
+    </div>
+</div>
+
+-->

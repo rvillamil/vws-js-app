@@ -176,7 +176,7 @@ function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
         newHtml += htmlWithEpisodeLinks;
     }
     newHtml += "</div>";
-
+    
     return newHtml;
 }
 
