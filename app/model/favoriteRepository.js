@@ -1,35 +1,58 @@
-// Tengo que ser capaz de almacenar mis series favoritas y de recuperaras
-// -- ver https://www.techiediaries.com/electron-data-persistence/ --> 
-// NeDB stands for Node.js Embedded Database, it's a
-// pure JavaScript module with no binary dependency and its API is a subset of MongoDB. NeDB can be used as in-memory or as a persistent database.
+var Datastore = require('nedb') // https://github.com/louischatriot/nedb
+var db = new Datastore({ filename: 'vws-db', 
+						 autoload: true });
 
-	/**
-	 * Find by account user name.
-	 *
-	 * @param userName the user name
-	 * @return the collection
-	 */
-	// SELECT f from Favorite f WHERE f.account.username = :username
-//	Collection<Favorite> findByAccountUserName(String userName);
+const show_path = 'vws-js-lib/lib/show';
+try {
+    console.log("Loading 'vws-js-lib' npm module from Local in '../../../" + show_path + "'");
+    var Show = require('../../../' + show_path);
 
-	/**
-	 * Find by account user name and title.
-	 *
-	 * @param userName the user name
-	 * @param title the title
-	 * @return the optional
-	 */
-	// SELECT f from Favorite f WHERE f.account.username = :username AND f.title = :title
-//	Optional<Favorite> findByAccountUserNameAndTitle(String userName, String title);
-
+} catch (e) {
+    console.log("'vws-js-lib' not found in dir. Loading npm module from current 'node_modules/" + show_path);
+    var Show = require(show_path);    
+}
+// ------------------------------------------------------------
+// Config repo
+//
 /**
- * Managment all favorites
+ * Repository for my favorites show obejcts
  */
 class FavoriteRepository {
-    constructor() {      
+    constructor() {
     }
-    findAllFavorites(){
-        
-    }
+    findAllFavoritesShows(){
+        return "TODO: findAllFavoritesShows";
+	}
+	
+	findShowByTittle(theTitle){		
+		return db.find({title: theTitle}, function(err, record) {
+			if (err) {
+				console.error("Error: " + err);
+			//	process.exit(0);
+			} else{
+				//console.log("record: " + JSON.stringify (record));
+				//return record;
+			}			
+			
+		});
+	}	
+	save (show){
+		db.insert(show, function (err, newShow) {
+			if (err) {				
+				console.error("Insert error: " + err);
+				return;
+			}
+			console.log ("Persisted favorite show with title '" +
+						 newShow.title + "'" + " and year '" + newShow.year + "'");			
+		  });
+	}
   }
-  
+
+  // https://www.todojs.com/introduccion-a-nedb-una-base-de-datos-javascript-embebida/
+const favoriteRepository = new FavoriteRepository();
+
+var show = new Show();
+show.title='titulo1';
+
+favoriteRepository.save ( show )
+console.log("Show:  " +favoriteRepository.findShowByTittle ('titulo1'));

@@ -3,13 +3,15 @@ const omdb_path = 'vws-js-lib/lib/omdb';
 const IMDB_ICON_PATH = 'app/assets/images/IMDB_Logo_2016.svg.png';
 
 try {
-    console.log("Loading 'vws-js-lib' npm module from Local in '../" + tumejortorrent_scrapper_path + "'")
-    var tumejortorrent_scraper = require('../' + tumejortorrent_scrapper_path);
-    var omdb = require('../' + omdb_path);
+    console.log("Loading 'vws-js-lib' npm module from Local in '../../../" + tumejortorrent_scrapper_path + "'")
+    var tumejortorrent_scraper = require('../../../' + tumejortorrent_scrapper_path);
+    console.log("Loading 'vws-js-lib' npm module from Local in '../../../" + omdb_path + "'")
+    var omdb = require('../../../' + omdb_path);
 
 } catch (e) {
     console.log("'vws-js-lib' not found in dir. Loading npm module from current 'node_modules/" + tumejortorrent_scrapper_path);
     var tumejortorrent_scraper = require(tumejortorrent_scrapper_path);
+    console.log("'vws-js-lib' not found in dir. Loading npm module from current 'node_modules/" + omdb_path);
     var omdb = require(omdb_path);
 }
 
