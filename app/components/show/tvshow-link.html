@@ -1,0 +1,83 @@
+<html>
+
+<template id="tvShowLink">
+    <style>
+        :host {
+            --space: 1.5em;
+            --text-color: rgb(246, 189, 4);
+        }
+
+        .tvshow-episode-container {
+            text-align: center;
+            margin: 1px;
+            border: 0px solid #ccc;
+            width: auto;
+        }
+
+        .tvshow-episode-container p {
+            margin: 2px;
+            border: 0px solid #ccc;
+            padding: 0px;
+            font-size: 0.875em;
+        }
+    </style>
+
+    <div class="tvshow-episode-container">
+    </div>
+
+</template>
+
+<script>
+    /**
+     * Webcomponent for tvshow link
+     */
+    class TVShowLink extends HTMLElement {
+        constructor() {
+            super();
+            this.importDocument = document.currentScript.ownerDocument;
+            // Events            
+            this.addEventListener('click', e => {
+                console.log("TVShowLink was clicked!");
+            });
+        }
+
+        /**
+         * Se llama cada vez que el elemento se inserta en el DOM.
+         * Aquí podemos hacer llamadas AJAX para pedir datos, configurar cosas, etc..
+         * Funcionaría similar al componentWillMount de React.js
+         */
+        connectedCallback() {
+            let shadowRoot = this.attachShadow({
+                mode: 'open'
+            });
+            const t = this.importDocument.querySelector('#tvShowLink');
+            const instance = t.content.cloneNode(true);
+            shadowRoot.appendChild(instance);
+
+            const session = this.getAttribute('session');
+            const episode = this.getAttribute('episode');
+            const urltodownload = this.getAttribute('urltodownload');
+
+
+            this.shadowRoot.querySelector('.tvshow-episode-container').innerHTML =
+                this._renderEpisode(
+                    urltodownload,
+                    session,
+                    episode);
+        }
+
+        /**
+         * Return html with Session and Episode and torrent link
+         * @param {*} text Text next imdb icon 
+         */
+        _renderEpisode(urltodownload, session, episode) {
+            return "<a href='" + urltodownload + "'>" +
+                "<p>Temp." + session + " - Ep." + episode + "</p>" +
+                "</a>";
+        }
+    }
+
+    window.customElements.define('tvshow-link', TVShowLink);
+</script>
+
+</html>

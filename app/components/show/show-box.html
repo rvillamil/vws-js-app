@@ -47,19 +47,6 @@
             color: var(--title-text-color);
         }
 
-        .show-box-session {
-            width: auto;
-            margin: 1px;
-            padding: 1px;
-            border: 1px;
-            text-align: center;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-            font-size: 0.875em;
-            font-weight: bold;
-        }
-
         .show-box-quality {
             display: block;
             margin: 1px;
@@ -131,22 +118,6 @@
         .show-box-img:hover .tooltiptext {
             visibility: visible;
         }
-
-        /*
-        .showtv-episodes-container {
-            text-align: center;
-            margin: 1px;
-            border: 0px solid #ccc;
-            width: auto;
-        }
-
-        .showtv-episodes-container p {
-            margin: 2px;
-            border: 0px solid #ccc;
-            padding: 0px;
-            font-size: 0.875em;
-        }
-        */
     </style>
 
     <div class="show-container">
@@ -155,7 +126,6 @@
         </div>
 
         <div class="show-box-title"></div>
-        <div class="show-box-session"></div>
         <div class="show-box-quality"></div>
         <div class="show-box-date-and-size"></div>
         <div class="show-box-ratings">
@@ -163,30 +133,8 @@
             <div class="show-box-rating-rottentomatoes"></div>
             <div class="show-box-rating-tmdb"></div>
         </div>
-
-
-
-        <div class="showtv-episodes-container">
-            <!--
-            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/">
-                <p>Episodio 3</p>
-            </a>
-            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/99762_modern-family-temporada-9-hdtv-720p-cap-902-ac3-5-1-espaa-a-ol-castellano/">
-                <p>Episodio 2</p>
-            </a>
-            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/99436_modern-family-temporada-9-hdtv-720p-cap-901-ac3-5-1-espaa-a-ol-castellano/">
-                <p>Episodio 1</p>
-            </a>
-            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/96214_modern-family-temporada-8-hdtv-720p-cap-822-ac3-5-1-espaa-ol-castellano/">
-                <p>Episodio 22</p>
-            </a>
-            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/95977_modern-family-temporada-8-hdtv-720p-cap-821-ac3-5-1-espaa-ol-castellano/">
-                <p>Episodio 21</p>
-            </a>
-        -->
-        </div>
+        <div class="showtv-episodes-container"></div>
     </div>
-
 
 </template>
 
@@ -194,7 +142,6 @@
     /**
      * Webcomponent to show info about films or TV-shows.
      * 
-     * https://carlosazaustre.es/como-crear-webcomponent-de-forma-nativa/
      * https://www.codementor.io/ayushgupta/vanilla-js-web-components-chguq8goz 
      */
     class ShowBox extends HTMLElement {
@@ -248,14 +195,9 @@
             if (originaltitle) {
                 tooltiptext = title + "(" + originaltitle + ")";
             }
-            // htmlWithImage += "<span class='tooltiptext'>" + tooltiptext + "</span>";
+            htmlWithImage += "<span class='tooltiptext'>" + tooltiptext + "</span>";
             this.shadowRoot.querySelector('.show-box-img').innerHTML = htmlWithImage;
 
-            // Session --> e.g. Tempora da 9
-            const session = this.getAttribute('session');
-            if (session) {
-                this.shadowRoot.querySelector('.show-box-session').innerHTML = "Temporada " + session;
-            }
             // Quality --> e.g. HDTV 720p
             const quality = this.getAttribute('quality');
             if (quality) {
@@ -288,19 +230,8 @@
                 this.shadowRoot.querySelector('.show-box-rating-tmdb').innerHTML = this._renderRatingPoints(
                     imdbrating, this.ROTTEN_ICON_PATH);
             }
-            // Episode list
-
-            //this.shadowRoot.querySelector('.showtv-episodes-container').innerHTML = "none";
-            /*
-                var newHTML = " <div class='showtv-episodes-container'>";
-            for (var i = 0; i < shows.length; i++) {
-                //console.log("Processing TV show '" + shows[i]['title'] + " T-" + shows[i]['session'] + " E-" + shows[i]['episode'] + "'");
-                newHTML += "<a href='" + shows[i]["urltodownload"] + "'>";
-                newHTML += "<p>Episodio " + shows[i]['episode'] + "</p>";
-                newHTML += "</a>";
-            }
-            newHTML += "</div>";
-            */
+            // Episode list : tvshow-link tags
+            this.shadowRoot.querySelector('.showtv-episodes-container').innerHTML = this.shadowRoot.host.innerHTML;
         }
 
         /**
@@ -317,40 +248,3 @@
 </script>
 
 </html>
-
-
-<!--
-<div class='show-container' 
-    onmouseover='setAboutShow("Modern Family",
-                              "Director Steven Levitan (Creator)'>
-    <div class='show-box-img'>
-        <a href='http://tumejorjuego.com/redirect/ap-903-ac3-5-1-espaa-a-ol-castellano/'>
-            <img src='http://tumejortorrent.com/pictures/c/2261_modern-family.jpg' alt='cover' />
-        </a>
-        <span class='tooltiptext'>Modern Family</span>
-    </div>
-
-    <div class='show-box-title'>Modern Family</div>
-    <div class='show-box-session'>Temporada 9</div>
-    <div class='show-box-quality'>HDTV 720p</div>
-    <div class='show-box-text'>29-10-2017 - 700 MB</div>
-    <div class='showtv-episodes-container'>
-        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/'>
-            <p>Episodio 3</p>
-        </a>
-        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/99762_modern-family-temporada-9-hdtv-720p-cap-902-ac3-5-1-espaa-a-ol-castellano/'>
-            <p>Episodio 2</p>
-        </a>
-        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/99436_modern-family-temporada-9-hdtv-720p-cap-901-ac3-5-1-espaa-a-ol-castellano/'>
-            <p>Episodio 1</p>
-        </a>
-        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/96214_modern-family-temporada-8-hdtv-720p-cap-822-ac3-5-1-espaa-ol-castellano/'>
-            <p>Episodio 22</p>
-        </a>
-        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/95977_modern-family-temporada-8-hdtv-720p-cap-821-ac3-5-1-espaa-ol-castellano/'>
-            <p>Episodio 21</p>
-        </a>
-    </div>
-</div>
-
--->
