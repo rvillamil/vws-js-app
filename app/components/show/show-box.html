@@ -3,8 +3,10 @@
 <template id="showBox">
     <style>
         :host {
-            --orange: #e67e22;
             --space: 1.5em;
+            --title-text-color: rgb(184, 188, 191);
+            --ratings-text-color: rgb(246, 189, 4);
+            --tooltiptext-background-color: #fa8072;
         }
 
         .show-container {
@@ -42,7 +44,7 @@
             overflow: hidden;
             font-size: 0.875em;
             font-weight: bold;
-            color: var(--menubar-button-text-color);
+            color: var(--title-text-color);
         }
 
         .show-box-session {
@@ -70,24 +72,40 @@
             overflow: hidden;
         }
 
-        .show-box-rating {
-            display: block;
-            text-align: center;
+        .show-box-ratings::after {
+            content: "";
+            clear: both;
+            display: table;
         }
 
-        .show-box-rating img {
-            vertical-align: middle;
-        }
-
-        .show-box-rating span {
+        .show-box-ratings span {
             vertical-align: middle;
             font-weight: bold;
             font-size: 0.9em;
-            color: var(--topbar-text-color);
+            color: var(--ratings-text-color);
             margin: 4px;
-            padding: 1px;
+            padding: 3px;
             border: 1px;
         }
+
+        .show-box-rating-imdb {
+            float: left;
+            width: 30%;
+            padding: 1px;
+        }
+
+        .show-box-rating-rottentomatoes {
+            float: left;
+            width: 30%;
+            padding: 1px;
+        }
+
+        .show-box-rating-tmdb {
+            float: left;
+            width: 30%;
+            padding: 1px;
+        }
+
 
         /* Campo con la portada del show-container */
 
@@ -99,21 +117,22 @@
         .show-box-img .tooltiptext {
             visibility: hidden;
             width: auto;
-            background-color: var(--topbar-background-color);
-            color: #fff;
+            background-color: var(--tooltiptext-background-color);
+            /* color: var (--tooltiptext-text-color); */
             text-align: center;
             border-radius: 3px;
             padding: 5px;
             /* Position the tooltip */
             position: absolute;
             z-index: 1;
-            margin-left: -120px;
+            margin-left: -70px;
         }
 
         .show-box-img:hover .tooltiptext {
             visibility: visible;
         }
 
+        /*
         .showtv-episodes-container {
             text-align: center;
             margin: 1px;
@@ -127,19 +146,11 @@
             padding: 0px;
             font-size: 0.875em;
         }
+        */
     </style>
 
     <div class="show-container">
         <div class="show-box-img">
-            <a href="none">
-                <img src="none" alt="cover" />
-            </a>
-
-            <!--
-            <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/">
-                <img src="http://tumejortorrent.com/pictures/c/2261_modern-family.jpg" alt="cover" />
-            </a>
-            -->
             <span class="tooltiptext"></span>
         </div>
 
@@ -147,6 +158,14 @@
         <div class="show-box-session"></div>
         <div class="show-box-quality"></div>
         <div class="show-box-date-and-size"></div>
+        <div class="show-box-ratings">
+            <div class="show-box-rating-imdb"></div>
+            <div class="show-box-rating-rottentomatoes"></div>
+            <div class="show-box-rating-tmdb"></div>
+        </div>
+
+
+
         <div class="showtv-episodes-container">
             <!--
             <a href="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/">
@@ -182,11 +201,14 @@
         constructor() {
             super();
             this.importDocument = document.currentScript.ownerDocument;
-
-            // Events
+            // Events            
             this.addEventListener('click', e => {
                 console.log("Element was clicked!");
             });
+
+            this.IMDB_ICON_PATH = 'Logo_IMDB.png';
+            this.TMDB_ICON_PATH = 'Logo_TMDB.png';
+            this.ROTTEN_ICON_PATH = 'Logo_rottentomatoes.jpg';
         }
 
         /**
@@ -201,26 +223,46 @@
             const t = this.importDocument.querySelector('#showBox');
             const instance = t.content.cloneNode(true);
             shadowRoot.appendChild(instance);
-            // Imagen
-            /*
-            console.log("DATA: " +
-                this.shadowRoot.querySelector('.show-box-img').getAttribute('href')
-            );
-            */
+
             // Titulo --> Modern Family
-            this.shadowRoot.querySelector('.show-box-title').innerHTML = this.getAttribute('title');
+            const title = this.getAttribute('title');
+            this.shadowRoot.querySelector('.show-box-title').innerHTML = title;
+
+            // Imagen
+            const image = this.getAttribute('show-box-img');
+            const urltodownload = this.getAttribute("urltodownload");
+            const urlwithcover = this.getAttribute("urlwithcover");
+            const originaltitle = this.getAttribute('originaltitle');
+            var tooltiptext = title;
+
+            var htmlWithImage = "";
+            if (urltodownload) {
+                htmlWithImage += "<a href='" + urltodownload + "'>";
+                if (urlwithcover) {
+                    htmlWithImage += "<img src='" + urlwithcover + "'" +
+                        " alt='cover' " + "/>";
+                }
+                htmlWithImage += "</a>";
+            }
+            // Tooltip text
+            if (originaltitle) {
+                tooltiptext = title + "(" + originaltitle + ")";
+            }
+            // htmlWithImage += "<span class='tooltiptext'>" + tooltiptext + "</span>";
+            this.shadowRoot.querySelector('.show-box-img').innerHTML = htmlWithImage;
+
             // Session --> e.g. Tempora da 9
             const session = this.getAttribute('session');
             if (session) {
-                this.shadowRoot.querySelector('.show-box-session').innerHTML = session;
+                this.shadowRoot.querySelector('.show-box-session').innerHTML = "Temporada " + session;
             }
             // Quality --> e.g. HDTV 720p
             const quality = this.getAttribute('quality');
             if (quality) {
                 this.shadowRoot.querySelector('.show-box-quality').innerHTML = quality;
             }
-            // Date and Size -->  e.g. 29-10-2017 - 700 MB            
-            var date = this.getAttribute('date');
+            // Releasedate and filesize -->  e.g. 29-10-2017 - 700 MB            
+            var date = this.getAttribute('releasedate');
             if (date == null) {
                 date = 'unknow';
             }
@@ -229,8 +271,45 @@
                 size = 'unknow';
             }
             this.shadowRoot.querySelector('.show-box-date-and-size').innerHTML = date + " - " + size;
+
+            // Ratings            
+            const imdbrating = this.getAttribute('imdbrating');
+            if (imdbrating) {
+                this.shadowRoot.querySelector('.show-box-rating-imdb').innerHTML = this._renderRatingPoints(
+                    imdbrating, this.IMDB_ICON_PATH);
+            }
+            const rottentomatoes = this.getAttribute('rottentomatoes');
+            if (rottentomatoes) {
+                this.shadowRoot.querySelector('.show-box-rating-rottentomatoes').innerHTML = this._renderRatingPoints(
+                    imdbrating, this.TMDB_ICON_PATH);
+            }
+            const tmdbrating = this.getAttribute('tmdbrating');
+            if (tmdbrating) {
+                this.shadowRoot.querySelector('.show-box-rating-tmdb').innerHTML = this._renderRatingPoints(
+                    imdbrating, this.ROTTEN_ICON_PATH);
+            }
             // Episode list
+
             //this.shadowRoot.querySelector('.showtv-episodes-container').innerHTML = "none";
+            /*
+                var newHTML = " <div class='showtv-episodes-container'>";
+            for (var i = 0; i < shows.length; i++) {
+                //console.log("Processing TV show '" + shows[i]['title'] + " T-" + shows[i]['session'] + " E-" + shows[i]['episode'] + "'");
+                newHTML += "<a href='" + shows[i]["urltodownload"] + "'>";
+                newHTML += "<p>Episodio " + shows[i]['episode'] + "</p>";
+                newHTML += "</a>";
+            }
+            newHTML += "</div>";
+            */
+        }
+
+        /**
+         * Return html with IMDB icon and rating text
+         * @param {*} text Text next imdb icon 
+         */
+        _renderRatingPoints(text, icon) {
+            return "<img src=" + icon + " width=\"35\" height=\"16\">" +
+                "<span>" + text + "</span>";
         }
     }
 
@@ -239,12 +318,13 @@
 
 </html>
 
+
 <!--
 <div class='show-container' 
     onmouseover='setAboutShow("Modern Family",
                               "Director Steven Levitan (Creator)'>
     <div class='show-box-img'>
-        <a href='http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/'>
+        <a href='http://tumejorjuego.com/redirect/ap-903-ac3-5-1-espaa-a-ol-castellano/'>
             <img src='http://tumejortorrent.com/pictures/c/2261_modern-family.jpg' alt='cover' />
         </a>
         <span class='tooltiptext'>Modern Family</span>
