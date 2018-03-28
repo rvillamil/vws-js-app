@@ -74,28 +74,29 @@ function getShows(evt, htmlElementID) {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
 
         crawler.crawlBillboardFilms(
-                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null))
+                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null), 2)
             .then(
                 showList => {
-                    console.log(`Billboard Films length ${showList.length}`);
+                    console.log("crawler - Billboardfilms length: " + showList.length);
                     closeModalWindow(modalWindow);
                 }
             ).catch(function (err) {
-                console.log(`getShows - Error on crawlBillboardFilms ${err}`);
+                console.log('Error: ' + err);
             });
+
 
     } else if (htmlElementID == "videopremieres-content") {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
 
         crawler.crawlVideoPremieres(
-                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null))
+                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null), 2)
             .then(
                 showList => {
-                    console.log(`Video premieres length ${showList.length}`);
+                    console.log("crawler - VideoPremieres length: " + showList.length);
                     closeModalWindow(modalWindow);
                 }
             ).catch(function (err) {
-                console.log(`getShows - Error on crawlVideoPremieres ${err}`);
+                console.log('Error: ' + err);
             });
 
     } else {
@@ -121,13 +122,13 @@ function newHTMLShow(show, htmlWithEpisodeLinks) {
         "," + '"' + show.sinopsis + '"' + ")'" +
         ">";
 
-    newHtml += `<show-box title=${show.title} 
-                          originaltitle=${show.originalTitle} 
-                          quality=${show.quality} releasedate=${show.releaseDate} 
-                          size=${show.fileSize} urltodownload=${show.urltodownload} 
-                          urlwithcover=${show.urlwithCover} 
-                          imdbrating=${show.imdbRating} 
-                          rottentomatoes=${show.rottenTomatoes}>`
+    newHtml += `<show-box title='${show.title}' 
+                          originaltitle='${show.originalTitle}' 
+                          quality='${show.quality}' releasedate='${show.releaseDate}' 
+                          size='${show.fileSize}' urltodownload='${show.urltodownload}' 
+                          urlwithcover='${show.urlwithCover}' 
+                          imdbrating='${show.imdbRating}' 
+                          rottentomatoes='${show.rottenTomatoes}'>`
 
     // TODO: Episode list
     /*
