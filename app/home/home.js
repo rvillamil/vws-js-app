@@ -110,73 +110,38 @@ function getShows(evt, htmlElementID) {
 }
 
 /**
- * Create HTML text with show
+ * Create HTML TAG with show info
  * 
- * @param jsonShow: JSON Object, with the show
+ * @param show: JSON Object, with the show
  * @param htmlWithEpisodeLinks: HTML text with episode links or null show is not a TV Show
- * @return html text with the show
+ 
+ * @return html fragment with the show render
  */
-function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
+function newHTMLShow(show, htmlWithEpisodeLinks) {
     var newHtml = "";
     newHtml += "<div class='show-container'" +
         " onmouseover='setAboutShow(" +
-        '"' + jsonShow.title + '"' +
-        "," + '"' + jsonShow.year + '"' +
-        "," + '"' + jsonShow.description + '"' +
-        "," + '"' + jsonShow.sinopsis + '"' + ")'" +
+        '"' + show.title + '"' +
+        "," + '"' + show.year + '"' +
+        "," + '"' + show.description + '"' +
+        "," + '"' + show.sinopsis + '"' + ")'" +
         ">";
 
-    // console.log("TITULO->'" + jsonShow.title + "' DESCRIPTION ->'" + jsonShow.description + "' SINOPSIS ->" + jsonShow.sinopsis);
+    newHtml += '<show-box title=${show.title} originaltitle=${show.originalTitle} ' +
+        'quality=${show.quality} releasedate=${show.releaseDate} size=${fileSize} urltodownload=${show.urltodownload} urlwithcover=${show.urlwithCover} imdbrating=${show.imdbRating} rottentomatoes=${show.rottenTomatoes}>'
 
-    // Filmaffinity Points
-    if (jsonShow["filmaffinityPoints"] != null) {
-        newHtml += "<div class='show-box-text'>" + " Filmaffinity " +
-            jsonShow["filmaffinityPoints"] + "</div>";
-    }
-    // Cover            
-    newHtml += "<div class='show-box-img'>";
-    newHtml += "<a href='" + jsonShow["urltodownload"] + "'>";
-    newHtml += "<img src='" + jsonShow["urlwithCover"] + "'" +
-        " alt='cover' " + "/>";
-    newHtml += "</a>";
+    // TODO: Episode list
+    /*
+    <show-box title="Modern Family" originaltitle="Repudieitor..2" quality="HDTV 720p" releasedate="12-10-2003" urltodownload="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/"
+        urlwithcover="http://localhost:8080/Logo_IMDB.png" imdbrating="6.3" rottentomatoes="50/10">
+        <tvshow-link session="1" episode="6" urltodownload="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/"></tvshow-link>
+        <tvshow-link session="2" episode="8" urltodownload="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/"></tvshow-link>
+    </show-box>
+    */
+    newHtml += '</show-box>'
+    newHtml += '</div>';
 
-    var tooltiptexttitle = jsonShow.title;
-    if (jsonShow.originalTitle) {
-        tooltiptexttitle = jsonShow.title + "(" + jsonShow.originalTitle + ")";
-    }
-    newHtml += "<span class='tooltiptext'>" + tooltiptexttitle + "</span>";
-    newHtml += "</div>";
-
-    // Title
-    newHtml += "<div class='show-box-title'>" + jsonShow.title + "</div>";
-
-    // Session
-    if (jsonShow["session"] != null) {
-        newHtml += "<div class='show-box-session'>" + "Temporada " +
-            jsonShow["session"] + "</div>";
-    }
-    // Quality
-    var quality = jsonShow["quality"];
-    //console.log ("Quality:'" + quality + "'");
-    if (quality == null) {
-        quality = "Undetermined";
-    }
-    newHtml += "<div class='show-box-quality'>" + quality + "</div>";
-
-    // Releasedate and filesize
-    newHtml += "<div class='show-box-text'>" + jsonShow["releaseDate"] +
-        " - " + jsonShow["fileSize"] + "</div>";
-
-    // Rating
-    var showID = getShowID(jsonShow.title, jsonShow.originalTitle, jsonShow.year);
-    newHtml += "<div class='show-box-rating' id='" + showID + "'>" + "Searching.." + "</div>";
-
-    // Add html with episode list
-    if (htmlWithEpisodeLinks != null) {
-        newHtml += htmlWithEpisodeLinks;
-    }
-    newHtml += "</div>";
-    
+    console.log('newHTML: ' + newHtml);
     return newHtml;
 }
 
@@ -201,17 +166,13 @@ function setAboutShow(title, year, description, sinopsis) {
     document.getElementById("about-show-description").innerHTML = "<p>Descripcion</p>" + description;
     document.getElementById("about-show-sinopsis").innerHTML = "<p>Sinopsis</p>" + sinopsis;
 }
-/**
- * @param {*} text String with the text 
- * @returns html <div> to write the text in the middle of the screen
- */
-function htmlWithTextInTheMiddle(text) {
-    return "<div class=\"center\">" + text + "<div>"
-}
+
 
 /**
  * Return html with IMDB icon and rating text
  * @param {*} text Text next imdb icon 
+ * 
+ * TODO: ¿Que hacemos con esto?
  */
 function htmlWithIMDbPoints(text) {
     return "<img src=" + IMDB_ICON_PATH + " width=\"35\" height=\"16\">" +
