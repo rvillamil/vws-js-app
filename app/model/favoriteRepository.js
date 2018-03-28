@@ -6,43 +6,48 @@ var db = new Datastore({
 
 const show_path = 'vws-js-lib/lib/show';
 try {
-	console.log("Loading 'vws-js-lib' npm module from Local in '../../../" + show_path + "'");
-	const Show = require('../../../' + show_path);
+	console.log("Loading 'Show' object from Local in '../../../" + show_path + "'");
+	var Show = require('../../../' + show_path);
 
 } catch (e) {
-	console.log("'vws-js-lib' not found in dir. Loading npm module from current 'node_modules/" + show_path);
-	const Show = require(show_path);
+	console.log("'Show' object not found in dir. Loading from current 'node_modules/" + show_path);
+	var Show = require(show_path);
 }
 // ------------------------------------------------------------
-// Config repo
-//
 /**
- * Repository for my favorites show obejcts
+ * Repository for my favorites show objects
+ * https://www.todojs.com/introduccion-a-nedb-una-base-de-datos-javascript-embebida/
  */
 class FavoriteRepository {
 	constructor() {}
-	findAllFavoritesShows() {
-		return "TODO: findAllFavoritesShows";
+
+	findAllFavoritesShows(onShowFound) {
+		db.find({}, function (err, record) {
+			if (err) {
+				console.error("ERROR! FavoriteRepository - findAllFavoritesShows: " + err);
+				process.exit(0);
+			} else {
+				onShowFound(record);
+			}
+		});
 	}
 
-	findShowByTittle(theTitle) {
-		return db.find({
+	findShowByTittle(theTitle, onShowFound) {
+		db.find({
 			title: theTitle
 		}, function (err, record) {
 			if (err) {
-				console.error("Error: " + err);
-				//	process.exit(0);
+				console.error("ERROR! FavoriteRepository - findShowByTittle: " + err);
+				process.exit(0);
 			} else {
-				//console.log("record: " + JSON.stringify (record));
-				//return record;
+				onShowFound(record);
 			}
-
 		});
 	}
 	save(show) {
 		db.insert(show, function (err, newShow) {
 			if (err) {
-				console.error("Insert error: " + err);
+				console.error("ERROR! FavoriteRepository - insert error: " + err);
 				return;
 			}
 			console.log("Persisted favorite show with title '" +
@@ -51,11 +56,26 @@ class FavoriteRepository {
 	}
 }
 
-// https://www.todojs.com/introduccion-a-nedb-una-base-de-datos-javascript-embebida/
+// --- Examples --
+/*
 const favoriteRepository = new FavoriteRepository();
 
-var show = new Show();
-show.title = 'titulo1';
+var show1 = new Show();
+show1.title = 'titulo1';
+show1.year = '2012';
+favoriteRepository.save(show1);
 
-favoriteRepository.save(show)
-console.log("Show:  " + favoriteRepository.findShowByTittle('titulo1'));
+var show2 = new Show();
+show2.title = 'titulo2';
+show2.year = '4012';
+favoriteRepository.save(show2);
+
+favoriteRepository.findShowByTittle('titulo2', show => {
+	console.log('Found ' + JSON.stringify(show));
+})
+
+
+favoriteRepository.findAllFavoritesShows(show => {
+	console.log('Found ' + JSON.stringify(show));
+})
+*/

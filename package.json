@@ -5,6 +5,7 @@
   "description": "Electron application for web-scraping on torrent video websites",
   "main": "main.js",
   "scripts": {
+    "test": "mocha",
     "start": "electron .",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=app/assets/icons/mac/icon.icns --no-prune --out=release-builds",
     "package-win": "electron-packager .  --overwrite --asar=true --platform=win32 --arch=ia32 --icon=app/assets/icons/win/icon.ico --no-prune --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Video Website Scraper\"",
@@ -26,12 +27,13 @@
   "license": "MIT",
   "homepage": "https://github.com/rvillamil/vws-js-app",
   "devDependencies": {
+    "mocha": "^5.0.1",
     "electron": "~1.8.2",
-    "electron-packager": "^11.0.1"    
+    "electron-packager": "^11.0.1"
   },
 
   "dependencies": {
-    "nedb":"*",
+    "nedb": "*",
     "vws-js-app": "git+https://github.com/rvillamil/vws-js-lib.git"
   }
 }
