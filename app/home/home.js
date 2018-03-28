@@ -86,6 +86,7 @@ function getShows(evt, htmlElementID) {
 
     } else if (htmlElementID == "videopremieres-content") {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
+
         crawler.crawlVideoPremieres(
                 show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null))
             .then(
@@ -123,7 +124,7 @@ function newHTMLShow(show, htmlWithEpisodeLinks) {
     newHtml += `<show-box title=${show.title} 
                           originaltitle=${show.originalTitle} 
                           quality=${show.quality} releasedate=${show.releaseDate} 
-                          size=${fileSize} urltodownload=${show.urltodownload} 
+                          size=${show.fileSize} urltodownload=${show.urltodownload} 
                           urlwithcover=${show.urlwithCover} 
                           imdbrating=${show.imdbRating} 
                           rottentomatoes=${show.rottenTomatoes}>`
