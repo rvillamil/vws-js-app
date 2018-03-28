@@ -239,6 +239,7 @@ div.about-show {
 
 /* ---------- Component: tvshow follow form --------------- */
 
+/*
 .form-shows {
     display: inline-block;
     background: var(--form-shows-background-color);
@@ -275,3 +276,4 @@ div.about-show {
     color: var(--topbar-text-color);
     font-size: var(--menubar-font-size);
 }
+*/

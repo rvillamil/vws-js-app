@@ -1,18 +1,14 @@
-const tumejortorrent_scrapper_path = 'vws-js-lib/lib/tumejortorrent';
-const omdb_path = 'vws-js-lib/lib/omdb';
-const IMDB_ICON_PATH = 'app/assets/images/IMDB_Logo_2016.svg.png';
+const crawlerPath = 'vws-js-lib/lib/crawler';
+
+// const IMDB_ICON_PATH = 'app/assets/images/IMDB_Logo_2016.svg.png';
 
 try {
-    console.log("Loading 'vws-js-lib' npm module from Local in '../../../" + tumejortorrent_scrapper_path + "'")
-    var tumejortorrent_scraper = require('../../../' + tumejortorrent_scrapper_path);
-    console.log("Loading 'vws-js-lib' npm module from Local in '../../../" + omdb_path + "'")
-    var omdb = require('../../../' + omdb_path);
+    console.log("Loading 'crawler' npm module from Local in '../../../" + crawlerPath + "'")
+    var crawler = require('../../../' + crawlerPath);
 
 } catch (e) {
-    console.log("'vws-js-lib' not found in dir. Loading npm module from current 'node_modules/" + tumejortorrent_scrapper_path);
-    var tumejortorrent_scraper = require(tumejortorrent_scrapper_path);
-    console.log("'vws-js-lib' not found in dir. Loading npm module from current 'node_modules/" + omdb_path);
-    var omdb = require(omdb_path);
+    console.log("'crawler' not found in dir. Loading npm module from current 'node_modules/" + crawlerPath);
+    var crawler = require(crawlerPath);
 }
 
 /**
@@ -27,6 +23,7 @@ function loadContent() {
  * 
  * @param {*} showListCrawled Show objects list
  */
+/*
 function searchShowRating(showList) {
     showList.forEach(show => {
         var theTitle = show.originalTitle;
@@ -35,10 +32,7 @@ function searchShowRating(showList) {
         }
         omdb.searchShow(theTitle, show.year)
             .then(function (response) {
-                /*
-                console.log("The data found for title '" + theTitle + "' and year '" +
-                    show.year + "' --> " + JSON.stringify(response));
-                */
+                
                 var theHTMLShow = document.getElementById(getShowID(show.title, show.originalTitle, show.year));
                 if (response.imdbRating) {
                     theHTMLShow.innerHTML = htmlWithIMDbPoints(response.imdbRating);
@@ -51,6 +45,7 @@ function searchShowRating(showList) {
             });
     });
 }
+*/
 
 /**
  * Replace de tabcontent with name 'htmlElementID' with HTML show list
@@ -59,7 +54,7 @@ function searchShowRating(showList) {
  * @param htmlElementID: billboardfilms-content, videopremieres-content,... HTML element to replace
  */
 function getShows(evt, htmlElementID) {
-    console.log("getShows - Loading content .. '" + htmlElementID + "'");
+    console.log(`getShows - Loading content .. ${htmlElementID}`);
     document.getElementById(htmlElementID).innerHTML = "";
 
     var i, tabcontent, tablinks;
@@ -73,39 +68,37 @@ function getShows(evt, htmlElementID) {
     }
     document.getElementById(htmlElementID).style.display = "block";
     evt.currentTarget.className += " active";
-    var modalWinow = null;
+    var modalWindow = null;
 
     if (htmlElementID == "billboardfilms-content") {
-        modalWinow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
+        modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
 
-        tumejortorrent_scraper.crawlBillboardFilms(
-                showObjectCrawled => document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObjectCrawled, null))
+        crawler.crawlBillboardFilms(
+                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null))
             .then(
-                showListCrawled => {
-                    console.log("billboardfilms length: " + showListCrawled.length);
-                    closeModalWindow(modalWinow);
-                    searchShowRating(showListCrawled);
+                showList => {
+                    console.log(`Billboard Films length ${showList.length}`);
+                    closeModalWindow(modalWindow);
                 }
             ).catch(function (err) {
-                console.log('Error: ' + err);
+                console.log(`getShows - Error on crawlBillboardFilms ${err}`);
             });
 
     } else if (htmlElementID == "videopremieres-content") {
-        modalWinow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
-        tumejortorrent_scraper.crawlVideoPremieres(
-                showObjectCrawled => document.getElementById(htmlElementID).innerHTML += newHTMLShow(showObjectCrawled, null))
+        modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
+        crawler.crawlVideoPremieres(
+                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null))
             .then(
-                showListCrawled => {
-                    console.log("videopremieres length: " + showListCrawled.length);
-                    closeModalWindow(modalWinow);
-                    searchShowRating(showListCrawled);
+                showList => {
+                    console.log(`Video premieres length ${showList.length}`);
+                    closeModalWindow(modalWindow);
                 }
             ).catch(function (err) {
-                console.log('Error: ' + err);
+                console.log(`getShows - Error on crawlVideoPremieres ${err}`);
             });
 
     } else {
-        alert("ERROR!! 'main-content' not exists " + htmlElementID)
+        alert(`ERROR!! 'main-content' not exists ${htmlElementID}`)
     }
 }
 
@@ -127,8 +120,13 @@ function newHTMLShow(show, htmlWithEpisodeLinks) {
         "," + '"' + show.sinopsis + '"' + ")'" +
         ">";
 
-    newHtml += '<show-box title=${show.title} originaltitle=${show.originalTitle} ' +
-        'quality=${show.quality} releasedate=${show.releaseDate} size=${fileSize} urltodownload=${show.urltodownload} urlwithcover=${show.urlwithCover} imdbrating=${show.imdbRating} rottentomatoes=${show.rottenTomatoes}>'
+    newHtml += `<show-box title=${show.title} 
+                          originaltitle=${show.originalTitle} 
+                          quality=${show.quality} releasedate=${show.releaseDate} 
+                          size=${fileSize} urltodownload=${show.urltodownload} 
+                          urlwithcover=${show.urlwithCover} 
+                          imdbrating=${show.imdbRating} 
+                          rottentomatoes=${show.rottenTomatoes}>`
 
     // TODO: Episode list
     /*
@@ -141,16 +139,8 @@ function newHTMLShow(show, htmlWithEpisodeLinks) {
     newHtml += '</show-box>'
     newHtml += '</div>';
 
-    console.log('newHTML: ' + newHtml);
+    console.log(`newHTML: ${newHtml}`);
     return newHtml;
-}
-
-function getShowID(title, originalTitle, year) {
-    var theTitle = originalTitle;
-    if (!theTitle) {
-        theTitle = title;
-    }
-    return theTitle + "_" + year;
 }
 
 /**
@@ -167,6 +157,15 @@ function setAboutShow(title, year, description, sinopsis) {
     document.getElementById("about-show-sinopsis").innerHTML = "<p>Sinopsis</p>" + sinopsis;
 }
 
+/*
+function getShowID(title, originalTitle, year) {
+    var theTitle = originalTitle;
+    if (!theTitle) {
+        theTitle = title;
+    }
+    return theTitle + "_" + year;
+}
+*/
 
 /**
  * Return html with IMDB icon and rating text
@@ -174,7 +173,9 @@ function setAboutShow(title, year, description, sinopsis) {
  * 
  * TODO: ¿Que hacemos con esto?
  */
+/*
 function htmlWithIMDbPoints(text) {
     return "<img src=" + IMDB_ICON_PATH + " width=\"35\" height=\"16\">" +
         "<span>" + text + "</span>"
 }
+*/
