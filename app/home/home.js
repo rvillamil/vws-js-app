@@ -1,4 +1,4 @@
-const CRAWL_LIMIT = 3; // Number of shows to crawl
+const CRAWL_LIMIT = 2; // Number of shows to crawl
 const crawlerPath = 'vws-js-lib/lib/crawler';
 
 try {
@@ -102,68 +102,7 @@ function getShows(evt, htmlElementID) {
     }
 }
 
-/**
- * Create HTML TAG with show info
- * 
- * @param show: JSON Object, with the show
- * @param htmlWithEpisodeLinks: HTML text with episode links or null show is not a TV Show
- 
- * @return html fragment with the show render
- */
-function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
-    var newHtml = "";
-    newHtml += "<div class='show-container'" +
-        " onmouseover='setAboutShow(" + '"' + jsonShow["title"] + '"' +
-        "," + '"' + jsonShow["year"] + '"' +
-        "," + '"' + jsonShow["description"] + '"' +
-        "," + '"' + jsonShow["sinopsis"] + '"' + ")'" +
-        ">";
-    //console.log("Titulo: " + jsonShow["title"] + "- descr" + jsonShow["description"] + "- sinopsis: " + jsonShow["sinopsis"]);
 
-    // Filmaffinity Points
-    if (jsonShow["filmaffinityPoints"] != null) {
-        newHtml += "<div class='show-box-text'>" + " Filmaffinity " +
-            jsonShow["filmaffinityPoints"] + "</div>";
-    }
-    // Cover            
-    newHtml += "<div class='show-box-img'>";
-    newHtml += "<a href='" + jsonShow["urltodownload"] + "'>";
-    newHtml += "<img src='" + jsonShow["urlwithCover"] + "'" +
-        " alt='cover' " + "/>";
-    newHtml += "</a>";
-    newHtml += "<span class='tooltiptext'>" + jsonShow["title"] +
-        "</span>";
-    newHtml += "</div>";
-
-    // Title
-    newHtml += "<div class='show-box-title'>" + jsonShow["title"] +
-        "</div>";
-
-    // Session
-    if (jsonShow["session"] != null) {
-        newHtml += "<div class='show-box-session'>" + "Temporada " +
-            jsonShow["session"] + "</div>";
-    }
-    // Quality
-    var quality = jsonShow["quality"];
-    //console.log ("Quality:'" + quality + "'");
-    if (quality == null) {
-        quality = "Undetermined";
-    }
-    newHtml += "<div class='show-box-quality'>" + quality + "</div>";
-
-    // Releasedate and filesize
-    newHtml += "<div class='show-box-text'>" + jsonShow["releaseDate"] +
-        " - " + jsonShow["fileSize"] + "</div>";
-
-    // Add html with episode list
-    if (htmlWithEpisodeLinks != null) {
-        newHtml += htmlWithEpisodeLinks;
-    }
-    newHtml += "</div>";
-
-    return newHtml;
-}
 
 /**
  * Fill 'about show' section
@@ -186,18 +125,5 @@ function getShowID(title, originalTitle, year) {
         theTitle = title;
     }
     return theTitle + "_" + year;
-}
-*/
-
-/**
- * Return html with IMDB icon and rating text
- * @param {*} text Text next imdb icon 
- * 
- * TODO: ¿Que hacemos con esto?
- */
-/*
-function htmlWithIMDbPoints(text) {
-    return "<img src=" + IMDB_ICON_PATH + " width=\"35\" height=\"16\">" +
-        "<span>" + text + "</span>"
 }
 */

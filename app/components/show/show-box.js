@@ -1,110 +1,93 @@
+IMDB_ICON_PATH = 'app/components/show/Logo_IMDB.png'
+TMDB_ICON_PATH = 'app/components/show/Logo_TMDB.png'
+ROTTEN_ICON_PATH = 'app/components/show/Logo_rottentomatoes.jpg'
+
 /**
- * Webcomponent to show info about films or TV-shows.
+ * Create HTML TAG with show info
  * 
- * https://www.codementor.io/ayushgupta/vanilla-js-web-components-chguq8goz 
+ * @param show: JSON Object, with the show
+ * @param htmlWithEpisodeLinks: HTML text with episode links or null show is not a TV Show
+ 
+ * @return html fragment with the show render
  */
-class ShowBox extends HTMLElement {
-    constructor() {
-        super();
-        // this.importDocument = document.currentScript.ownerDocument;
-        // Events            
-        this.addEventListener('click', e => {
-            console.log("Element was clicked..!");
-        });
+function newHTMLShow(show, htmlWithEpisodeLinks) {
+    var newHtml = "";
 
-        this.IMDB_ICON_PATH = 'Logo_IMDB.png';
-        this.TMDB_ICON_PATH = 'Logo_TMDB.png';
-        this.ROTTEN_ICON_PATH = 'Logo_rottentomatoes.jpg';
+    // Tooltip text
+    var tooltiptext = show.title;
+    if (show.originaltitle != null) {
+        tooltiptext = show.title + "(" + show.originaltitle + ")";
     }
 
-    /**
-     * Se llama cada vez que el elemento se inserta en el DOM.
-     * Aquí podemos hacer llamadas AJAX para pedir datos, configurar cosas, etc..
-     * Funcionaría similar al componentWillMount de React.js
-     */
-    connectedCallback() {
+    newHtml += `<div class='show-container' 
+                     onmouseover='setAboutShow("${show.title}", 
+                                                "${show.year}",
+                                                "${show.description}",
+                                                "${show.sinopsis}")'>
+    <!-- cover -->
+    <div class='show-box-img'>
+        <a href='${show.urltodownload}'>
+            <img src='${show.urlwithCover}' alt='cover'/>
+        </a>
+        <span class='tooltiptext'>${tooltiptext}</span>
+    </div>
+    
+    <!-- Title -->
+    <div class='show-box-title'>${show.title}</div>`
 
-        const ownerDocument = document.currentScript.ownerDocument;
-        const template = ownerDocument.querySelector('#showBox');
-        const instance = template.content.cloneNode(true);
+    // Quality --> e.g. HDTV 720p
+    var quality = show.quality;
+    if (quality == null) {
+        quality = "Desconocida";
+    }
+    newHtml += `<div class='show-box-quality'>${quality}</div>`
 
-        let shadowRoot = this.attachShadow({
-            mode: 'open'
-        });
-        shadowRoot.appendChild(instance);
+    // Releasedate and filesize -->  e.g. 29-10-2017 - 700 MBar date = this.getAttribute('releasedate');
+    var date = show.releaseDate;
+    if (date == null) {
+        date = 'unknow';
+    }
+    var size = show.fileSize;
+    if (size == null) {
+        size = 'unknow';
+    }
+    newHtml += `<div class='show-box-text'>${date} - ${size}</div>`
 
-        //this.importDocument = document.currentScript.ownerDocument;            
-        // Titulo --> Modern Family
-        const title = this.getAttribute('title');
-        this.shadowRoot.querySelector('.show-box-title').innerHTML = title;
-
-        // Imagen
-        const image = this.getAttribute('show-box-img');
-        const urltodownload = this.getAttribute("urltodownload");
-        const urlwithcover = this.getAttribute("urlwithcover");
-        const originaltitle = this.getAttribute('originaltitle');
-        var tooltiptext = title;
-
-        var htmlWithImage = "";
-        if (urltodownload) {
-            htmlWithImage += "<a href='" + urltodownload + "'>";
-            if (urlwithcover) {
-                htmlWithImage += "<img src='" + urlwithcover + "'" +
-                    " alt='cover' " + "/>";
-            }
-            htmlWithImage += "</a>";
-        }
-        // Tooltip text
-        if (originaltitle) {
-            tooltiptext = title + "(" + originaltitle + ")";
-        }
-        htmlWithImage += "<span class='tooltiptext'>" + tooltiptext + "</span>";
-        this.shadowRoot.querySelector('.show-box-img').innerHTML = htmlWithImage;
-
-        // Quality --> e.g. HDTV 720p
-        const quality = this.getAttribute('quality');
-        if (quality) {
-            this.shadowRoot.querySelector('.show-box-quality').innerHTML = quality;
-        }
-        // Releasedate and filesize -->  e.g. 29-10-2017 - 700 MB            
-        var date = this.getAttribute('releasedate');
-        if (date == null) {
-            date = 'unknow';
-        }
-        var size = this.getAttribute('size');
-        if (size == null) {
-            size = 'unknow';
-        }
-        this.shadowRoot.querySelector('.show-box-date-and-size').innerHTML = date + " - " + size;
-
-        // Ratings            
-        const imdbrating = this.getAttribute('imdbrating');
-        if (imdbrating) {
-            this.shadowRoot.querySelector('.show-box-rating-imdb').innerHTML = this._renderRatingPoints(
-                imdbrating, this.IMDB_ICON_PATH);
-        }
-        const rottentomatoes = this.getAttribute('rottentomatoes');
-        if (rottentomatoes) {
-            this.shadowRoot.querySelector('.show-box-rating-rottentomatoes').innerHTML = this._renderRatingPoints(
-                imdbrating, this.TMDB_ICON_PATH);
-        }
-        const tmdbrating = this.getAttribute('tmdbrating');
-        if (tmdbrating) {
-            this.shadowRoot.querySelector('.show-box-rating-tmdb').innerHTML = this._renderRatingPoints(
-                imdbrating, this.ROTTEN_ICON_PATH);
-        }
-        // Episode list : tvshow-link tags
-        this.shadowRoot.querySelector('.showtv-episodes-container').innerHTML = this.shadowRoot.host.innerHTML;
+    // Ratings            
+    const imdbrating = 5;
+    if (imdbrating) {
+        newHtml += this._renderRatingPoints(imdbrating, IMDB_ICON_PATH);
+    }
+    const rottentomatoes = show.rottentomatoes;
+    if (rottentomatoes) {
+        newHtml += this._renderRatingPoints(rottentomatoes, TMDB_ICON_PATH);
+    }
+    const tmdbrating = show.tmdbrating;
+    if (tmdbrating) {
+        newHtml += this._renderRatingPoints(tmdbrating, ROTTEN_ICON_PATH);
     }
 
-    /**
-     * Return html with IMDB icon and rating text
-     * @param {*} text Text next imdb icon 
-     */
-    _renderRatingPoints(text, icon) {
-        return "<img src=" + icon + " width=\"35\" height=\"16\">" +
-            "<span>" + text + "</span>";
+    // ------- TV Shows ------
+    // Session
+    if (show.session != null) {
+        newHtml += `<div class='show-box-session'>Temporada ${show.session}</div>`
     }
+    // Add html with episode list
+    if (htmlWithEpisodeLinks != null) {
+        newHtml += htmlWithEpisodeLinks;
+    }
+    newHtml += "</div>";
+
+    console.log("newHTML: " + newHtml);
+    return newHtml;
 }
 
-window.customElements.define('show-box', ShowBox);
+
+/**
+ * Return html with IMDB icon and rating text
+ * @param {*} text Text next imdb icon 
+ */
+function _renderRatingPoints(text, icon) {
+    return "<img src=" + icon + " width=\"35\" height=\"16\">" +
+        "<span>" + text + "</span>";
+}
