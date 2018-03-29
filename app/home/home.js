@@ -1,13 +1,11 @@
 const crawlerPath = 'vws-js-lib/lib/crawler';
 
-// const IMDB_ICON_PATH = 'app/assets/images/IMDB_Logo_2016.svg.png';
-
 try {
-    console.log("Loading 'crawler' npm module from Local in '../../../" + crawlerPath + "'")
-    var crawler = require('../../../' + crawlerPath);
+    console.log(`Loading 'crawler' npm module from Local from '../${crawlerPath}'`)
+    var crawler = require('../' + crawlerPath);
 
 } catch (e) {
-    console.log("'crawler' not found in dir. Loading npm module from current 'node_modules/" + crawlerPath);
+    console.log(`'crawler' not found in dir. Loading npm module from current 'node_modules/" ${crawlerPath}`);
     var crawler = require(crawlerPath);
 }
 
