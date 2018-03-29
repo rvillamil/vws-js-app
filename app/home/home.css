@@ -198,19 +198,6 @@ div.about-show {
     color: var(--topbar-text-color);
 }
 
-#about-show-year {
-    float: top;
-    border: 0px solid #ccc;
-    margin: 5px;
-    color: var(--about-show-text-color)
-}
-
-#about-show-year p {
-    margin: 0px;
-    font-size: 1.2em;
-    color: var(--topbar-text-color);
-}
-
 #about-show-description {
     float: top;
     border: 0px solid #aaa;
@@ -219,6 +206,19 @@ div.about-show {
 }
 
 #about-show-description p {
+    margin: 0px;
+    font-size: 1.2em;
+    color: var(--topbar-text-color);
+}
+
+#about-show-year {
+    float: top;
+    border: 0px solid #aaa;
+    margin: 5px;
+    color: var(--about-show-text-color);
+}
+
+#about-show-year p {
     margin: 0px;
     font-size: 1.2em;
     color: var(--topbar-text-color);
@@ -237,9 +237,112 @@ div.about-show {
     color: var(--topbar-text-color);
 }
 
+/* ------------------------ Component: Show ------------------------- */
+
+.show-container {
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid #ccc;
+    width: 140px;
+}
+
+.show-container:hover {
+    border: 1px solid #fa8072;
+}
+
+/* Elemento de texto dentro del show-container con la fecha, formato ..*/
+
+.show-box-text {
+    display: block;
+    margin: 1px;
+    padding: 1px;
+    border: 1px;
+    text-align: center;
+    font-size: 0.775em;
+}
+
+/* Titulo del show con Tooltip y recortado por puntos */
+
+.show-box-title {
+    width: auto;
+    margin: 1px;
+    padding: 1px;
+    border: 1px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0.875em;
+    font-weight: bold;
+    color: var(--menubar-button-text-color);
+}
+
+.show-box-session {
+    width: auto;
+    margin: 1px;
+    padding: 1px;
+    border: 1px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0.875em;
+    font-weight: bold;
+}
+
+.show-box-quality {
+    display: block;
+    margin: 1px;
+    padding: 1px;
+    border: 1px;
+    text-align: center;
+    font-size: 0.775em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Campo con la portada del show-container */
+
+.show-box-img img {
+    width: 100%;
+    height: auto;
+}
+
+.show-box-img .tooltiptext {
+    visibility: hidden;
+    width: auto;
+    background-color: var(--topbar-background-color);
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    margin-left: -120px;
+}
+
+.show-box-img:hover .tooltiptext {
+    visibility: visible;
+}
+
+.showtv-episodes-container {
+    text-align: center;
+    margin: 1px;
+    border: 0px solid #ccc;
+    width: auto;
+}
+
+.showtv-episodes-container p {
+    margin: 2px;
+    border: 0px solid #ccc;
+    padding: 0px;
+    font-size: 0.875em;
+}
+
 /* ---------- Component: tvshow follow form --------------- */
 
-/*
 .form-shows {
     display: inline-block;
     background: var(--form-shows-background-color);
@@ -276,4 +379,3 @@ div.about-show {
     color: var(--topbar-text-color);
     font-size: var(--menubar-font-size);
 }
-*/

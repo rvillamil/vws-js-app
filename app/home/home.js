@@ -1,9 +1,9 @@
+const CRAWL_LIMIT = 3; // Number of shows to crawl
 const crawlerPath = 'vws-js-lib/lib/crawler';
 
 try {
     console.log(`Loading 'crawler' npm module from Local from '../${crawlerPath}'`)
     var crawler = require('../' + crawlerPath);
-
 } catch (e) {
     console.log(`'crawler' not found in dir. Loading npm module from current 'node_modules/" ${crawlerPath}`);
     var crawler = require(crawlerPath);
@@ -72,7 +72,7 @@ function getShows(evt, htmlElementID) {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
 
         crawler.crawlBillboardFilms(
-                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null), 2)
+                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null), CRAWL_LIMIT)
             .then(
                 showList => {
                     console.log("crawler - Billboardfilms length: " + showList.length);
@@ -87,7 +87,7 @@ function getShows(evt, htmlElementID) {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
 
         crawler.crawlVideoPremieres(
-                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null), 2)
+                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null), CRAWL_LIMIT)
             .then(
                 showList => {
                     console.log("crawler - VideoPremieres length: " + showList.length);
@@ -110,36 +110,58 @@ function getShows(evt, htmlElementID) {
  
  * @return html fragment with the show render
  */
-function newHTMLShow(show, htmlWithEpisodeLinks) {
+function newHTMLShow(jsonShow, htmlWithEpisodeLinks) {
     var newHtml = "";
     newHtml += "<div class='show-container'" +
-        " onmouseover='setAboutShow(" +
-        '"' + show.title + '"' +
-        "," + '"' + show.year + '"' +
-        "," + '"' + show.description + '"' +
-        "," + '"' + show.sinopsis + '"' + ")'" +
+        " onmouseover='setAboutShow(" + '"' + jsonShow["title"] + '"' +
+        "," + '"' + jsonShow["year"] + '"' +
+        "," + '"' + jsonShow["description"] + '"' +
+        "," + '"' + jsonShow["sinopsis"] + '"' + ")'" +
         ">";
+    //console.log("Titulo: " + jsonShow["title"] + "- descr" + jsonShow["description"] + "- sinopsis: " + jsonShow["sinopsis"]);
 
-    newHtml += `<show-box title='${show.title}' 
-                          originaltitle='${show.originalTitle}' 
-                          quality='${show.quality}' releasedate='${show.releaseDate}' 
-                          size='${show.fileSize}' urltodownload='${show.urltodownload}' 
-                          urlwithcover='${show.urlwithCover}' 
-                          imdbrating='${show.imdbRating}' 
-                          rottentomatoes='${show.rottenTomatoes}'>`
+    // Filmaffinity Points
+    if (jsonShow["filmaffinityPoints"] != null) {
+        newHtml += "<div class='show-box-text'>" + " Filmaffinity " +
+            jsonShow["filmaffinityPoints"] + "</div>";
+    }
+    // Cover            
+    newHtml += "<div class='show-box-img'>";
+    newHtml += "<a href='" + jsonShow["urltodownload"] + "'>";
+    newHtml += "<img src='" + jsonShow["urlwithCover"] + "'" +
+        " alt='cover' " + "/>";
+    newHtml += "</a>";
+    newHtml += "<span class='tooltiptext'>" + jsonShow["title"] +
+        "</span>";
+    newHtml += "</div>";
 
-    // TODO: Episode list
-    /*
-    <show-box title="Modern Family" originaltitle="Repudieitor..2" quality="HDTV 720p" releasedate="12-10-2003" urltodownload="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/"
-        urlwithcover="http://localhost:8080/Logo_IMDB.png" imdbrating="6.3" rottentomatoes="50/10">
-        <tvshow-link session="1" episode="6" urltodownload="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/"></tvshow-link>
-        <tvshow-link session="2" episode="8" urltodownload="http://tumejorjuego.com/redirect/index.php?link=descargar-torrent/100089_modern-family-temporada-9-hdtv-720p-cap-903-ac3-5-1-espaa-a-ol-castellano/"></tvshow-link>
-    </show-box>
-    */
-    newHtml += '</show-box>'
-    newHtml += '</div>';
+    // Title
+    newHtml += "<div class='show-box-title'>" + jsonShow["title"] +
+        "</div>";
 
-    console.log(`newHTML: ${newHtml}`);
+    // Session
+    if (jsonShow["session"] != null) {
+        newHtml += "<div class='show-box-session'>" + "Temporada " +
+            jsonShow["session"] + "</div>";
+    }
+    // Quality
+    var quality = jsonShow["quality"];
+    //console.log ("Quality:'" + quality + "'");
+    if (quality == null) {
+        quality = "Undetermined";
+    }
+    newHtml += "<div class='show-box-quality'>" + quality + "</div>";
+
+    // Releasedate and filesize
+    newHtml += "<div class='show-box-text'>" + jsonShow["releaseDate"] +
+        " - " + jsonShow["fileSize"] + "</div>";
+
+    // Add html with episode list
+    if (htmlWithEpisodeLinks != null) {
+        newHtml += htmlWithEpisodeLinks;
+    }
+    newHtml += "</div>";
+
     return newHtml;
 }
 
