@@ -1,7 +1,7 @@
 {
   "name": "vws-js-app",
   "productName": "Video Website Scraper",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Electron application for web-scraping on torrent video websites",
   "main": "main.js",
   "scripts": {

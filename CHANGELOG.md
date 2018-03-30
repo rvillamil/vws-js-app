@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-- IMDB Rating
+- IMDB, TMDB and Rottentomatoes rating support
 - Change order in menu bar. Video premieres first option
-- New data Scraped : Original title and Year
+- New data Scraped: Original title and Year
 - Enhance sinopsis field crawling
 - Clean area when reload the same menu option (non duplicated shows)
 
