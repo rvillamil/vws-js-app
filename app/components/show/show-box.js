@@ -1,17 +1,18 @@
-IMDB_ICON_PATH = 'app/components/show/Logo_IMDB.png'
-TMDB_ICON_PATH = 'app/components/show/Logo_TMDB.png'
-ROTTEN_ICON_PATH = 'app/components/show/Logo_rottentomatoes.jpg'
+IMDB_ICON_PATH = 'app/components/show/Logo_IMDB.svg'
+TMDB_ICON_PATH = 'app/components/show/Logo_TMDB.svg'
+ROTTEN_ICON_PATH = 'app/components/show/Logo_rottentomatoes.svg'
+NULL_RATING_STRING = "----"
 
 /**
- * Create HTML TAG with show info
+ * Render Show
  * 
  * @param show: JSON Object, with the show
  * @param htmlWithEpisodeLinks: HTML text with episode links or null show is not a TV Show
  
- * @return html fragment with the show render
+ * @return html fragment
  */
-function newHTMLShow(show, htmlWithEpisodeLinks) {
-    var newHtml = "";
+function renderShowBox(show, htmlWithEpisodeLinks) {
+    var htmlShow = "";
 
     // Tooltip text
     var tooltiptext = show.title;
@@ -19,12 +20,12 @@ function newHTMLShow(show, htmlWithEpisodeLinks) {
         tooltiptext = show.title + "(" + show.originaltitle + ")";
     }
 
-    newHtml += `<div class='show-container' 
+    htmlShow += `<div class='show-container' 
                      onmouseover='setAboutShow("${show.title}", 
                                                 "${show.year}",
                                                 "${show.description}",
                                                 "${show.sinopsis}")'>
-    <!-- cover -->
+    <!-- cover and tooltip -->
     <div class='show-box-img'>
         <a href='${show.urltodownload}'>
             <img src='${show.urlwithCover}' alt='cover'/>
@@ -40,7 +41,7 @@ function newHTMLShow(show, htmlWithEpisodeLinks) {
     if (quality == null) {
         quality = "Desconocida";
     }
-    newHtml += `<div class='show-box-quality'>${quality}</div>`
+    htmlShow += `<div class='show-box-quality'>${quality}</div>`
 
     // Releasedate and filesize -->  e.g. 29-10-2017 - 700 MBar date = this.getAttribute('releasedate');
     var date = show.releaseDate;
@@ -51,43 +52,57 @@ function newHTMLShow(show, htmlWithEpisodeLinks) {
     if (size == null) {
         size = 'unknow';
     }
-    newHtml += `<div class='show-box-text'>${date} - ${size}</div>`
+    htmlShow += `<div class='show-box-text'>${date} - ${size}</div>`
 
     // Ratings            
-    const imdbrating = 5;
-    if (imdbrating) {
-        newHtml += this._renderRatingPoints(imdbrating, IMDB_ICON_PATH);
+    htmlShow += `<div class='show-box-ratings'>`
+    //const imdbrating = 5.3;
+    var imdbrating = show.imdbrating;
+    if (imdbrating == null) {
+        imdbrating = NULL_RATING_STRING;
     }
-    const rottentomatoes = show.rottentomatoes;
-    if (rottentomatoes) {
-        newHtml += this._renderRatingPoints(rottentomatoes, TMDB_ICON_PATH);
+    htmlShow += this._renderRatingPoints(imdbrating, IMDB_ICON_PATH, "show-box-rating-imdb");
+
+    var rottentomatoes = show.rottentomatoes;
+    if (rottentomatoes == null) {
+        rottentomatoes = NULL_RATING_STRING;
     }
-    const tmdbrating = show.tmdbrating;
-    if (tmdbrating) {
-        newHtml += this._renderRatingPoints(tmdbrating, ROTTEN_ICON_PATH);
+    htmlShow += this._renderRatingPoints(rottentomatoes, TMDB_ICON_PATH, "show-box-rating-rottentomatoes");
+
+    var tmdbrating = show.tmdbrating;
+    if (tmdbrating == null) {
+        tmdbrating = NULL_RATING_STRING;
     }
+    htmlShow += this._renderRatingPoints(tmdbrating, ROTTEN_ICON_PATH, "show-box-rating-tmdb");
+
+    htmlShow += `</div>` // </div> show-box-ratings
 
     // ------- TV Shows ------
     // Session
     if (show.session != null) {
-        newHtml += `<div class='show-box-session'>Temporada ${show.session}</div>`
+        htmlShow += `<div class='show-box-session'>Temporada ${show.session}</div>`
     }
     // Add html with episode list
     if (htmlWithEpisodeLinks != null) {
-        newHtml += htmlWithEpisodeLinks;
+        htmlShow += htmlWithEpisodeLinks;
     }
-    newHtml += "</div>";
+    htmlShow += "</div>";
 
-    console.log("newHTML: " + newHtml);
-    return newHtml;
+    //console.log("htmlShow: " + htmlShow);
+    return htmlShow;
 }
 
 
 /**
- * Return html with IMDB icon and rating text
- * @param {*} text Text next imdb icon 
+ * Render Rating
+ * 
+ * @param {*} rating Text with rating 
+ * @param {*} iconPath Icon logo 
+ * @param {*} className css clasname 
  */
-function _renderRatingPoints(text, icon) {
-    return "<img src=" + icon + " width=\"35\" height=\"16\">" +
-        "<span>" + text + "</span>";
+function _renderRatingPoints(rating, iconPath, className) {
+    return `<div class="${className}">    
+                 <img src="${iconPath}" width="50" height="16">
+                 <span>${rating}</span>
+            </div>`
 }

@@ -72,7 +72,7 @@ function getShows(evt, htmlElementID) {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
 
         crawler.crawlBillboardFilms(
-                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null), CRAWL_LIMIT)
+                show => document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null), CRAWL_LIMIT)
             .then(
                 showList => {
                     console.log("crawler - Billboardfilms length: " + showList.length);
@@ -87,7 +87,7 @@ function getShows(evt, htmlElementID) {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
 
         crawler.crawlVideoPremieres(
-                show => document.getElementById(htmlElementID).innerHTML += newHTMLShow(show, null), CRAWL_LIMIT)
+                show => document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null), CRAWL_LIMIT)
             .then(
                 showList => {
                     console.log("crawler - VideoPremieres length: " + showList.length);

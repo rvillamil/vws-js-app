@@ -1,15 +1,29 @@
+:root {
+    --show-box-font-default-size: 0.775em;
+    --show-box-font-big-size: 0.875em;
+    --show-box-container-border-color: #ccc;
+    --show-box-container-border-hover-color: #fa8072;
+    --show-box-title-color: rgb(184, 188, 191);
+    --show-box-img-tooltiptext-color: #fff;
+    --show-box-img-tooltiptext-background-color: #733;
+    --show-box-ratings-text-color: rgb(246, 189, 4);
+    --show-box-ratings-font-size: 0.975em;
+}
+
+/* Contenedor o Box del resto de los componentes */
+
 .show-container {
     display: inline-block;
     margin: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--show-box-container-border-color);
     width: 140px;
 }
 
 .show-container:hover {
-    border: 1px solid #fa8072;
+    border: 1px solid var(--show-box-container-border-hover-color);
 }
 
-/* Elemento de texto dentro del show-container con la fecha, formato ..*/
+/* Elemento generido de texto dentro del show-container con la fecha, formato ..*/
 
 .show-box-text {
     display: block;
@@ -17,7 +31,7 @@
     padding: 1px;
     border: 1px;
     text-align: center;
-    font-size: 0.775em;
+    font-size: var(--show-box-font-default-size);
 }
 
 /* Titulo del show con Tooltip y recortado por puntos */
@@ -31,9 +45,21 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 0.875em;
+    font-size: var(--show-box-font-big-size);
     font-weight: bold;
-    color: var(--menubar-button-text-color);
+    color: var(--show-box-title-color);
+}
+
+.show-box-quality {
+    display: block;
+    margin: 1px;
+    padding: 1px;
+    border: 1px;
+    text-align: center;
+    font-size: var(--show-box-font-default-size);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .show-box-session {
@@ -45,20 +71,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    font-size: 0.875em;
+    font-size: var(--show-box-font-big-size);
     font-weight: bold;
-}
-
-.show-box-quality {
-    display: block;
-    margin: 1px;
-    padding: 1px;
-    border: 1px;
-    text-align: center;
-    font-size: 0.775em;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 /* Campo con la portada del show-container */
@@ -71,21 +85,58 @@
 .show-box-img .tooltiptext {
     visibility: hidden;
     width: auto;
-    background-color: var(--topbar-background-color);
-    color: #fff;
+    background-color: var(--show-box-img-tooltiptext-background-color);
+    color: var(--show-box-img-tooltiptext-color);
     text-align: center;
     border-radius: 3px;
     padding: 5px;
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-    margin-left: -120px;
+    margin-left: -10px;
 }
 
 .show-box-img:hover .tooltiptext {
     visibility: visible;
 }
 
+/* Ratings : IMDB, rottentomatoes... */
+
+.show-box-ratings::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.show-box-ratings span {
+    float: left;
+    padding: 0px;
+    margin-left: 15px;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: var(--show-box-font-big-size);
+    color: var(--show-box-ratings-text-color);
+}
+
+.show-box-rating-imdb {
+    float: left;
+    width: 33%;
+    padding: 1px;
+}
+
+.show-box-rating-rottentomatoes {
+    float: left;
+    width: 33%;
+    padding: 1px;
+}
+
+.show-box-rating-tmdb {
+    float: left;
+    width: 33%;
+    padding: 1px;
+}
+
+/*
 .showtv-episodes-container {
     text-align: center;
     margin: 1px;
@@ -97,5 +148,6 @@
     margin: 2px;
     border: 0px solid #ccc;
     padding: 0px;
-    font-size: 0.875em;
+    font-size: var(--show-box-font-big-size);
 }
+*/
