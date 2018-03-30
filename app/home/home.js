@@ -1,4 +1,4 @@
-const CRAWL_LIMIT = 2; // Number of shows to crawl
+const CRAWL_LIMIT = 20; // Number of shows to crawl
 const crawlerPath = 'vws-js-lib/lib/crawler';
 
 try {
@@ -15,35 +15,6 @@ try {
 function loadContent() {
     getShows(event, 'videopremieres-content');
 }
-
-/**
- * Search the show rating using omdb service
- * 
- * @param {*} showListCrawled Show objects list
- */
-/*
-function searchShowRating(showList) {
-    showList.forEach(show => {
-        var theTitle = show.originalTitle;
-        if (!theTitle) {
-            theTitle = show.title;
-        }
-        omdb.searchShow(theTitle, show.year)
-            .then(function (response) {
-                
-                var theHTMLShow = document.getElementById(getShowID(show.title, show.originalTitle, show.year));
-                if (response.imdbRating) {
-                    theHTMLShow.innerHTML = htmlWithIMDbPoints(response.imdbRating);
-                } else {
-                    theHTMLShow.innerHTML = htmlWithIMDbPoints("-");
-                }
-            })
-            .catch(function (err) {
-                console.log('Error: ' + err);
-            });
-    });
-}
-*/
 
 /**
  * Replace de tabcontent with name 'htmlElementID' with HTML show list
@@ -72,14 +43,18 @@ function getShows(evt, htmlElementID) {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
 
         crawler.crawlBillboardFilms(
-                show => document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null), CRAWL_LIMIT)
+                CRAWL_LIMIT,
+                show => {
+                    //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
+                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null);
+                })
             .then(
-                showList => {
-                    console.log("crawler - Billboardfilms length: " + showList.length);
-                    closeModalWindow(modalWindow);
+                urlList => {
+                    console.log("crawler - Billboardfilms length: " + urlList.length)
+                    closeModalWindow(modalWindow)
                 }
-            ).catch(function (err) {
-                console.log('Error: ' + err);
+            ).catch(err => {
+                console.log('ERROR! getShows - Billboardfilms: ' + err)
             });
 
 
@@ -87,22 +62,24 @@ function getShows(evt, htmlElementID) {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
 
         crawler.crawlVideoPremieres(
-                show => document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null), CRAWL_LIMIT)
+                CRAWL_LIMIT,
+                show => {
+                    //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
+                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null);
+                })
             .then(
-                showList => {
-                    console.log("crawler - VideoPremieres length: " + showList.length);
+                urlList => {
+                    console.log("crawler - VideoPremieres length: " + urlList.length);
                     closeModalWindow(modalWindow);
                 }
-            ).catch(function (err) {
-                console.log('Error: ' + err);
+            ).catch(err => {
+                console.log('ERROR! getShows - VideoPremieres: ' + err);
             });
 
     } else {
         alert(`ERROR!! 'main-content' not exists ${htmlElementID}`)
     }
 }
-
-
 
 /**
  * Fill 'about show' section

@@ -57,25 +57,25 @@ function renderShowBox(show, htmlWithEpisodeLinks) {
     // Ratings            
     htmlShow += `<div class='show-box-ratings'>`
     //const imdbrating = 5.3;
-    var imdbrating = show.imdbrating;
+    var imdbrating = show.imdbRating;
     if (imdbrating == null) {
         imdbrating = NULL_RATING_STRING;
     }
     htmlShow += this._renderRatingPoints(imdbrating, IMDB_ICON_PATH, "show-box-rating-imdb");
 
-    var rottentomatoes = show.rottentomatoes;
+    var rottentomatoes = show.rottenTomatoes;
     if (rottentomatoes == null) {
         rottentomatoes = NULL_RATING_STRING;
     }
     htmlShow += this._renderRatingPoints(rottentomatoes, TMDB_ICON_PATH, "show-box-rating-rottentomatoes");
 
-    var tmdbrating = show.tmdbrating;
+    var tmdbrating = show.tmdbRating;
     if (tmdbrating == null) {
         tmdbrating = NULL_RATING_STRING;
     }
     htmlShow += this._renderRatingPoints(tmdbrating, ROTTEN_ICON_PATH, "show-box-rating-tmdb");
 
-    htmlShow += `</div>` // </div> show-box-ratings
+    htmlShow += "</div>" // </div> show-box-ratings
 
     // ------- TV Shows ------
     // Session
@@ -88,7 +88,7 @@ function renderShowBox(show, htmlWithEpisodeLinks) {
     }
     htmlShow += "</div>";
 
-    //console.log("htmlShow: " + htmlShow);
+    console.log("htmlShow: " + htmlShow);
     return htmlShow;
 }
 

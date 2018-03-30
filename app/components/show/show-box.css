@@ -3,7 +3,7 @@
     --show-box-font-big-size: 0.875em;
     --show-box-container-border-color: #ccc;
     --show-box-container-border-hover-color: #fa8072;
-    --show-box-title-color: rgb(184, 188, 191);
+    --show-box-title-color: rgb(246, 189, 4);
     --show-box-img-tooltiptext-color: #fff;
     --show-box-img-tooltiptext-background-color: #733;
     --show-box-ratings-text-color: rgb(246, 189, 4);
@@ -113,7 +113,6 @@
     padding: 0px;
     margin-left: 15px;
     vertical-align: middle;
-    font-weight: bold;
     font-size: var(--show-box-font-big-size);
     color: var(--show-box-ratings-text-color);
 }
