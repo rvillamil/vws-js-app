@@ -94,13 +94,3 @@ function setAboutShow(title, year, description, sinopsis) {
     document.getElementById("about-show-description").innerHTML = "<p>Descripcion</p>" + description;
     document.getElementById("about-show-sinopsis").innerHTML = "<p>Sinopsis</p>" + sinopsis;
 }
-
-/*
-function getShowID(title, originalTitle, year) {
-    var theTitle = originalTitle;
-    if (!theTitle) {
-        theTitle = title;
-    }
-    return theTitle + "_" + year;
-}
-*/

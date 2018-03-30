@@ -14,10 +14,13 @@ NULL_RATING_STRING = "----"
 function renderShowBox(show, htmlWithEpisodeLinks) {
     var htmlShow = "";
 
+
     // Tooltip text
     var tooltiptext = show.title;
-    if (show.originaltitle != null) {
-        tooltiptext = show.title + "(" + show.originaltitle + ")";
+    if (show.originalTitle != null) {
+        if (show.originalTitle.trim().toUpperCase() != show.title.trim().toUpperCase()) {
+            tooltiptext = show.title + "(" + show.originalTitle + ")";
+        }
     }
 
     htmlShow += `<div class='show-container' 
@@ -67,13 +70,13 @@ function renderShowBox(show, htmlWithEpisodeLinks) {
     if (rottentomatoes == null) {
         rottentomatoes = NULL_RATING_STRING;
     }
-    htmlShow += this._renderRatingPoints(rottentomatoes, TMDB_ICON_PATH, "show-box-rating-rottentomatoes");
+    htmlShow += this._renderRatingPoints(rottentomatoes, ROTTEN_ICON_PATH, "show-box-rating-rottentomatoes");
 
     var tmdbrating = show.tmdbRating;
     if (tmdbrating == null) {
         tmdbrating = NULL_RATING_STRING;
     }
-    htmlShow += this._renderRatingPoints(tmdbrating, ROTTEN_ICON_PATH, "show-box-rating-tmdb");
+    htmlShow += this._renderRatingPoints(tmdbrating, TMDB_ICON_PATH, "show-box-rating-tmdb");
 
     htmlShow += "</div>" // </div> show-box-ratings
 
@@ -88,7 +91,6 @@ function renderShowBox(show, htmlWithEpisodeLinks) {
     }
     htmlShow += "</div>";
 
-    console.log("htmlShow: " + htmlShow);
     return htmlShow;
 }
 
@@ -101,8 +103,12 @@ function renderShowBox(show, htmlWithEpisodeLinks) {
  * @param {*} className css clasname 
  */
 function _renderRatingPoints(rating, iconPath, className) {
+    var ratingFilled = rating + "";
+    if (ratingFilled.length < 2) {
+        ratingFilled = rating + '.0'
+    }
     return `<div class="${className}">    
                  <img src="${iconPath}" width="50" height="16">
-                 <span>${rating}</span>
+                 <span>${ratingFilled}</span>
             </div>`
 }
