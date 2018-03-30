@@ -7,10 +7,10 @@
   "scripts": {
     "test": "mocha",
     "start": "electron .",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=app/assets/icons/mac/icon.icns --no-prune --out=release-builds",
-    "package-win": "electron-packager .  --overwrite --asar=true --platform=win32 --arch=ia32 --icon=app/assets/icons/win/icon.ico --no-prune --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Video Website Scraper\"",
-    "package-linux": "electron-packager .  --overwrite --asar=true --platform=linux --arch=x64 --icon=app/assets/icons/png/1024x1024.png --no-prune --out=release-builds",
-    "package-all": "npm run package-mac && npm run package-win && npm run package-linux"
+    "package-mac": "npm install && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=app/assets/icons/mac/icon.icns --no-prune --out=release-builds",
+    "package-win": "npm install && electron-packager .  --overwrite --asar=true --platform=win32 --arch=ia32 --icon=app/assets/icons/win/icon.ico --no-prune --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Video Website Scraper\"",
+    "package-linux": "npm install && electron-packager .  --overwrite --asar=true --platform=linux --arch=x64 --icon=app/assets/icons/png/1024x1024.png --no-prune --out=release-builds",
+    "package-all": "npm install && npm run package-mac && npm run package-win && npm run package-linux"
   },
   "repository": {
     "type": "git",
