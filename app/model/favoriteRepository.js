@@ -1,18 +1,19 @@
-var Datastore = require('nedb') // https://github.com/louischatriot/nedb
-var db = new Datastore({
-	filename: 'vws-db',
-	autoload: true
-});
-
 const show_path = 'vws-js-lib/lib/show';
 try {
-	console.log("Loading 'Show' object from Local in '../../../" + show_path + "'");
+	console.log(`Loading 'Show' object from Local from '../../../${show_path}'`)
 	var Show = require('../../../' + show_path);
 
 } catch (e) {
 	console.log("'Show' object not found in dir. Loading from current 'node_modules/" + show_path);
 	var Show = require(show_path);
 }
+
+var Datastore = require('nedb') // https://github.com/louischatriot/nedb
+var db = new Datastore({
+	filename: 'vws-db',
+	autoload: true
+});
+
 // ------------------------------------------------------------
 /**
  * Repository for my favorites show objects
@@ -21,15 +22,18 @@ try {
 class FavoriteRepository {
 	constructor() {}
 
-	findAllFavoritesShows(onShowFound) {
+	findAllFavoritesShows(favoritesShows, onShowFound) {
+		//favoritesShows = [];
 		db.find({}, function (err, record) {
 			if (err) {
 				console.error("ERROR! FavoriteRepository - findAllFavoritesShows: " + err);
 				process.exit(0);
 			} else {
+				favoritesShows[0] = 'ala;';
 				onShowFound(record);
 			}
 		});
+		return favoritesShows;
 	}
 
 	findShowByTittle(theTitle, onShowFound) {
@@ -57,7 +61,7 @@ class FavoriteRepository {
 }
 
 // --- Examples --
-/*
+
 const favoriteRepository = new FavoriteRepository();
 
 var show1 = new Show();
@@ -70,12 +74,16 @@ show2.title = 'titulo2';
 show2.year = '4012';
 favoriteRepository.save(show2);
 
+/*
 favoriteRepository.findShowByTittle('titulo2', show => {
 	console.log('Found ' + JSON.stringify(show));
 })
-
-
-favoriteRepository.findAllFavoritesShows(show => {
-	console.log('Found ' + JSON.stringify(show));
-})
 */
+favoritesShows = [];
+favoritesShows.push('a')
+favoriteRepository.findAllFavoritesShows(favoritesShows, show => {
+	//console.log('Found ' + JSON.stringify(show));
+	//favoritesShows[0] = show.title;
+})
+
+console.log('Favoritos: ' + favoritesShows);

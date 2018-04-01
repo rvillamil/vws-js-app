@@ -1,6 +1,7 @@
 const CRAWL_LIMIT = 20; // Number of shows to crawl
-const crawlerPath = 'vws-js-lib/lib/crawler';
+const favoriteRepository = require('../app/model/favoriteRepository');
 
+const crawlerPath = 'vws-js-lib/lib/crawler';
 try {
     console.log(`Loading 'crawler' npm module from Local from '../${crawlerPath}'`)
     var crawler = require('../' + crawlerPath);
@@ -50,11 +51,11 @@ function getShows(evt, htmlElementID) {
                 })
             .then(
                 urlList => {
-                    console.log("crawler - Billboardfilms length: " + urlList.length)
+                    console.log(`crawler - Billboardfilms length: ${urlList.length}`)
                     closeModalWindow(modalWindow)
                 }
             ).catch(err => {
-                console.log('ERROR! getShows - Billboardfilms: ' + err)
+                console.error(`ERROR! getShows - Billboardfilms: ${err}`)
             });
 
 
@@ -69,12 +70,18 @@ function getShows(evt, htmlElementID) {
                 })
             .then(
                 urlList => {
-                    console.log("crawler - VideoPremieres length: " + urlList.length);
+                    console.log(`crawler - VideoPremieres length: ${urlList.length}`);
                     closeModalWindow(modalWindow);
                 }
             ).catch(err => {
-                console.log('ERROR! getShows - VideoPremieres: ' + err);
+                console.error(`ERROR! getShows - VideoPremieres: ${err}`)
             });
+
+    } else if (htmlElementID == "favoritetvshows-content") {
+        modalWindow = showModalWindow("Espere por favor..", "Obteniendo mis series favoritas ..", "");
+        favoriteRepository.findAllFavoritesShows(show => {
+            console.log(`TVShow favorite found '${JSON.stringify(show)}'`);
+        });
 
     } else {
         alert(`ERROR!! 'main-content' not exists ${htmlElementID}`)
