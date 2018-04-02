@@ -14,6 +14,7 @@ var db = new Datastore({
 	autoload: true
 });
 
+
 // ------------------------------------------------------------
 /**
  * Repository for my favorites show objects
@@ -22,68 +23,72 @@ var db = new Datastore({
 class FavoriteRepository {
 	constructor() {}
 
-	findAllFavoritesShows(favoritesShows, onShowFound) {
-		//favoritesShows = [];
-		db.find({}, function (err, record) {
-			if (err) {
-				console.error("ERROR! FavoriteRepository - findAllFavoritesShows: " + err);
-				process.exit(0);
-			} else {
-				favoritesShows[0] = 'ala;';
-				onShowFound(record);
-			}
+	findAllFavoritesShows() {
+		return new Promise((resolve, reject) => {
+			db.find({}, function (err, records) {
+				if (err) {
+					reject(Error(`ERROR! FavoriteRepository - findAllFavoritesShows ${err}`));
+				} else {
+					resolve(records);
+				}
+			});
 		});
-		return favoritesShows;
 	}
 
-	findShowByTittle(theTitle, onShowFound) {
-		db.find({
-			title: theTitle
-		}, function (err, record) {
-			if (err) {
-				console.error("ERROR! FavoriteRepository - findShowByTittle: " + err);
-				process.exit(0);
-			} else {
-				onShowFound(record);
-			}
+	findShowByTittle(theTitle) {
+		return new Promise((resolve, reject) => {
+			db.find({
+				title: theTitle
+			}, function (err, record) {
+				if (err) {
+					reject(Error(`ERROR! FavoriteRepository - findShowByTittle ${err}`));
+				} else {
+					resolve(record);
+				}
+			});
 		});
 	}
+
 	save(show) {
-		db.insert(show, function (err, newShow) {
-			if (err) {
-				console.error("ERROR! FavoriteRepository - insert error: " + err);
-				return;
-			}
-			console.log("Persisted favorite show with title '" +
-				newShow.title + "'" + " and year '" + newShow.year + "'");
+		return new Promise((resolve, reject) => {
+			db.insert(show, function (err, newShow) {
+				if (err) {
+					reject(Error(`ERROR! FavoriteRepository - insert error:  ${err}`));
+				} else {
+					resolve(newShow);
+				}
+			});
 		});
 	}
 }
 
-// --- Examples --
 
+//
+// NPM modules: https://goo.gl/Z5Ry3J
+//
+module.exports = FavoriteRepository;
+
+// --- Examples --
+/*
 const favoriteRepository = new FavoriteRepository();
 
 var show1 = new Show();
 show1.title = 'titulo1';
 show1.year = '2012';
-favoriteRepository.save(show1);
+favoriteRepository.save(show1).then(
+	newShow => console.log(newShow));
 
 var show2 = new Show();
 show2.title = 'titulo2';
 show2.year = '4012';
 favoriteRepository.save(show2);
+*/
 
 /*
-favoriteRepository.findShowByTittle('titulo2', show => {
-	console.log('Found ' + JSON.stringify(show));
-})
+favoriteRepository.findAllFavoritesShows()
+	.then(records => console.log("Favorites: " + JSON.stringify(records)));
 */
-favoritesShows = [];
-favoritesShows.push('a')
-favoriteRepository.findAllFavoritesShows(favoritesShows, show => {
-	//console.log('Found ' + JSON.stringify(show));
-	//favoritesShows[0] = show.title;
-})
 
-console.log('Favoritos: ' + favoritesShows);
+/*
+favoriteRepository.findShowByTittle('titulo2').then(show => console.log("Shows" + JSON.stringify(show)));
+*/
