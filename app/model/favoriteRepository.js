@@ -1,4 +1,6 @@
-const show_path = 'vws-js-lib/lib/show';
+const database_path = '/tmp/vws-db'
+const show_path = 'vws-js-lib/lib/show'
+
 try {
 	console.log(`Loading 'Show' object from Local from '../../../${show_path}'`)
 	var Show = require('../../../' + show_path);
@@ -8,9 +10,11 @@ try {
 	var Show = require(show_path);
 }
 
+
+console.log(`Loading database from '${database_path}'`);
 var Datastore = require('nedb') // https://github.com/louischatriot/nedb
 var db = new Datastore({
-	filename: 'vws-db',
+	filename: database_path,
 	autoload: true
 });
 
@@ -62,9 +66,8 @@ class FavoriteRepository {
 	}
 }
 
-
 //
-// NPM modules: https://goo.gl/Z5Ry3J
+// Node modules
 //
 module.exports = FavoriteRepository;
 

@@ -1,5 +1,15 @@
 const CRAWL_LIMIT = 20; // Number of shows to crawl
-const favoriteRepository = require('../app/model/favoriteRepository');
+const path = require("path");
+
+const showPath = 'vws-js-lib/lib/show';
+try {
+    console.log(`Loading 'Show' object from Local from '../../../${showPath}'`)
+    var Show = require('../' + showPath);
+
+} catch (e) {
+    console.log("'Show' object not found in dir. Loading from current 'node_modules/" + showPath);
+    var Show = require(showPath);
+}
 
 const crawlerPath = 'vws-js-lib/lib/crawler';
 try {
@@ -10,11 +20,17 @@ try {
     var crawler = require(crawlerPath);
 }
 
+const favoriteRepositoryPath = path.resolve('app/model/favoriteRepository');
+console.log(`Loading 'favoriteRepository' object from Local from '../../../${favoriteRepositoryPath}'`)
+const FavoriteRepository = require(favoriteRepositoryPath);
+
+
+// -------------------------------------------------------------------
 /**
  * Init home
  */
 function loadContent() {
-    getShows(event, 'videopremieres-content');
+    getShows(event, 'favoritetvshows-content');
 }
 
 /**
@@ -79,9 +95,19 @@ function getShows(evt, htmlElementID) {
 
     } else if (htmlElementID == "favoritetvshows-content") {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo mis series favoritas ..", "");
-        favoriteRepository.findAllFavoritesShows(show => {
-            console.log(`TVShow favorite found '${JSON.stringify(show)}'`);
-        });
+
+
+        var show = new Show();
+        show.title = 'A_test_title_save_1';
+        show.year = '2018';
+
+        var favoriteRepository = new FavoriteRepository();
+        favoriteRepository.save(show).then(
+            newShow => {
+                console.log("Show: " + JSON.stringify(newShow));
+            }
+        );
+
 
     } else {
         alert(`ERROR!! 'main-content' not exists ${htmlElementID}`)
