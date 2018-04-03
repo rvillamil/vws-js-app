@@ -1,26 +1,19 @@
-const database_path = '/tmp/vws-db'
-const show_path = 'vws-js-lib/lib/show'
-
-try {
-	console.log(`Loading 'Show' object from Local from '../../../${show_path}'`)
-	var Show = require('../../../' + show_path);
-
-} catch (e) {
-	console.log("'Show' object not found in dir. Loading from current 'node_modules/" + show_path);
-	var Show = require(show_path);
-}
-
-
-console.log(`Loading database from '${database_path}'`);
+//
+// npm modules required
+//
+var Show = require('vws-js-lib/lib/show');
 var Datastore = require('nedb') // https://github.com/louischatriot/nedb
+
+// -------- DB Load -------------
+const database_path = '/tmp/vws-db'
+console.log(`Loading database from '${database_path}'`)
 var db = new Datastore({
 	filename: database_path,
 	autoload: true
 });
 
-
 // ------------------------------------------------------------
-/**
+/**	
  * Repository for my favorites show objects
  * https://www.todojs.com/introduccion-a-nedb-una-base-de-datos-javascript-embebida/
  */
@@ -70,28 +63,3 @@ class FavoriteRepository {
 // Node modules
 //
 module.exports = FavoriteRepository;
-
-// --- Examples --
-/*
-const favoriteRepository = new FavoriteRepository();
-
-var show1 = new Show();
-show1.title = 'titulo1';
-show1.year = '2012';
-favoriteRepository.save(show1).then(
-	newShow => console.log(newShow));
-
-var show2 = new Show();
-show2.title = 'titulo2';
-show2.year = '4012';
-favoriteRepository.save(show2);
-*/
-
-/*
-favoriteRepository.findAllFavoritesShows()
-	.then(records => console.log("Favorites: " + JSON.stringify(records)));
-*/
-
-/*
-favoriteRepository.findShowByTittle('titulo2').then(show => console.log("Shows" + JSON.stringify(show)));
-*/

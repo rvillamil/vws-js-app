@@ -37,6 +37,13 @@ You'll need install [wvs-js-lib](https://github.com/rvillamil/vws-js-lib) at sam
     -- vws-js-app
 ```
 
+Third step: [Link npm module](https://goo.gl/fppRvN)
+
+```sh
+$cd vws-js-app
+$npm link ../vws-js-lib
+```
+
 and finally...
 
 ```sh

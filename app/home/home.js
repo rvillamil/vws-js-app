@@ -1,29 +1,9 @@
 const CRAWL_LIMIT = 20; // Number of shows to crawl
-const path = require("path");
-
-const showPath = 'vws-js-lib/lib/show';
-try {
-    console.log(`Loading 'Show' object from Local from '../../../${showPath}'`)
-    var Show = require('../' + showPath);
-
-} catch (e) {
-    console.log("'Show' object not found in dir. Loading from current 'node_modules/" + showPath);
-    var Show = require(showPath);
-}
-
-const crawlerPath = 'vws-js-lib/lib/crawler';
-try {
-    console.log(`Loading 'crawler' npm module from Local from '../${crawlerPath}'`)
-    var crawler = require('../' + crawlerPath);
-} catch (e) {
-    console.log(`'crawler' not found in dir. Loading npm module from current 'node_modules/" ${crawlerPath}`);
-    var crawler = require(crawlerPath);
-}
-
-const favoriteRepositoryPath = path.resolve('app/model/favoriteRepository');
-console.log(`Loading 'favoriteRepository' object from Local from '../../../${favoriteRepositoryPath}'`)
-const FavoriteRepository = require(favoriteRepositoryPath);
-
+//
+// npm modules required
+//
+var Show = require('vws-js-lib/lib/show');
+var crawler = require('vws-js-lib/lib/crawler');
 
 // -------------------------------------------------------------------
 /**

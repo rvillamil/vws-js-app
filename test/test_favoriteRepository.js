@@ -4,9 +4,14 @@
 // - mocha ...: https://mochajs.org/
 // - assert ..: https://nodejs.org/api/all.html
 //
+
+//
+// npm modules requiered
+//
 const assert = require('assert');
-var Show = require('../../vws-js-lib/lib/show');
+var Show = require('vws-js-lib/lib/show');
 var FavoriteRepository = require('../app/model/favoriteRepository');
+
 
 describe('favoriteRepository', function () {
     describe('#save()', function () {
@@ -26,4 +31,5 @@ describe('favoriteRepository', function () {
             );
         });
     });
+
 });
