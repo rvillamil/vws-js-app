@@ -1,4 +1,6 @@
 const CRAWL_LIMIT = 20; // Number of shows to crawl
+const CRAWL_TV_SHOWS_LIMIT = 10; // Number of TVshows to crawl
+
 //
 // npm modules required
 //
@@ -10,7 +12,7 @@ var crawler = require('vws-js-lib/lib/crawler');
  * Init home
  */
 function loadContent() {
-    getShows(event, 'favoritetvshows-content');
+    getShows(event, 'tvshows-content');
 }
 
 /**
@@ -73,20 +75,36 @@ function getShows(evt, htmlElementID) {
                 console.error(`ERROR! getShows - VideoPremieres: ${err}`)
             });
 
-    } else if (htmlElementID == "favoritetvshows-content") {
-        modalWindow = showModalWindow("Espere por favor..", "Obteniendo mis series favoritas ..", "");
+    } else if (htmlElementID == "tvshows-content") {
+        modalWindow = showModalWindow("Espere por favor..", "Obteniendo las ultimas series  ..", "");
 
+        crawler.crawlTVShows(
+                CRAWL_TV_SHOWS_LIMIT,
+                show => {
+                    //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
+                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null);
+                })
+            .then(
+                urlList => {
+                    console.log(`crawler - crawlTVShows length: ${urlList.length}`);
+                    closeModalWindow(modalWindow);
+                }
+            ).catch(err => {
+                console.error(`ERROR! getShows - crawlTVShows: ${err}`)
+            });
 
-        var show = new Show();
-        show.title = 'A_test_title_save_1';
-        show.year = '2018';
+        /*
+                var show = new Show();
+                show.title = 'A_test_title_save_1';
+                show.year = '2018';
 
-        var favoriteRepository = new FavoriteRepository();
-        favoriteRepository.save(show).then(
-            newShow => {
-                console.log("Show: " + JSON.stringify(newShow));
-            }
-        );
+                var favoriteRepository = new FavoriteRepository();
+                favoriteRepository.save(show).then(
+                    newShow => {
+                        console.log("Show: " + JSON.stringify(newShow));
+                    }
+                );
+                */
 
 
     } else {
