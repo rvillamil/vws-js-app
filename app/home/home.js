@@ -1,5 +1,6 @@
 const CRAWL_LIMIT = 20; // Number of shows to crawl
 const CRAWL_TV_SHOWS_LIMIT = 20; // Number of TVshows to crawl
+const CRAWL_TV_SHOWS_FAVORITES_LIMIT = 4; // Number of links with the latest episodes for each favorite show
 
 //
 // npm modules required
@@ -45,7 +46,7 @@ function getShows(evt, htmlElementID) {
                 CRAWL_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
-                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null);
+                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show)
                 })
             .then(
                 urlList => {
@@ -64,7 +65,7 @@ function getShows(evt, htmlElementID) {
                 CRAWL_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
-                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null);
+                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show);
                 })
             .then(
                 urlList => {
@@ -76,13 +77,15 @@ function getShows(evt, htmlElementID) {
             });
 
     } else if (htmlElementID == "tvshows-content") {
-        modalWindow = showModalWindow("Espere por favor..", "Obteniendo las ultimas series  ..", "");
-
+        modalWindow = showModalWindow("Espere por favor..", "Obteniendo mis favoritos y las ultimas series publicadas ..", "");
+        // My Favorites
+        loadAndRenderFavoritesTVshows(CRAWL_TV_SHOWS_FAVORITES_LIMIT, 'tvshows-favorites-content')
+        // Latest shows published
         crawler.crawlTVShows(
                 CRAWL_TV_SHOWS_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
-                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show, null);
+                    document.getElementById('tvshows-latest-content').innerHTML += renderShowBox(show);
                 })
             .then(
                 urlList => {
@@ -90,25 +93,11 @@ function getShows(evt, htmlElementID) {
                     closeModalWindow(modalWindow);
                 }
             ).catch(err => {
-                getErrorHandle(htmlElementID, modalWindow, err)
+                getErrorHandle('tvshows-latest-content', modalWindow, err)
             });
 
-        /*
-                var show = new Show();
-                show.title = 'A_test_title_save_1';
-                show.year = '2018';
-
-                var favoriteRepository = new FavoriteRepository();
-                favoriteRepository.save(show).then(
-                    newShow => {
-                        console.log("Show: " + JSON.stringify(newShow));
-                    }
-                );
-                */
-
-
     } else {
-        alert(`ERROR!! 'main-content' not exists ${htmlElementID}`)
+        alert(`ERROR !! 'main-content' not exists ${htmlElementID}`)
     }
 }
 
@@ -136,5 +125,6 @@ function setAboutShow(title, year, description, sinopsis) {
 function getErrorHandle(htmlElementID, modalWindow, err) {
     console.error(`ERROR! - getShows (${htmlElementID}) : ${err}`)
     closeModalWindow(modalWindow);
-    modalWindow = showModalWindow("Error grave", "Reinicie la aplicacion. Compruebe en un navegador, que el portal www.tumejortorrent.com esta disponible", "");
+    modalWindow = showModalWindow("Error grave",
+        "Reinicie la aplicacion. Compruebe en un navegador, que el portal www.tumejortorrent.com esta disponible", "OMG!");
 }

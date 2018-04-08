@@ -4,14 +4,12 @@ ROTTEN_ICON_PATH = 'app/components/show/Logo_rottentomatoes.svg'
 NULL_RATING_STRING = "----"
 
 /**
- * Render Show
+ * Render Show object
  * 
  * @param show: JSON Object, with the show
- * @param htmlWithEpisodeLinks: HTML text with episode links or null show is not a TV Show
- 
  * @return html fragment
  */
-function renderShowBox(show, htmlWithEpisodeLinks) {
+function renderShowBox(show) {
     var htmlShow = "";
 
 
@@ -85,10 +83,7 @@ function renderShowBox(show, htmlWithEpisodeLinks) {
     if (show.session != null) {
         htmlShow += `<div class='show-box-session'>Temporada ${show.session}</div>`
     }
-    // Add html with episode list
-    if (htmlWithEpisodeLinks != null) {
-        htmlShow += htmlWithEpisodeLinks;
-    }
+
     htmlShow += "</div>";
 
     return htmlShow;
