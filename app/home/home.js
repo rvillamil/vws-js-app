@@ -1,5 +1,5 @@
 const CRAWL_LIMIT = 20; // Number of shows to crawl
-const CRAWL_TV_SHOWS_LIMIT = 10; // Number of TVshows to crawl
+const CRAWL_TV_SHOWS_LIMIT = 20; // Number of TVshows to crawl
 
 //
 // npm modules required
@@ -53,7 +53,7 @@ function getShows(evt, htmlElementID) {
                     closeModalWindow(modalWindow)
                 }
             ).catch(err => {
-                console.error(`ERROR! getShows - Billboardfilms: ${err}`)
+                getErrorHandle(htmlElementID, modalWindow, err)
             });
 
 
@@ -72,7 +72,7 @@ function getShows(evt, htmlElementID) {
                     closeModalWindow(modalWindow);
                 }
             ).catch(err => {
-                console.error(`ERROR! getShows - VideoPremieres: ${err}`)
+                getErrorHandle(htmlElementID, modalWindow, err)
             });
 
     } else if (htmlElementID == "tvshows-content") {
@@ -90,7 +90,7 @@ function getShows(evt, htmlElementID) {
                     closeModalWindow(modalWindow);
                 }
             ).catch(err => {
-                console.error(`ERROR! getShows - crawlTVShows: ${err}`)
+                getErrorHandle(htmlElementID, modalWindow, err)
             });
 
         /*
@@ -124,4 +124,17 @@ function setAboutShow(title, year, description, sinopsis) {
     document.getElementById("about-show-year").innerHTML = "<p>Año</p>" + year;
     document.getElementById("about-show-description").innerHTML = "<p>Descripcion</p>" + description;
     document.getElementById("about-show-sinopsis").innerHTML = "<p>Sinopsis</p>" + sinopsis;
+}
+
+/**
+ * On error getting shows
+ * 
+ * @param {*} htmlElementID htmlelement when error
+ * @param {*} modalWindow current modal window
+ * @param {*} err Error to log
+ */
+function getErrorHandle(htmlElementID, modalWindow, err) {
+    console.error(`ERROR! - getShows (${htmlElementID}) : ${err}`)
+    closeModalWindow(modalWindow);
+    modalWindow = showModalWindow("Error grave", "Reinicie la aplicacion. Compruebe en un navegador, que el portal www.tumejortorrent.com esta disponible", "");
 }
