@@ -23,7 +23,7 @@ function loadContent() {
  * @param htmlElementID: billboardfilms-content, videopremieres-content,... HTML element to replace
  */
 function renderShows(evt, htmlElementID) {
-    console.log(`getShows - Loading content .. ${htmlElementID}`);
+    console.log(`renderShows - Loading content .. ${htmlElementID}`);
     document.getElementById(htmlElementID).innerHTML = "";
 
     var i, tabcontent, tablinks;
@@ -83,7 +83,7 @@ function renderShows(evt, htmlElementID) {
                 CRAWL_TV_SHOWS_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
-                    document.getElementById('tvshows-latest-content').innerHTML += renderShowBox(show);
+                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show);
                 })
             .then(
                 shows => {
