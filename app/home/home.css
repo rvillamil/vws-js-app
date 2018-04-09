@@ -153,17 +153,15 @@ div.menubar button.active {
     top: var(--topbar-height);
     left: var(--button-bar-width);
     padding: 0px 0px;
-    /*
-    border: 2px solid #fa8072;
-    */
     width: var(--main-content-width);
-    /*
-    border-left: none;
-    border-right: none;
-    */
     height: 90vh;
     overflow-y: auto;
     overflow-x: hidden;
+    /*
+    border: 2px solid #fa8072;
+    border-left: none;
+    border-right: none;
+    */
 }
 
 /* -------------------------- Zone: Right -------------------------- */

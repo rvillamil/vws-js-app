@@ -13,7 +13,7 @@ var crawler = require('vws-js-lib/lib/crawler');
  * Init home
  */
 function loadContent() {
-    getShows(event, 'tvshows-content');
+    getShows(event, 'favorites-tvshows-content');
 }
 
 /**
@@ -77,9 +77,7 @@ function getShows(evt, htmlElementID) {
             });
 
     } else if (htmlElementID == "tvshows-content") {
-        modalWindow = showModalWindow("Espere por favor..", "Obteniendo mis favoritos y las ultimas series publicadas ..", "");
-        // My Favorites
-        loadAndRenderFavoritesTVshows(CRAWL_TV_SHOWS_FAVORITES_LIMIT, 'tvshows-favorites-content')
+        modalWindow = showModalWindow("Espere por favor..", "Obteniendo las ultimas series publicadas ..", "");
         // Latest shows published
         crawler.crawlTVShows(
                 CRAWL_TV_SHOWS_LIMIT,
@@ -96,15 +94,22 @@ function getShows(evt, htmlElementID) {
                 getErrorHandle('tvshows-latest-content', modalWindow, err)
             });
 
+    } else if (htmlElementID == "favorites-tvshows-content") {
+        modalWindow = showModalWindow("Espere por favor..",
+            "Cargando mis series favoritas ..", "")
+        loadAndRenderFavoritesTVshows(CRAWL_TV_SHOWS_FAVORITES_LIMIT,
+            htmlElementID)
+
     } else {
         alert(`ERROR !! 'main-content' not exists ${htmlElementID}`)
     }
 }
 
 /**
- * Fill 'about show' section
+ * Render 'about show' section
  * 
  * @param title: The show title 
+ * @param year: The show year 
  * @param description The show description (actor, length..)
  * @param sinopsis The show sinopsis
  */
