@@ -49,8 +49,8 @@ function getShows(evt, htmlElementID) {
                     document.getElementById(htmlElementID).innerHTML += renderShowBox(show)
                 })
             .then(
-                urlList => {
-                    console.log(`crawler - Billboardfilms length: ${urlList.length}`)
+                shows => {
+                    console.log(`crawler - Billboardfilms length: ${shows.length}`)
                     closeModalWindow(modalWindow)
                 }
             ).catch(err => {
@@ -68,8 +68,8 @@ function getShows(evt, htmlElementID) {
                     document.getElementById(htmlElementID).innerHTML += renderShowBox(show);
                 })
             .then(
-                urlList => {
-                    console.log(`crawler - VideoPremieres length: ${urlList.length}`);
+                shows => {
+                    console.log(`crawler - VideoPremieres length: ${shows.length}`);
                     closeModalWindow(modalWindow);
                 }
             ).catch(err => {
@@ -88,8 +88,8 @@ function getShows(evt, htmlElementID) {
                     document.getElementById('tvshows-latest-content').innerHTML += renderShowBox(show);
                 })
             .then(
-                urlList => {
-                    console.log(`crawler - crawlTVShows length: ${urlList.length}`);
+                shows => {
+                    console.log(`crawler - crawlTVShows length: ${shows.length}`);
                     closeModalWindow(modalWindow);
                 }
             ).catch(err => {
