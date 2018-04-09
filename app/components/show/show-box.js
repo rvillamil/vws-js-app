@@ -22,10 +22,11 @@ function renderShowBox(show) {
     }
 
     htmlShow += `<div class='show-container' 
-                     onmouseover='setAboutShow("${show.title}", 
-                                                "${show.year}",
-                                                "${show.description}",
-                                                "${show.sinopsis}")'>
+                     ondblclick='saveFavoriteTVshow ("${show}")' 
+                     onmouseover='renderAboutShowSection("${show.title}", 
+                                                         "${show.year}",
+                                                         "${show.description}",
+                                                         "${show.sinopsis}")'>
     <!-- cover and tooltip -->
     <div class='show-box-img'>
         <a href='${show.urltodownload}'>

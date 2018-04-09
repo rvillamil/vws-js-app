@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- New TVShows support
+- New latest TVShows support.
+- New TVShows favorites support. Persistence for your favorites tvshows
 
 ## [1.0.0] - 2018-03-30
 

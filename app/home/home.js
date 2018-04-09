@@ -13,7 +13,7 @@ var crawler = require('vws-js-lib/lib/crawler');
  * Init home
  */
 function loadContent() {
-    getShows(event, 'favorites-tvshows-content');
+    renderShows(event, 'favorites-tvshows-content');
 }
 
 /**
@@ -22,7 +22,7 @@ function loadContent() {
  * @param evt : MouseEvent
  * @param htmlElementID: billboardfilms-content, videopremieres-content,... HTML element to replace
  */
-function getShows(evt, htmlElementID) {
+function renderShows(evt, htmlElementID) {
     console.log(`getShows - Loading content .. ${htmlElementID}`);
     document.getElementById(htmlElementID).innerHTML = "";
 
@@ -97,7 +97,9 @@ function getShows(evt, htmlElementID) {
     } else if (htmlElementID == "favorites-tvshows-content") {
         modalWindow = showModalWindow("Espere por favor..",
             "Cargando mis series favoritas ..", "")
-        loadAndRenderFavoritesTVshows(CRAWL_TV_SHOWS_FAVORITES_LIMIT,
+        renderFavoritesTVshows(
+            loadFavoritesTVShows(),
+            CRAWL_TV_SHOWS_FAVORITES_LIMIT,
             htmlElementID)
 
     } else {
@@ -113,7 +115,7 @@ function getShows(evt, htmlElementID) {
  * @param description The show description (actor, length..)
  * @param sinopsis The show sinopsis
  */
-function setAboutShow(title, year, description, sinopsis) {
+function renderAboutShowSection(title, year, description, sinopsis) {
     document.getElementById("about-show-title").innerHTML = "<p>Titulo</p>" + title;
     document.getElementById("about-show-year").innerHTML = "<p>Año</p>" + year;
     document.getElementById("about-show-description").innerHTML = "<p>Descripcion</p>" + description;

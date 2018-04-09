@@ -3,19 +3,48 @@
 //
 var Show = require('vws-js-lib/lib/show');
 var crawler = require('vws-js-lib/lib/crawler');
+var FavoriteRepository = require('../model/favoriteRepository');
 
+function loadFavoritesTVShows() {
+    // TODO ...
+    // 1 cargamos mis favoritos de la BBDD y recuperamos sus ultimos shows
 
-function loadAndRenderFavoritesTVshows(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID) {
-    // 1 cargamos mis favoritos de la BBDD
-    favoritesList = ['erase-una-vez/1490']
+    //favoritesTVShows = ['erase-una-vez/1490']
+    //favoritesTVShows = ['erase-una-vez/1490']
+    var favoriteRepository = new FavoriteRepository();
 
-    // 2 Cargamos mis favoritos y los pintamos
-    crawler.crawlMyFavoritesTVShows(CRAWL_TV_SHOWS_FAVORITES_LIMIT,
+    return favoriteRepository.findAllFavoritesShows()
+        .then(shows => {
+            return shows
+        })
+        .catch(err => {
+            console.error('ERROR! - loadFavoritesTVShows - Error on loading favorites:' + err);
+        })
+}
+
+function saveFavoriteTVshow(show) {
+    //
+    // OJO ...show  es un string no un object ..
+    //
+    console.log(`Saving favorite tvshow '${show}' ...`)
+    //  Salvamos un show seleccionado si no existe ya en la BB.DD...
+    var favoriteRepository = new FavoriteRepository();
+
+    return favoriteRepository.save(show).then(
+        newShow => {
+            console.log("Show saved succesfully ");
+        }
+    );
+}
+
+function renderFavoritesTVshows(favoritesList, limit, htmlElementID) {
+    /*
+    crawler.crawlMyFavoritesTVShows(
+            limit,
             favoritesList,
             show => {
                 console.log(`crawlMyFavoritesTVShows - Favorite Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
                 //document.getElementById(htmlElementID).innerHTML += renderShowBox(show)  // htmlElementID =='tvshows-favorites-content'
-
             })
         .then(
             urlList => {
@@ -24,7 +53,10 @@ function loadAndRenderFavoritesTVshows(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlEleme
         ).catch(err => {
             console.error(`ERROR! - loadAndRenderFavoritesTVshows: '${err}'`)
         });
+        */
 }
+
+
 
 
 /*

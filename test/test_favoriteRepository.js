@@ -23,7 +23,7 @@ describe('favoriteRepository', function () {
             show.title = 'test_title_save_1';
             show.year = 'test_year_save_1';
 
-            favoriteRepository.save(show).then(
+            return favoriteRepository.save(show).then(
                 newShow => {
                     assert.equal(show.year, newShow.year)
                     assert.equal(show.title, newShow.title)
