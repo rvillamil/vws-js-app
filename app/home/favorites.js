@@ -46,7 +46,7 @@ function _crawlCollectionTVShowsFromFavorites(limit, shows) {
     var actions = shows.map(fnCrawlTVShowsCollection);
     return Promise.all(actions)
         .then(showsCollection => {
-            // Array de "showscollection"
+            // TODO Array de "showscollection"
         });
 }
 
