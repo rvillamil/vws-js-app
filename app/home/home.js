@@ -42,7 +42,7 @@ function renderShows(evt, htmlElementID) {
     if (htmlElementID == "billboardfilms-content") {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de cine ..", "");
 
-        crawler.crawlBillboardFilms(
+        return crawler.crawlBillboardFilms(
                 CRAWL_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
@@ -61,7 +61,7 @@ function renderShows(evt, htmlElementID) {
     } else if (htmlElementID == "videopremieres-content") {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
 
-        crawler.crawlVideoPremieres(
+        return crawler.crawlVideoPremieres(
                 CRAWL_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
@@ -79,7 +79,7 @@ function renderShows(evt, htmlElementID) {
     } else if (htmlElementID == "tvshows-content") {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo las ultimas series publicadas ..", "");
         // Latest shows published
-        crawler.crawlTVShows(
+        return crawler.crawlTVShows(
                 CRAWL_TV_SHOWS_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
@@ -97,9 +97,7 @@ function renderShows(evt, htmlElementID) {
     } else if (htmlElementID == "favorites-tvshows-content") {
         modalWindow = showModalWindow("Espere por favor..",
             "Cargando mis series favoritas ..", "")
-        renderFavoritesTVshows(
-            loadFavoritesTVShows(),
-            CRAWL_TV_SHOWS_FAVORITES_LIMIT,
+        renderFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT,
             htmlElementID)
 
     } else {

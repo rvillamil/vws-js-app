@@ -5,31 +5,27 @@ var Show = require('vws-js-lib/lib/show');
 var crawler = require('vws-js-lib/lib/crawler');
 var FavoriteRepository = require('../model/favoriteRepository');
 
-function loadFavoritesTVShows() {
-    // TODO ...
-    // 1 cargamos mis favoritos de la BBDD y recuperamos sus ultimos shows
+// Global var ...ejem...
+var favoriteRepository = new FavoriteRepository();
 
-    //favoritesTVShows = ['erase-una-vez/1490']
-    //favoritesTVShows = ['erase-una-vez/1490']
-    var favoriteRepository = new FavoriteRepository();
-
+function renderFavoritesTVShowCollection(limit, htmlElementID) {
+    // TODO
+    // 1 - Cargamos los favoritos
+    // 2 - _crawlCollectionTVShowsFromFavorites --> Buscamos los ultimos episodios de los favoritos
+    // 3 - _render
     return favoriteRepository.findAllFavoritesShows()
-        .then(shows => {
-            return shows
-        })
-        .catch(err => {
-            console.error('ERROR! - loadFavoritesTVShows - Error on loading favorites:' + err);
+        .then(favoritesShows => {
+            return _crawlCollectionTVShowsFromFavorites(limit, favoritesShows)
         })
 }
 
 function saveFavoriteTVshow(show) {
     //
     // OJO ...show  es un string no un object ..
+    // OJO ...salamos el show no la coleccion que no merece la pena
     //
     console.log(`Saving favorite tvshow '${show}' ...`)
     //  Salvamos un show seleccionado si no existe ya en la BB.DD...
-    var favoriteRepository = new FavoriteRepository();
-
     return favoriteRepository.save(show).then(
         newShow => {
             console.log("Show saved succesfully ");
@@ -37,24 +33,23 @@ function saveFavoriteTVshow(show) {
     );
 }
 
-function renderFavoritesTVshows(favoritesList, limit, htmlElementID) {
-    /*
-    crawler.crawlMyFavoritesTVShows(
-            limit,
-            favoritesList,
-            show => {
-                console.log(`crawlMyFavoritesTVShows - Favorite Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
-                //document.getElementById(htmlElementID).innerHTML += renderShowBox(show)  // htmlElementID =='tvshows-favorites-content'
-            })
-        .then(
-            urlList => {
-                console.log(`loadAndRenderFavoritesTVshows - favorites length: ${favoritesList.length}`)
-            }
-        ).catch(err => {
-            console.error(`ERROR! - loadAndRenderFavoritesTVshows: '${err}'`)
+// ----------------------------------------------------------------------------
+// 
+// Private functions
+//
+function _crawlCollectionTVShowsFromFavorites(limit, shows) {
+
+    var fnCrawlTVShowsCollection = function (limit, show) {
+        return crawler.crawlTVShowCollection(limit, show)
+    }
+
+    var actions = shows.map(fnCrawlTVShowsCollection);
+    return Promise.all(actions)
+        .then(showsCollection => {
+            // Array de "showscollection"
         });
-        */
 }
+
 
 
 
