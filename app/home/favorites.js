@@ -1,9 +1,10 @@
 //
 // npm modules required
 //
+var path = require('path');
 var Show = require('vws-js-lib/lib/show');
 var crawler = require('vws-js-lib/lib/crawler');
-var FavoriteRepository = require('../model/favoriteRepository');
+var FavoriteRepository = require('vws-js-lib/lib/favoriteRepository');
 
 // Global var ...ejem...
 var favoriteRepository = new FavoriteRepository();
@@ -20,6 +21,8 @@ function renderFavoritesTVShowCollection(limit, htmlElementID) {
 }
 
 function saveFavoriteTVshow(show) {
+
+
     //
     // OJO ...show  es un string no un object ..
     // OJO ...salamos el show no la coleccion que no merece la pena
@@ -44,6 +47,7 @@ function _crawlCollectionTVShowsFromFavorites(limit, shows) {
     });
     return Promise.all(actions)
         .then(showsCollection => {
+            console.log(showsCollection)
             // TODO Array de "showscollection"
         });
 }
