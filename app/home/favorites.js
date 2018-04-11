@@ -16,6 +16,7 @@ function renderFavoritesTVShowCollection(limit, htmlElementID) {
     // 3 - _render
     return favoriteRepository.findAllFavoritesShows()
         .then(favoritesShows => {
+            console.log(`Loading favorites: ${JSON.stringify(favoritesShows)}\n`)
             return _crawlCollectionTVShowsFromFavorites(limit, favoritesShows)
         })
 }
@@ -46,10 +47,11 @@ function _crawlCollectionTVShowsFromFavorites(limit, shows) {
         return crawler.crawlTVShowCollection(limit, show)
     });
     return Promise.all(actions)
-        .then(showsCollection => {
-            console.log(showsCollection)
-            // TODO Array de "showscollection"
-        });
+        .then(
+            showsCollection => {
+                console.log(`ShowsCollection array is: ${JSON.stringify(showsCollection)}\n`)
+                return showsCollection
+            });
 }
 
 
