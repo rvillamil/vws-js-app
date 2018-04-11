@@ -39,11 +39,9 @@ function saveFavoriteTVshow(show) {
 //
 function _crawlCollectionTVShowsFromFavorites(limit, shows) {
 
-    var fnCrawlTVShowsCollection = function (limit, show) {
+    var actions = shows.map(show => {
         return crawler.crawlTVShowCollection(limit, show)
-    }
-
-    var actions = shows.map(fnCrawlTVShowsCollection);
+    });
     return Promise.all(actions)
         .then(showsCollection => {
             // TODO Array de "showscollection"
