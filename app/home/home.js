@@ -13,7 +13,7 @@ var crawler = require('vws-js-lib/lib/crawler');
  * Init home
  */
 function loadContent() {
-    renderShows(event, 'favorites-tvshows-content');
+    renderShows(event, 'tvshows-content');
 }
 
 /**
