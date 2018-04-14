@@ -1,5 +1,5 @@
 const CRAWL_LIMIT = 20; // Number of shows to crawl
-const CRAWL_TV_SHOWS_LIMIT = 20; // Number of TVshows to crawl
+const CRAWL_TV_SHOWS_LIMIT = 2; // Number of TVshows to crawl
 const CRAWL_TV_SHOWS_FAVORITES_LIMIT = 4; // Number of links with the latest episodes for each favorite show
 
 //
@@ -14,6 +14,7 @@ var crawler = require('vws-js-lib/lib/crawler');
  */
 function loadContent() {
     renderShows(event, 'tvshows-content');
+    //renderShows(event, 'videopremieres-content');
 }
 
 /**

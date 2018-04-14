@@ -22,7 +22,7 @@ function renderShowBox(show) {
     }
 
     htmlShow += `<div class='show-container' 
-                     ondblclick='saveFavoriteTVshow ("${show}")' 
+                     ondblclick='saveFavoriteTVshow ("${show.collectionName}")' 
                      onmouseover='renderAboutShowSection("${show.title}", 
                                                          "${show.year}",
                                                          "${show.description}",

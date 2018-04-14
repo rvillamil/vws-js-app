@@ -1,8 +1,7 @@
 //
 // npm modules required
 //
-var path = require('path');
-var Show = require('vws-js-lib/lib/show');
+var ShowCollection = require('vws-js-lib/lib/showCollection');
 var crawler = require('vws-js-lib/lib/crawler');
 var FavoriteRepository = require('vws-js-lib/lib/favoriteRepository');
 
@@ -14,59 +13,46 @@ function renderFavoritesTVShowCollection(limit, htmlElementID) {
     // 1 - Cargamos los favoritos
     // 2 - _crawlCollectionTVShowsFromFavorites --> Buscamos los ultimos episodios de los favoritos
     // 3 - _render
-    return favoriteRepository.findAllFavoritesShows()
-        .then(favoritesShows => {
-            console.log(`Loading favorites: ${JSON.stringify(favoritesShows)}\n`)
-            return _crawlCollectionTVShowsFromFavorites(limit, favoritesShows)
+    return favoriteRepository.findAll()
+        .then(showCollectionList => {
+            console.log(`Loading favorites: ${showCollectionList}\n`)
+            return _crawlShowCollectionList(limit, showCollectionList)
         })
 }
 
-function saveFavoriteTVshow(show) {
-
+function saveFavoriteTVshow(collectionName) {
 
     //
     // OJO ...show  es un string no un object ..
-    // OJO ...salamos el show no la coleccion que no merece la pena
+    // OJO ...salvamos el show no la coleccion que no merece la pena
     //
-    console.log(`Saving favorite tvshow '${show}' ...`)
     //  Salvamos un show seleccionado si no existe ya en la BB.DD...
-    return favoriteRepository.save(show).then(
-        newShow => {
-            console.log("Show saved succesfully ");
+    console.log(`Saving ${collectionName}'\n`)
+
+    var showCollection = new ShowCollection()
+    showCollection.name = collectionName
+
+    return favoriteRepository.save(showCollection).then(
+        newShowCollection => {
+            console.log(`collectionName favorite saved succesfully: '${newShowCollection}'\n`)
         }
     );
 }
 
 // ----------------------------------------------------------------------------
 // 
-// Private functions
+// Private functions : ¿Merece la pena una funcion con solo esto? --¿Llevar al crwaler?
 //
-function _crawlCollectionTVShowsFromFavorites(limit, shows) {
+function _crawlShowCollectionList(limit, showCollectionList) {
 
-    var actions = shows.map(show => {
-        return crawler.crawlTVShowCollection(limit, show)
+    var actions = showCollectionList.map(showCollection => {
+        return crawler.crawlTVShowCollection(limit, showCollection.name)
     });
+
     return Promise.all(actions)
         .then(
-            showsCollection => {
-                console.log(`ShowsCollection array is: ${JSON.stringify(showsCollection)}\n`)
-                return showsCollection
+            showCollectionList => {
+                console.log(`showCollectionList is: ${JSON.stringify(showCollectionList)}\n`)
+                return showCollectionList
             });
 }
-
-
-
-
-
-/*
-        var show = new Show();
-        show.title = 'A_test_title_save_1';
-        show.year = '2018';
-
-        var favoriteRepository = new FavoriteRepository();
-        favoriteRepository.save(show).then(
-            newShow => {
-                console.log("Show: " + JSON.stringify(newShow));
-            }
-        );
-        */
