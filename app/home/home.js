@@ -96,10 +96,8 @@ function renderShows(evt, htmlElementID) {
             });
 
     } else if (htmlElementID == "favorites-tvshows-content") {
-        modalWindow = showModalWindow("Espere por favor..",
-            "Cargando mis series favoritas ..", "")
-        renderFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT,
-            htmlElementID)
+        modalWindow = showModalWindow("Espere por favor..", "Cargando mis series favoritas ..", "")
+        renderFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID)
 
     } else {
         alert(`ERROR !! 'main-content' not exists ${htmlElementID}`)
