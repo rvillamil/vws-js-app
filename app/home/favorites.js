@@ -13,7 +13,7 @@ var favoriteRepository = new FavoriteRepository();
 //
 // Functions
 //
-function renderFavoritesTVShowCollection(limit, htmlElementID) {
+function crawlMyFavoritesTVShowCollection(limit, htmlElementID) {
 
     return favoriteRepository.findAll()
         .then(showCollectionFavoriteList => {
@@ -29,7 +29,7 @@ function saveFavoriteTVshow(collectionName) {
 
     return favoriteRepository.save(showCollection).then(
         newShowCollection => {
-            console.log(`Saving showColection: ${JSON.stringify(newShowCollection)}\n`)
+            console.log(`showColection saved!: ${JSON.stringify(newShowCollection)}\n`)
         }
     );
 }

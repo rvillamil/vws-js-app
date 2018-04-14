@@ -13,8 +13,9 @@ var crawler = require('vws-js-lib/lib/crawler');
  * Init home
  */
 function loadContent() {
-    renderShows(event, 'tvshows-content');
+    //renderShows(event, 'tvshows-content');
     //renderShows(event, 'videopremieres-content');
+    renderShows(event, 'favorites-tvshows-content');
 }
 
 /**
@@ -61,7 +62,6 @@ function renderShows(evt, htmlElementID) {
 
     } else if (htmlElementID == "videopremieres-content") {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo los estrenos de Video ..", "");
-
         return crawler.crawlVideoPremieres(
                 CRAWL_LIMIT,
                 show => {
@@ -79,12 +79,11 @@ function renderShows(evt, htmlElementID) {
 
     } else if (htmlElementID == "tvshows-content") {
         modalWindow = showModalWindow("Espere por favor..", "Obteniendo las ultimas series publicadas ..", "");
-        // Latest shows published
         return crawler.crawlTVShows(
                 CRAWL_TV_SHOWS_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
-                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show);
+                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show)
                 })
             .then(
                 shows => {
@@ -97,7 +96,15 @@ function renderShows(evt, htmlElementID) {
 
     } else if (htmlElementID == "favorites-tvshows-content") {
         modalWindow = showModalWindow("Espere por favor..", "Cargando mis series favoritas ..", "")
-        renderFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID)
+        crawlMyFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID).then(
+            showCollectionList => {
+                showCollectionList.forEach(function (showCollection) {
+                    //console.log(`showCollection crawled !!  --> ${JSON.stringify(showCollection)}\n\n`)
+                    document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(showCollection);
+                })
+                closeModalWindow(modalWindow)
+            }
+        )
 
     } else {
         alert(`ERROR !! 'main-content' not exists ${htmlElementID}`)

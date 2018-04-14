@@ -23,6 +23,19 @@
     border: 1px solid var(--show-box-container-border-hover-color);
 }
 
+/* Contenedor para el showcomponent  */
+
+.showcollection-container {
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid var(--show-box-container-border-color);
+    width: 150px;
+}
+
+.showcollection-container:hover {
+    border: 1px solid var(--show-box-container-border-hover-color);
+}
+
 /* Elemento generido de texto dentro del show-container con la fecha, formato ..*/
 
 .show-box-text {
