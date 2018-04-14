@@ -44,6 +44,9 @@ function renderShowBox(show) {
     </div>`
 }
 
+// ----------------------------------------------------------------------------
+// 
+// Private functions
 function _renderCoverWithToolTipText(show) {
     return `
         <div class='show-box-img'>
