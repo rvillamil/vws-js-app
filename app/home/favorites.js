@@ -8,7 +8,7 @@ var FavoriteRepository = require('vws-js-lib/lib/favoriteRepository');
 //
 // Global var
 //
-var favoriteRepository = new FavoriteRepository();
+var favoriteRepository = new FavoriteRepository('vws-db');
 
 //
 // Functions
