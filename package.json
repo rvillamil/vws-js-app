@@ -33,7 +33,6 @@
   },
 
   "dependencies": {
-    "vws-js-app": "git+https://github.com/rvillamil/vws-js-lib.git",
-    "nedb": "*"
+    "vws-js-app": "git+https://github.com/rvillamil/vws-js-lib.git"
   }
 }
