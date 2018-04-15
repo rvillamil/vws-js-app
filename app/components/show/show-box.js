@@ -9,6 +9,49 @@ ROTTEN_ICON_PATH = 'app/components/show/Logo_rottentomatoes.svg'
 NULL_RATING_STRING = "----"
 
 /**
+ * Render Show with film or video information
+ * 
+ * @param show: JSON Object, with the show
+ * @return html fragment
+ */
+function renderFilm(show) {
+    return `
+    <div class='show-container' onmouseover='renderAboutShowSection("${show.title}", 
+                                                         "${show.year}",
+                                                         "${show.description}",
+                                                         "${show.sinopsis}")'>
+        ${_renderCoverWithToolTipText(show)}
+        ${_renderTitle(show)}
+        ${_renderQuality(show)} 
+        ${_renderReleaseDateAndFileSize(show)}        
+        ${_renderAllRatingPoints(show)}
+    </div>`
+}
+
+/**
+ * Render Show with TVShow information
+ * 
+ * @param show: JSON Object, with the show
+ * @return html fragment
+ */
+function renderTVShow(show) {
+    return `
+    <div class='show-container' 
+                    ondblclick='saveFavoriteTVshow ("${show.collectionName}")' 
+                    onmouseover='renderAboutShowSection("${show.title}", 
+                                                         "${show.year}",
+                                                         "${show.description}",
+                                                         "${show.sinopsis}")'>
+        ${_renderCoverWithToolTipText(show)}
+        ${_renderTitle(show)}
+        ${_renderQuality(show)} 
+        ${_renderReleaseDateAndFileSize(show)}        
+        ${_renderAllRatingPoints(show)}
+        ${_renderSession(show)}
+    </div>`
+}
+
+/**
  * Render ShowCollection object
  * 
  * @param showCollection: JSON Object, with the showCollection
@@ -31,28 +74,7 @@ function renderShowCollectionBox(showCollection) {
     </div>`
 }
 
-/**
- * Render Show object
- * 
- * @param show: JSON Object, with the show
- * @return html fragment
- */
-function renderShowBox(show) {
-    return `
-    <div class='show-container' 
-                    ondblclick='saveFavoriteTVshow ("${show.collectionName}")' 
-                    onmouseover='renderAboutShowSection("${show.title}", 
-                                                         "${show.year}",
-                                                         "${show.description}",
-                                                         "${show.sinopsis}")'>
-        ${_renderCoverWithToolTipText(show)}
-        ${_renderTitle(show)}
-        ${_renderQuality(show)} 
-        ${_renderReleaseDateAndFileSize(show)}        
-        ${_renderAllRatingPoints(show)}
-        ${_renderSession(show)}
-    </div>`
-}
+
 
 // ----------------------------------------------------------------------------
 // 

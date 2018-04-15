@@ -48,7 +48,7 @@ function renderShows(evt, htmlElementID) {
                 CRAWL_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
-                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show)
+                    document.getElementById(htmlElementID).innerHTML += renderFilm(show)
                 })
             .then(
                 shows => {
@@ -66,7 +66,7 @@ function renderShows(evt, htmlElementID) {
                 CRAWL_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
-                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show);
+                    document.getElementById(htmlElementID).innerHTML += renderFilm(show);
                 })
             .then(
                 shows => {
@@ -83,7 +83,7 @@ function renderShows(evt, htmlElementID) {
                 CRAWL_TV_SHOWS_LIMIT,
                 show => {
                     //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
-                    document.getElementById(htmlElementID).innerHTML += renderShowBox(show)
+                    document.getElementById(htmlElementID).innerHTML += renderTVShow(show)
                 })
             .then(
                 shows => {
@@ -104,7 +104,9 @@ function renderShows(evt, htmlElementID) {
                 })
                 closeModalWindow(modalWindow)
             }
-        )
+        ).catch(err => {
+            getErrorHandle('favorites-tvshows-content', modalWindow, err)
+        });
 
     } else {
         alert(`ERROR !! 'main-content' not exists ${htmlElementID}`)
