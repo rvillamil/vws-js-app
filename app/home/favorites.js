@@ -3,7 +3,7 @@
 //
 var ShowCollection = require('vws-js-lib/lib/showCollection');
 var crawler = require('vws-js-lib/lib/crawler');
-var FavoriteRepository = require('vws-js-lib/lib/favoriteRepository');
+var FavoriteRepository = require('favoriteRepository');
 
 //
 // Global var
