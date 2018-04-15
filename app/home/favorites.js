@@ -40,5 +40,7 @@ function saveFavoriteTVshow(collectionName) {
         newShowCollection => {
             console.log(`showColection saved!: ${JSON.stringify(newShowCollection)}\n`)
         }
-    );
+    ).catch(err => {
+        console.error(err)
+    })
 }
