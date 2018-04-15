@@ -1,3 +1,8 @@
+//
+// npm modules required
+//
+//var Show = require('vws-js-lib/lib/showcollection');
+
 IMDB_ICON_PATH = 'app/components/show/Logo_IMDB.svg'
 TMDB_ICON_PATH = 'app/components/show/Logo_TMDB.svg'
 ROTTEN_ICON_PATH = 'app/components/show/Logo_rottentomatoes.svg'
@@ -13,11 +18,16 @@ function renderShowCollectionBox(showCollection) {
     var firstShow = showCollection.shows[0]
 
     return `
-    <div class='showcollection-container'>
+    <div class='showcollection-container'
+                    onmouseover='renderAboutShowSection("${firstShow.title}", 
+                                                         "${firstShow.year}",
+                                                         "${firstShow.description}",
+                                                         "${firstShow.sinopsis}")'>
         ${_renderCoverWithToolTipText(firstShow)}
         ${_renderTitle(firstShow)}
         ${_renderQuality(firstShow)}
         ${_renderReleaseDateAndFileSize(firstShow)}
+        ${_renderSessionsCollection(showCollection)}
     </div>`
 }
 
@@ -108,13 +118,6 @@ function _renderAllRatingPoints(show) {
     return htmlShow
 }
 
-/**
- * Render Rating
- * 
- * @param {*} rating Text with rating 
- * @param {*} iconPath Icon logo 
- * @param {*} className css clasname 
- */
 function _renderRatingPoints(rating, iconPath, className) {
     var ratingFilled = rating + "";
     if (ratingFilled.length < 2) {
@@ -132,6 +135,23 @@ function _renderSession(show) {
         htmlShow += `<div class='show-box-session'>Temporada ${show.session}</div>`
     }
     return htmlShow
+}
+
+function _renderSessionAndEpisode(show) {
+    return `<div class='show-box-session'>
+                <a href='${show.urltodownload}'>
+                    Temp.${show.currentSession} - Cap.${show.currentEpisode} 
+                </a>
+            </div>`
+}
+
+function _renderSessionsCollection(showCollection) {
+    var htmlFragment = "<div class='show-box-session'>"
+    showCollection.getShows().forEach(show => {
+        htmlFragment += _renderSessionAndEpisode(show)
+    })
+    htmlFragment += "</div>"
+    return htmlFragment
 }
 
 function _newToolTipTex(show) {
