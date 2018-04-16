@@ -44,3 +44,36 @@ function saveFavoriteTVshow(collectionName) {
         console.error(err)
     })
 }
+
+function deleteFavoriteTVshow(collectionName) {
+
+    var showCollection = new ShowCollection()
+    showCollection.name = collectionName
+
+    return favoriteRepository.delete(showCollection.name).then(
+        newShowCollection => {
+            console.log(`showColection '${JSON.stringify(newShowCollection)}' deleted!\n`)
+
+            loadMyFavoritesTVShowCollection("favorites-tvshows-content")
+        }
+    ).catch(err => {
+        console.error(err)
+    })
+}
+
+
+function loadMyFavoritesTVShowCollection(htmlElementID) {
+    document.getElementById(htmlElementID).innerHTML = "";
+    var modalWindow = showModalWindow("Espere por favor..", "Cargando mis series favoritas ..", "")
+    crawlMyFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID).then(
+        showCollectionList => {
+            showCollectionList.forEach(function (showCollection) {
+                //console.log(`showCollection crawled !!  --> ${JSON.stringify(showCollection)}\n\n`)
+                document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(showCollection);
+            })
+            closeModalWindow(modalWindow)
+        }
+    ).catch(err => {
+        getErrorHandle('favorites-tvshows-content', modalWindow, err)
+    });
+}

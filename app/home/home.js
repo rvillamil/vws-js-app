@@ -1,7 +1,3 @@
-const CRAWL_LIMIT = 20; // Number of shows to crawl
-const CRAWL_TV_SHOWS_LIMIT = 20; // Number of TVshows to crawl
-const CRAWL_TV_SHOWS_FAVORITES_LIMIT = 4; // Number of links with the latest episodes for each favorite show
-
 //
 // npm modules required
 //
@@ -95,19 +91,7 @@ function renderShows(evt, htmlElementID) {
             });
 
     } else if (htmlElementID == "favorites-tvshows-content") {
-        modalWindow = showModalWindow("Espere por favor..", "Cargando mis series favoritas ..", "")
-        crawlMyFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID).then(
-            showCollectionList => {
-                showCollectionList.forEach(function (showCollection) {
-                    //console.log(`showCollection crawled !!  --> ${JSON.stringify(showCollection)}\n\n`)
-                    document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(showCollection);
-                })
-                closeModalWindow(modalWindow)
-            }
-        ).catch(err => {
-            getErrorHandle('favorites-tvshows-content', modalWindow, err)
-        });
-
+        loadMyFavoritesTVShowCollection(htmlElementID)
     } else {
         alert(`ERROR !! 'main-content' not exists ${htmlElementID}`)
     }
