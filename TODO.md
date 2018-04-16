@@ -1,4 +1,3 @@
-- Actualizar los Ficheros de README con la nueva API
-- Actualizar el CHANGELOG con todo
 - Falta un test de un metodo de tumejortorrent y alguna clase mas por testear
 - Nombres de las series y colecciones no molan mucho ¿Los busca en OMDB?
+- Poder borrar series favoritas
