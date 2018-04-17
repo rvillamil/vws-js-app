@@ -1,4 +1,4 @@
 - Falta un test de un metodo de tumejortorrent y alguna clase mas por testear
 - Nombres de las series y colecciones no molan mucho ¿Los busca en OMDB?
-- Poder borrar series favoritas
-- LOS TEST del favoriterepository ESTAN MAL ...hay que vaciar antes la BBDD SI NO SALEN LAS CUENTAS
+- Brrar series favoritas: Dialogo para preguntar antes de borrar
+- Añadir y quitar series favoritas: Que no sea con el doble clic

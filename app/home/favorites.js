@@ -38,7 +38,7 @@ function saveFavoriteTVshow(collectionName) {
 
     return favoriteRepository.save(showCollection).then(
         newShowCollection => {
-            console.log(`showColection saved!: ${JSON.stringify(newShowCollection)}\n`)
+            console.log(`ShowCollection object saved!: ${JSON.stringify(newShowCollection)}\n`)
         }
     ).catch(err => {
         console.error(err)
@@ -47,13 +47,9 @@ function saveFavoriteTVshow(collectionName) {
 
 function deleteFavoriteTVshow(collectionName) {
 
-    var showCollection = new ShowCollection()
-    showCollection.name = collectionName
-
-    return favoriteRepository.delete(showCollection.name).then(
-        newShowCollection => {
-            console.log(`showColection '${JSON.stringify(newShowCollection)}' deleted!\n`)
-
+    return favoriteRepository.delete(collectionName).then(
+        numRemoved => {
+            console.log(`Collection name '${collectionName}' deleted!\n`)
             loadMyFavoritesTVShowCollection("favorites-tvshows-content")
         }
     ).catch(err => {
@@ -68,7 +64,6 @@ function loadMyFavoritesTVShowCollection(htmlElementID) {
     crawlMyFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID).then(
         showCollectionList => {
             showCollectionList.forEach(function (showCollection) {
-                //console.log(`showCollection crawled !!  --> ${JSON.stringify(showCollection)}\n\n`)
                 document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(showCollection);
             })
             closeModalWindow(modalWindow)

@@ -62,7 +62,7 @@ function renderShowCollectionBox(showCollection) {
 
     return `
     <div class='showcollection-container'
-                    ondblclick='deleteFavoriteTVshow ("${firstShow.collectionName}")' 
+                    ondblclick='deleteFavoriteTVshow ("${showCollection.name}")' 
                     onmouseover='renderAboutShowSection("${firstShow.title}", 
                                                          "${firstShow.year}",
                                                          "${firstShow.description}",
