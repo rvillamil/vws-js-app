@@ -47,14 +47,18 @@ function saveFavoriteTVshow(collectionName) {
 
 function deleteFavoriteTVshow(collectionName) {
 
-    return favoriteRepository.delete(collectionName).then(
-        numRemoved => {
-            console.log(`Collection name '${collectionName}' deleted!\n`)
-            loadMyFavoritesTVShowCollection("favorites-tvshows-content")
-        }
-    ).catch(err => {
-        console.error(err)
-    })
+    var txt;
+    var r = confirm(`¿Quieres eliminar la serie '${collectionName}' de tus favoritos?!`);
+    if (r == true) {
+        return favoriteRepository.delete(collectionName).then(
+            numRemoved => {
+                console.log(`Collection name '${collectionName}' deleted!\n`)
+                loadMyFavoritesTVShowCollection("favorites-tvshows-content")
+            }
+        ).catch(err => {
+            console.error(err)
+        })
+    }
 }
 
 
