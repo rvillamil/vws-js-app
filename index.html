@@ -17,7 +17,7 @@
 
 </head>
 
-<body onload="loadContent()">
+<body onload="init()">
   <!-- Zone: Top -->
   <div class="topbar">
     <p>VWS: Video websites scraper</p>
@@ -25,10 +25,10 @@
 
   <!-- Zone: Left (Button zone) -->
   <div class="menubar">
-    <button class="tablinks" onclick="init(event, 'videopremieres-content')">Estrenos de Video</button>
-    <button class="tablinks" onclick="init(event, 'billboardfilms-content')">Estrenos de cine</button>
-    <button class="tablinks" onclick="init(event, 'tvshows-content')">Series</button>
-    <button class="tablinks" onclick="init(event, 'favorites-tvshows-content')">Mis series favoritas</button>
+    <button class="tablinks" onclick="loadAndRenderShows(event, 'videopremieres-content')">Estrenos de Video</button>
+    <button class="tablinks" onclick="loadAndRenderShows(event, 'billboardfilms-content')">Estrenos de cine</button>
+    <button class="tablinks" onclick="loadAndRenderShows(event, 'tvshows-content')">Series</button>
+    <button class="tablinks" onclick="loadAndRenderShows(event, 'favorites-tvshows-content')">Mis series favoritas</button>
   </div>
 
   <!-- Zone: Center  -->

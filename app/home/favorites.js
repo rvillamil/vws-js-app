@@ -53,7 +53,7 @@ function deleteFavoriteTVshow(collectionName) {
         return favoriteRepository.delete(collectionName).then(
             numRemoved => {
                 console.log(`Collection name '${collectionName}' deleted!\n`)
-                loadMyFavoritesTVShowCollection("favorites-tvshows-content")
+                loadAndRenderFavoritesTVShowCollection("favorites-tvshows-content")
             }
         ).catch(err => {
             console.error(err)
@@ -65,7 +65,7 @@ function deleteFavoriteTVshow(collectionName) {
 function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
     document.getElementById(htmlElementID).innerHTML = "";
     var modalWindow = showModalWindow("Espere por favor..", "Cargando mis series favoritas ..", "")
-    crawlMyFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID).then(
+    return crawlMyFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID).then(
         showCollectionList => {
             showCollectionList.forEach(function (showCollection) {
                 document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(showCollection);
