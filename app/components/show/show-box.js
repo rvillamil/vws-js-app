@@ -67,7 +67,7 @@ function renderShowCollectionBox(showCollection) {
                                                          "${firstShow.year}",
                                                          "${firstShow.description}",
                                                          "${firstShow.sinopsis}")'>
-        ${_renderCoverWithToolTipText(firstShow)}
+        ${_renderCoverWithToolTipText(firstShow,coverNoLink=true)}
         ${_renderTitle(firstShow)}
         ${_renderQuality(firstShow)}
         ${_renderReleaseDateAndFileSize(firstShow)}
@@ -80,15 +80,24 @@ function renderShowCollectionBox(showCollection) {
 // ----------------------------------------------------------------------------
 // 
 // Private functions
-function _renderCoverWithToolTipText(show) {
-    return `
+function _renderCoverWithToolTipText(show, coverNoLink = false) {
+    if (coverNoLink) {
+        return `
+        <div class='show-box-img'>
+            <a>
+                <img src='${show.urlwithCover}' alt='cover'/>
+            </a>
+            <span class='tooltiptext'>${this._newToolTipTex(show)}</span>
+        </div>`
+    } else {
+        return `
         <div class='show-box-img'>
             <a href='${show.urltodownload}'>
                 <img src='${show.urlwithCover}' alt='cover'/>
             </a>
             <span class='tooltiptext'>${this._newToolTipTex(show)}</span>
-        </div>
-    `
+        </div>`
+    }
 }
 
 function _renderTitle(show) {
