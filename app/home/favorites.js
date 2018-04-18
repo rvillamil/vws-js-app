@@ -58,7 +58,7 @@ function deleteFavoriteTVshow(collectionName) {
 }
 
 
-function loadMyFavoritesTVShowCollection(htmlElementID) {
+function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
     document.getElementById(htmlElementID).innerHTML = "";
     var modalWindow = showModalWindow("Espere por favor..", "Cargando mis series favoritas ..", "")
     crawlMyFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID).then(
@@ -69,6 +69,6 @@ function loadMyFavoritesTVShowCollection(htmlElementID) {
             closeModalWindow(modalWindow)
         }
     ).catch(err => {
-        getErrorHandle('favorites-tvshows-content', modalWindow, err)
+        onLoadAndRenderShowsError(htmlElementID, modalWindow, err)
     });
 }
