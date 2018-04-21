@@ -42,7 +42,8 @@ function renderTVShow(show) {
                                                          "${show.year}",
                                                          "${show.description}",
                                                          "${show.sinopsis}")'>
-        ${_renderCoverWithToolTipText(show)}
+
+        ${_renderCoverWithNoLink(show, "Haz doble click para añadir a favoritos")}
         ${_renderTitle(show)}
         ${_renderQuality(show)} 
         ${_renderReleaseDateAndFileSize(show)}        
@@ -67,7 +68,7 @@ function renderShowCollectionBox(showCollection) {
                                                          "${firstShow.year}",
                                                          "${firstShow.description}",
                                                          "${firstShow.sinopsis}")'>
-        ${_renderCoverWithToolTipText(firstShow,coverNoLink=true)}
+        ${_renderCoverWithNoLink(firstShow, "Haz doble click para eliminar de favoritos")}
         ${_renderTitle(firstShow)}
         ${_renderQuality(firstShow)}
         ${_renderReleaseDateAndFileSize(firstShow)}
@@ -80,24 +81,25 @@ function renderShowCollectionBox(showCollection) {
 // ----------------------------------------------------------------------------
 // 
 // Private functions
-function _renderCoverWithToolTipText(show, coverNoLink = false) {
-    if (coverNoLink) {
-        return `
+
+function _renderCoverWithNoLink(show, myTooltiptext) {
+    return `
         <div class='show-box-img'>
             <a>
                 <img src='${show.urlwithCover}' alt='cover'/>
             </a>
-            <span class='tooltiptext'>${this._newToolTipTex(show)}</span>
+            <span class='tooltiptext'>${myTooltiptext}</span>
         </div>`
-    } else {
-        return `
+}
+
+function _renderCoverWithToolTipText(show) {
+    return `
         <div class='show-box-img'>
             <a href='${show.urltodownload}'>
                 <img src='${show.urlwithCover}' alt='cover'/>
             </a>
             <span class='tooltiptext'>${this._newToolTipTex(show)}</span>
         </div>`
-    }
 }
 
 function _renderTitle(show) {

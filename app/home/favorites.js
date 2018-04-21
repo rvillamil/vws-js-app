@@ -33,21 +33,24 @@ function crawlMyFavoritesTVShowCollection(limit, htmlElementID) {
 
 function saveFavoriteTVshow(collectionName) {
 
-    var showCollection = new ShowCollection()
-    showCollection.name = collectionName
+    var r = confirm(`¿Quieres añadir la serie '${collectionName}' a tus favoritos?!`);
+    if (r == true) {
 
-    return favoriteRepository.save(showCollection).then(
-        newShowCollection => {
-            console.log(`ShowCollection object saved!: ${JSON.stringify(newShowCollection)}\n`)
-        }
-    ).catch(err => {
-        console.error(err)
-    })
+        var showCollection = new ShowCollection()
+        showCollection.name = collectionName
+
+        return favoriteRepository.save(showCollection).then(
+            newShowCollection => {
+                console.log(`ShowCollection object saved!: ${JSON.stringify(newShowCollection)}\n`)
+            }
+        ).catch(err => {
+            console.error(err)
+        })
+    }
 }
 
 function deleteFavoriteTVshow(collectionName) {
 
-    var txt;
     var r = confirm(`¿Quieres eliminar la serie '${collectionName}' de tus favoritos?!`);
     if (r == true) {
         return favoriteRepository.delete(collectionName).then(
