@@ -9,19 +9,62 @@
   <!-- CSS -->
   <link rel="stylesheet" href="show-box.css">
 
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+      margin: 0;
+    }
+  </style>
+
 </head>
 
-<body onload="init()">
+<body>
+  <div id="show-box-in-rows" class="main-content">
+  </div>
 
   <script>
-    function init() {
+    IMDB_ICON_PATH = './Logo_IMDB.svg'
+    TMDB_ICON_PATH = './Logo_TMDB.svg'
+    ROTTEN_ICON_PATH = './Logo_rottentomatoes.svg'
 
-      show = {
-        "title": "prueba",
-        "year": "2017"
-      };
-      renderFilm(show)
-    }
+    var show1 = {
+      title: "prueba",
+      year: "2017",
+      originalTitle: "The firm",
+      urlBase: "http://wwww.google.es",
+      description: "Descripcion de palo",
+      sinopsis: "Sinopsis sinopsis",
+      quality: "8K 4098p",
+      urlwithCover: "http://tumejortorrent.com/pictures/c/1092_the-big-bang-theory.jpg",
+      fileSize: "2,4 Gb",
+      releaseDate: "09-03-2016",
+      urltodownload: "http://tumejortorrent.com/pictures/c/1092_the-big-bang-theory.jpg",
+      imdbRating: "3.9",
+      imdbID: "2081",
+      rottenTomatoes: "16%",
+      tmdbRating: "4.6"
+    };
+    document.getElementById("show-box-in-rows").innerHTML += renderFilm(show1)
+
+    var show2 = {
+      title: "prueba",
+      year: "2017",
+      originalTitle: "The firm",
+      urlBase: "http://wwww.google.es",
+      description: "Descripcion de palo",
+      sinopsis: "Sinopsis sin opsis",
+      quality: "3K 1098p",
+      urlwithCover: "http://tumejortorrent.com/pictures/c/1303_modern-family.jpg",
+      fileSize: "2,8 Gb",
+      releaseDate: "23-06-2018",
+      urltodownload: "http://tumejortorrent.com/pictures/c/1303_modern-family.jpg",
+      imdbRating: "8.9",
+      imdbID: "4081",
+      rottenTomatoes: "66%",
+      tmdbRating: "1.6"
+    };
+
+    document.getElementById("show-box-in-rows").innerHTML += renderFilm(show2)
   </script>
 
 </body>

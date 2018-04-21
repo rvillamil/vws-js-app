@@ -8,7 +8,6 @@
     --about-show-text-color: rgb(208, 208, 208);
     --menubar-button-text-color: rgb(184, 188, 191);
     --menubar-font-size: 0.80em;
-    --form-shows-background-color: rgb(96, 101, 101);
     /* Layout size*/
     --button-bar-width: 10%;
     --main-content-width: 75%;
@@ -49,24 +48,10 @@ a:active {
     text-decoration: underline;
 }
 
-.center {
-    position: absolute;
-    height: X px;
-    width: Y px;
-    left: 30%;
-    top: 50%;
-    margin-top: - X/2 px;
-    margin-left: - Y/2 px;
-    color: var(--topbar-text-color);
-    font-size: 1.50em
-}
-
 /* -------------------------- Zone: Top ------------------------- */
 
 div.topbar {
     background-color: var(--topbar-background-color);
-    /*display: inline-block;*/
-    /* text-align: left; */
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -157,11 +142,6 @@ div.menubar button.active {
     height: 90vh;
     overflow-y: auto;
     overflow-x: hidden;
-    /*
-    border: 2px solid #fa8072;
-    border-left: none;
-    border-right: none;
-    */
 }
 
 /* -------------------------- Zone: Right -------------------------- */
@@ -233,147 +213,4 @@ div.about-show {
     margin: 0px;
     font-size: 1.2em;
     color: var(--topbar-text-color);
-}
-
-/* ------------------------ Component: Show ------------------------- */
-
-.show-container {
-    display: inline-block;
-    margin: 5px;
-    border: 1px solid #ccc;
-    width: 140px;
-}
-
-.show-container:hover {
-    border: 1px solid #fa8072;
-}
-
-/* Elemento de texto dentro del show-container con la fecha, formato ..*/
-
-.show-box-text {
-    display: block;
-    margin: 1px;
-    padding: 1px;
-    border: 1px;
-    text-align: center;
-    font-size: 0.775em;
-}
-
-/* Titulo del show con Tooltip y recortado por puntos */
-
-.show-box-title {
-    width: auto;
-    margin: 1px;
-    padding: 1px;
-    border: 1px;
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    font-size: 0.875em;
-    font-weight: bold;
-    color: var(--menubar-button-text-color);
-}
-
-.show-box-session {
-    width: auto;
-    margin: 1px;
-    padding: 1px;
-    border: 1px;
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    font-size: 0.875em;
-    font-weight: bold;
-}
-
-.show-box-quality {
-    display: block;
-    margin: 1px;
-    padding: 1px;
-    border: 1px;
-    text-align: center;
-    font-size: 0.775em;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-/* Campo con la portada del show-container */
-
-.show-box-img img {
-    width: 100%;
-    height: auto;
-}
-
-.show-box-img .tooltiptext {
-    visibility: hidden;
-    width: auto;
-    background-color: var(--topbar-background-color);
-    color: #fff;
-    text-align: center;
-    border-radius: 3px;
-    padding: 5px;
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    margin-left: -120px;
-}
-
-.show-box-img:hover .tooltiptext {
-    visibility: visible;
-}
-
-.showtv-episodes-container {
-    text-align: center;
-    margin: 1px;
-    border: 0px solid #ccc;
-    width: auto;
-}
-
-.showtv-episodes-container p {
-    margin: 2px;
-    border: 0px solid #ccc;
-    padding: 0px;
-    font-size: 0.875em;
-}
-
-/* ---------- Component: tvshow follow form --------------- */
-
-.form-shows {
-    display: inline-block;
-    background: var(--form-shows-background-color);
-    border-radius: 0em;
-    margin: 0.2em;
-    padding: 0.2em;
-    color: var(--menubar-button-text-color);
-    font-size: var(--menubar-font-size);
-    padding-left: 1.5em;
-    padding-right: 4.5em;
-}
-
-.rounded-element {
-    background: #1A1A1A;
-    border-radius: 1em;
-    border: none;
-    margin: 0.2em;
-    padding: 0.8em;
-    color: #A2A2A2;
-    font-size: 1.1em;
-    padding-left: 1.5em;
-    outline: none;
-}
-
-#box-with-form-tvshows-follow {
-    background: var(--form-shows-background-color);
-}
-
-.text-with-tvshows-following {
-    display: inline-block;
-    margin: 0.2em;
-    padding: 0.2em;
-    background: var(--form-shows-background-color);
-    color: var(--topbar-text-color);
-    font-size: var(--menubar-font-size);
 }

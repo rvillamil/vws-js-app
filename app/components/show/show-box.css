@@ -7,7 +7,10 @@
     --show-box-img-tooltiptext-color: #fff;
     --show-box-img-tooltiptext-background-color: #733;
     --show-box-ratings-text-color: rgb(246, 189, 4);
-    --show-box-ratings-font-size: 0.975em;
+}
+
+* {
+    box-sizing: border-box
 }
 
 /* Contenedor o Box del resto de los componentes */
@@ -147,19 +150,3 @@
     width: 33%;
     padding: 1px;
 }
-
-/*
-.showtv-episodes-container {
-    text-align: center;
-    margin: 1px;
-    border: 0px solid #ccc;
-    width: auto;
-}
-
-.showtv-episodes-container p {
-    margin: 2px;
-    border: 0px solid #ccc;
-    padding: 0px;
-    font-size: var(--show-box-font-big-size);
-}
-*/
