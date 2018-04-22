@@ -24,30 +24,6 @@ body {
     margin: 0;
 }
 
-a:link {
-    color: white;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-a:visited {
-    color: pink;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--topbar-text-color);
-    background-color: transparent;
-    text-decoration: underline;
-}
-
-a:active {
-    color: yellow;
-    background-color: transparent;
-    text-decoration: underline;
-}
-
 /* -------------------------- Zone: Top ------------------------- */
 
 div.topbar {
