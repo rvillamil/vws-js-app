@@ -11,6 +11,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+current-vws-db
 
 # Electron pacakger
 release-builds/
