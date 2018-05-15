@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Improvements in searches of movie scores
 - CSS refactoring
 
 ## [1.5.0] - 2018-04-21
