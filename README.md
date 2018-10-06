@@ -23,8 +23,6 @@ First step
 
 ```sh
 $git clone https://github.com/rvillamil/vws-js-app
-$cd vws-js-app
-$npm install
 ```
 
 Second step
@@ -47,7 +45,7 @@ $npm link ../vws-js-lib
 and finally...
 
 ```sh
-$npm start
+$npm install && npm start
 ```
 
 ### Electron packager
