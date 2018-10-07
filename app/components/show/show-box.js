@@ -1,8 +1,6 @@
 //
 // npm modules required
 //
-//var Show = require('vws-js-lib/lib/showcollection');
-
 IMDB_ICON_PATH = 'app/components/show/Logo_IMDB.svg'
 TMDB_ICON_PATH = 'app/components/show/Logo_TMDB.svg'
 ROTTEN_ICON_PATH = 'app/components/show/Logo_rottentomatoes.svg'
