@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.6.1] - 2018-10-07
 
 - Electron 1.4.15 downgrade. Problems with major versions
+- Video Premieres load first on application start
 
 ## [1.6.0] - 2018-10-07
 
