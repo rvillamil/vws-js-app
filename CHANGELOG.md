@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Improvements in searches of movie scores
 - CSS refactoring
 - Readme instalation section: fix error
+- Electron 3.0.2 upgraded
 
 ## [1.5.0] - 2018-04-21
 
