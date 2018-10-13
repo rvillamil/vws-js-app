@@ -170,11 +170,20 @@ function _renderSession(show) {
 }
 
 function _renderSessionAndEpisode(show) {
-    return `<div class='show-box-session'>
+    var labelWithLink = `Temp.${show.currentSession} - Cap.${show.currentEpisode}`
+
+    console.log(`RENDER: ${JSON.stringify(show)}\n`)
+
+    if (show.allreadyDownloaded == true) {
+        labelWithLink = `D Temp.${show.currentSession} - Cap.${show.currentEpisode}`
+    }
+    var htmlFragment = `<div class='show-box-session'>
                 <a href='${show.urltodownload}'>
-                    Temp.${show.currentSession} - Cap.${show.currentEpisode} 
+                    ${labelWithLink} 
                 </a>
             </div>`
+
+    return htmlFragment
 }
 
 function _renderSessionsCollection(showCollection) {
