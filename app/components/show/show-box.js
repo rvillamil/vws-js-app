@@ -172,15 +172,15 @@ function _renderSession(show) {
 function _renderSessionAndEpisode(show) {
     var labelWithLink = `Temp.${show.currentSession} - Cap.${show.currentEpisode}`
     // console.log(`_renderSessionAndEpisode: ${JSON.stringify(show)}\n`)
-
     if (!show.allreadyDownloaded) {
         labelWithLink = `D Temp.${show.currentSession} - Cap.${show.currentEpisode}`
     }
-    var htmlFragment = `<div class='show-box-session'>
-                <a href='${show.urltodownload}'>
-                    ${labelWithLink} 
-                </a>
-            </div>`
+    var htmlFragment =
+        `<div class='show-box-session' onclick='onclickToDownloadFile ("${show.urltodownload}")'>
+            <a href='${show.urltodownload}'>
+                ${labelWithLink} 
+            </a>
+         </div>`
 
     return htmlFragment
 }

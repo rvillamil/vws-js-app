@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- New feature!! notify wheen there are new downloads
+
 ## [1.6.1] - 2018-10-07
 
 - Electron 1.4.15 downgrade. Problems with major versions

@@ -64,6 +64,13 @@ function deleteFavoriteTVshow(collectionName) {
     }
 }
 
+function onclickToDownloadFile(urltodownload) {
+    console.log(`favorites - onclickToDownloadFile: ${urltodownload}`)
+
+    favoriteRepository.updateAllreadyDownloadedShowByURL(urltodownload, true).then(numReplaced => {
+        console.log(`The episode with url '${urltodownload}' has been replaced '${numReplaced}' times`)
+    })
+}
 
 function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
     document.getElementById(htmlElementID).innerHTML = "";
