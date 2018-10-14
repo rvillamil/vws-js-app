@@ -69,34 +69,23 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
     document.getElementById(htmlElementID).innerHTML = "";
     var modalWindow = showModalWindow("Espere por favor..", "Cargando mis series favoritas ..", "")
 
-    /*    
-            var actions = newShows.map(showToAdd => {
-                return this.updateCollectionWithNewShow(newShowCollectionName, showToAdd).then(
-                    // Nothing ...
-                ).catch(err => {
-                    console.log(`ERROR! - updateCollectionWithNewShows - ${err}`)
-                })
-            })
-            return Promise.all(actions).then(  )
-                .catch(err => {
-                    console.log(`ERROR! - updateCollectionWithNewShows - ${err}`)
-                })
-
-        */
-
-    // TODO : Montar promesas ...
     return crawlMyFavoritesTVShowCollection(CRAWL_TV_SHOWS_FAVORITES_LIMIT, htmlElementID).then(
+
         showCollectionListCrawled => {
 
-            var actions = showCollectionListCrawled.map(showCollectionCrawled => {
-                return favoriteRepository.updateCollectionWithNewShows(
-                    showCollectionCrawled.name,
-                    showCollectionCrawled.shows).then(
-                    // Nothing ...
-                ).catch(err => {
-                    console.log(`ERROR! - crawlMyFavoritesTVShowCollection - ${err}`)
+            var actions = showCollectionListCrawled.map(
+
+                showCollectionCrawled => {
+                    return favoriteRepository.updateCollectionWithNewShows(
+                            showCollectionCrawled.name,
+                            showCollectionCrawled.shows
+                        ).then(numReplaced => {
+                            console.log(`New '${numReplaced}' episodes for ${showCollectionCrawled.name}`)
+                        })
+                        .catch(err => {
+                            console.log(`ERROR! - crawlMyFavoritesTVShowCollection - ${err}`)
+                        })
                 })
-            })
 
             return Promise.all(actions)
                 .then(

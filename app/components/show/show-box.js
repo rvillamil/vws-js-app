@@ -171,10 +171,9 @@ function _renderSession(show) {
 
 function _renderSessionAndEpisode(show) {
     var labelWithLink = `Temp.${show.currentSession} - Cap.${show.currentEpisode}`
+    // console.log(`_renderSessionAndEpisode: ${JSON.stringify(show)}\n`)
 
-    console.log(`RENDER: ${JSON.stringify(show)}\n`)
-
-    if (show.allreadyDownloaded == true) {
+    if (!show.allreadyDownloaded) {
         labelWithLink = `D Temp.${show.currentSession} - Cap.${show.currentEpisode}`
     }
     var htmlFragment = `<div class='show-box-session'>
