@@ -188,7 +188,7 @@ function _renderSessionAndEpisode(show) {
 
 function _renderSessionsCollection(showCollection) {
     var htmlFragment = "<div class='show-box-session'>"
-    showCollection.getShows().forEach(show => {
+    showCollection.shows.forEach(show => {
         htmlFragment += _renderSessionAndEpisode(show)
     })
     htmlFragment += "</div>"
