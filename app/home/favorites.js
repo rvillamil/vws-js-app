@@ -89,8 +89,6 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
 
             return Promise.all(actions)
                 .then(
-                    // Nothing
-                ).then(
                     _refreshFromPersistence(htmlElementID).then(closeModalWindow(modalWindow))
                 )
                 .catch(err => {
