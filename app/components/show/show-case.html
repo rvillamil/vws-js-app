@@ -18,14 +18,16 @@
 
 </head>
 
-<body>
+<body bgcolor="#E6E6FA">
   <div id="show-box-in-rows" class="main-content">
   </div>
 
   <script>
-    IMDB_ICON_PATH = './Logo_IMDB.svg'
-    TMDB_ICON_PATH = './Logo_TMDB.svg'
-    ROTTEN_ICON_PATH = './Logo_rottentomatoes.svg'
+    IMDB_ICON_PATH = './logo_IMDB.svg'
+    TMDB_ICON_PATH = './logo_TMDB.svg'
+    ROTTEN_ICON_PATH = './logo_rottentomatoes.svg'
+    ARROW_DOWN_IMAGE_PATH = './arrow_down.png'
+    CHECKED_SYMBOL_IMAGE_PATH = './checked-symbol.svg'
 
     var show1 = {
       title: "prueba",
@@ -42,7 +44,8 @@
       imdbRating: "3.9",
       imdbID: "2081",
       rottenTomatoes: "16%",
-      tmdbRating: "4.6"
+      tmdbRating: "4.6",
+      allreadyDownloaded: true
     };
     document.getElementById("show-box-in-rows").innerHTML += renderFilm(show1)
 
@@ -61,10 +64,79 @@
       imdbRating: "8.9",
       imdbID: "4081",
       rottenTomatoes: "66%",
-      tmdbRating: "1.6"
+      tmdbRating: "1.6",
+      allreadyDownloaded: false
+    };
+    document.getElementById("show-box-in-rows").innerHTML += renderFilm(show2)
+
+    var showCollection1 = {
+      "name": "la-resistencia/4133",
+      "url": null,
+      "shows": [{
+        "title": "La Resistencia",
+        "year": "2018",
+        "urlBase": "http://tumejortorrent.com/descargar/serie-en-hd/la-resistencia/temporada-2/capitulo-20/",
+        "description": "La Resistencia es un programa de televisi?n espa?ol , entrevitas y comedia.",
+        "sinopsis": "",
+        "quality": "HDTV 720p",
+        "urlwithCover": "http://tumejortorrent.com/pictures/c/4133_la-resistencia.jpg",
+        "fileSize": "1.9 GB",
+        "releaseDate": "12-10-2018",
+        "urltodownload": "http://tumejortorrent.com/descargar-torrent/112141_-1539337780-la-resistencia---temporada-2--hdtv-720p-ac3-5-1/",
+        "imdbRating": null,
+        "imdbID": null,
+        "rottenTomatoes": null,
+        "tmdbRating": null,
+        "error": 0,
+        "currentSession": "2",
+        "currentEpisode": "20",
+        "collectionName": "la-resistencia/4133",
+        "allreadyDownloaded": false
+      }, {
+        "title": "La Resistencia",
+        "year": "2018",
+        "urlBase": "http://tumejortorrent.com/descargar/serie-en-hd/la-resistencia/temporada-2/capitulo-19/",
+        "description": "La Resistencia es un programa de televisi?n espa?ol , entrevitas y comedia.",
+        "sinopsis": "",
+        "quality": "HDTV 720p",
+        "urlwithCover": "http://tumejortorrent.com/pictures/c/4133_la-resistencia.jpg",
+        "fileSize": "1.8 GB",
+        "releaseDate": "11-10-2018",
+        "urltodownload": "http://tumejortorrent.com/descargar-torrent/112076_-1539259898-la-resistencia---temporada-2--hdtv-720p-ac3-5-1/",
+        "imdbRating": null,
+        "imdbID": null,
+        "rottenTomatoes": null,
+        "tmdbRating": null,
+        "error": 0,
+        "currentSession": "2",
+        "currentEpisode": "19",
+        "collectionName": "la-resistencia/4133",
+        "allreadyDownloaded": true
+      }, {
+        "title": "La Resistencia",
+        "year": "2018",
+        "urlBase": "http://tumejortorrent.com/descargar/serie-en-hd/la-resistencia/temporada-2/capitulo-18/",
+        "description": "La Resistencia es un programa de televisi?n espa?ol , entrevitas y comedia.",
+        "sinopsis": "",
+        "quality": "HDTV 720p",
+        "urlwithCover": "http://tumejortorrent.com/pictures/c/4133_la-resistencia.jpg",
+        "fileSize": "2 GB",
+        "releaseDate": "10-10-2018",
+        "urltodownload": "http://tumejortorrent.com/descargar-torrent/112034_-1539170442-la-resistencia---temporada-2--hdtv-720p-ac3-5-1/",
+        "imdbRating": null,
+        "imdbID": null,
+        "rottenTomatoes": null,
+        "tmdbRating": null,
+        "error": 0,
+        "currentSession": "2",
+        "currentEpisode": "18",
+        "collectionName": "la-resistencia/4133",
+        "allreadyDownloaded": false
+      }],
+      "_id": "ZjohfgBEc5q7uLxw"
     };
 
-    document.getElementById("show-box-in-rows").innerHTML += renderFilm(show2)
+    document.getElementById("show-box-in-rows").innerHTML += renderShowCollectionBox(showCollection1)
   </script>
 
 </body>

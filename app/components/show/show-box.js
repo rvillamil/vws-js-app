@@ -1,9 +1,11 @@
 //
 // npm modules required
 //
-IMDB_ICON_PATH = 'app/components/show/Logo_IMDB.svg'
-TMDB_ICON_PATH = 'app/components/show/Logo_TMDB.svg'
-ROTTEN_ICON_PATH = 'app/components/show/Logo_rottentomatoes.svg'
+IMDB_ICON_PATH = 'app/components/show/logo_IMDB.svg'
+TMDB_ICON_PATH = 'app/components/show/logo_TMDB.svg'
+ROTTEN_ICON_PATH = 'app/components/show/logo_rottentomatoes.svg'
+ARROW_DOWN_IMAGE_PATH = 'app/components/show/arrow_down.png'
+CHECKED_SYMBOL_IMAGE_PATH = 'app/components/show/checked-symbol.svg'
 NULL_RATING_STRING = "----"
 
 /**
@@ -170,18 +172,24 @@ function _renderSession(show) {
 }
 
 function _renderSessionAndEpisode(show) {
-    var labelWithLink = `Temp.${show.currentSession} - Cap.${show.currentEpisode}`
-    // console.log(`_renderSessionAndEpisode: ${JSON.stringify(show)}\n`)
+
+    var labelWithLink = `<a href='${show.urltodownload}'>
+                            Temp.${show.currentSession} - Cap.${show.currentEpisode}
+                        </a>`
     if (!show.allreadyDownloaded) {
-        labelWithLink = `D Temp.${show.currentSession} - Cap.${show.currentEpisode}`
+        labelWithLink = `<a href='${show.urltodownload}'>
+                            <img border="0" alt="Download" src="${ARROW_DOWN_IMAGE_PATH}" width="15" height="15">
+                         </a>` + labelWithLink
+    } else {
+        labelWithLink = `<a href='${show.urltodownload}'>
+                            <img border="0" alt="Download" src="${CHECKED_SYMBOL_IMAGE_PATH}" width="15" height="15">
+                        </a>` + labelWithLink
     }
+
     var htmlFragment =
         `<div class='show-box-session' onclick='onclickToDownloadFile ("${show.urltodownload}")'>
-            <a href='${show.urltodownload}'>
-                ${labelWithLink} 
-            </a>
-         </div>`
-
+           ${labelWithLink}
+        </div>`
     return htmlFragment
 }
 

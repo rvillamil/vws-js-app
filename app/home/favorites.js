@@ -113,6 +113,7 @@ function _refreshFromPersistence(htmlElementID) {
     return favoriteRepository.findAll().then(
         docWithshowCollectionList => {
             docWithshowCollectionList.forEach(newDocWithShowCollection => {
+                console.log(`RENDER: ${JSON.stringify (newDocWithShowCollection)}`)
                 document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(newDocWithShowCollection);
             })
         })
