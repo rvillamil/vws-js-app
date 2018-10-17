@@ -110,7 +110,7 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
 
 function _refreshFromPersistence(htmlElementID) {
 
-    return favoriteRepository.findAll().then(
+    return favoriteRepository.findAll(CRAWL_TV_SHOWS_FAVORITES_LIMIT).then(
         docWithshowCollectionList => {
             docWithshowCollectionList.forEach(newDocWithShowCollection => {
                 console.log(`RENDER: ${JSON.stringify (newDocWithShowCollection)}`)
