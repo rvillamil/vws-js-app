@@ -110,11 +110,13 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
 
 function _refreshFromPersistence(htmlElementID) {
 
-    return favoriteRepository.findAll(CRAWL_TV_SHOWS_FAVORITES_LIMIT).then(
+    return favoriteRepository.findAll().then(
         docWithshowCollectionList => {
             docWithshowCollectionList.forEach(newDocWithShowCollection => {
-                console.log(`RENDER: ${JSON.stringify (newDocWithShowCollection)}`)
-                document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(newDocWithShowCollection);
+                //console.log(`RENDER: ${JSON.stringify (newDocWithShowCollection)}`)
+                // console.log(`docWithshowCollectionList.length: ${JSON.stringify (docWithshowCollectionList.length)}`)
+                document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(
+                    newDocWithShowCollection, CRAWL_TV_SHOWS_FAVORITES_LIMIT);
             })
         })
 }

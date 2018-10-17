@@ -56,9 +56,10 @@ function renderTVShow(show) {
  * Render ShowCollection object
  * 
  * @param showCollection: JSON Object, with the showCollection
+ * @param limit: Limit to render shows
  * @return html fragment
  */
-function renderShowCollectionBox(showCollection) {
+function renderShowCollectionBox(showCollection, limit) {
     var firstShow = showCollection.shows[0]
 
     return `
@@ -72,7 +73,7 @@ function renderShowCollectionBox(showCollection) {
         ${_renderTitle(firstShow)}
         ${_renderQuality(firstShow)}
         ${_renderReleaseDateAndFileSize(firstShow)}
-        ${_renderSessionsCollection(showCollection)}
+        ${_renderSessionsCollection(showCollection,limit)}
     </div>`
 }
 
@@ -193,10 +194,18 @@ function _renderSessionAndEpisode(show) {
     return htmlFragment
 }
 
-function _renderSessionsCollection(showCollection) {
+function _renderSessionsCollection(showCollection, limit) {
     var htmlFragment = "<div class='show-box-session'>"
+    var counter = 0
     showCollection.shows.forEach(show => {
-        htmlFragment += _renderSessionAndEpisode(show)
+        if (limit != undefined) {
+            if (counter < limit) {
+                htmlFragment += _renderSessionAndEpisode(show)
+            }
+        } else {
+            htmlFragment += _renderSessionAndEpisode(show)
+        }
+        counter += 1
     })
     htmlFragment += "</div>"
     return htmlFragment
