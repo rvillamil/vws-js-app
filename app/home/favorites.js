@@ -125,9 +125,9 @@ function _refreshFromPersistence(htmlElementID) {
 
             var actions = docWithshowCollectionList.map(
                 newDocWithShowCollection => {
-                    //return renderShowCollectionBox(newDocWithShowCollection, CRAWL_TV_SHOWS_FAVORITES_LIMIT)
+                    return renderShowCollectionBox(newDocWithShowCollection, CRAWL_TV_SHOWS_FAVORITES_LIMIT)
 
-                    return renderShowCollectionBox(newDocWithShowCollection)
+                    //return renderShowCollectionBox(newDocWithShowCollection)
                 })
 
             return Promise.all(actions)
