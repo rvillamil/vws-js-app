@@ -88,6 +88,8 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
                             showCollectionCrawled.shows
                         ).then(numReplaced => {
                             console.log(`New '${numReplaced}' episodes for ${showCollectionCrawled.name}`)
+
+                            return numReplaced
                         })
                         .catch(err => {
                             console.log(`ERROR! - crawlMyFavoritesTVShowCollection - ${err}`)
@@ -95,9 +97,15 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
                 })
 
             return Promise.all(actions)
-                .then(
-                    _refreshFromPersistence(htmlElementID).then(closeModalWindow(modalWindow))
-                )
+                .then(numReplaced => {
+                    _refreshFromPersistence(htmlElementID).then(
+                        fullHTML => {
+                            document.getElementById(htmlElementID).innerHTML = fullHTML
+                            console.log("End refresh!")
+                            closeModalWindow(modalWindow)
+                        }
+                    )
+                })
                 .catch(err => {
                     console.log(`ERROR! - crawlMyFavoritesTVShowCollection - ${err}`)
                 })
@@ -116,15 +124,13 @@ function _refreshFromPersistence(htmlElementID) {
 
             var actions = docWithshowCollectionList.map(
                 newDocWithShowCollection => {
-                    document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(
-                        newDocWithShowCollection);
-
+                    return renderShowCollectionBox(newDocWithShowCollection)
                 })
 
             return Promise.all(actions)
-                .then(
-                    console.log('Refresh all!!')
-                )
+                .then(showCollectionListHTML => {
+                    return showCollectionListHTML
+                })
                 .catch(err => {
                     console.log(`ERROR! - _refreshFromPersistence - ${err}`)
                 })
