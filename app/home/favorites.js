@@ -83,9 +83,10 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
             var actions = showCollectionListCrawled.map(
 
                 showCollectionCrawled => {
-                    return favoriteRepository.updateCollectionWithNewShows(
-                            showCollectionCrawled.name,
-                            showCollectionCrawled.shows
+                    // Actualizamos la coleccion de nombre showCollectionCrawled.name con los shows de la coleccion showCollectionCrawled.shows
+                    return favoriteRepository.mergeShowCollections(
+                            showCollectionCrawled,
+                            showCollectionCrawled.name
                         ).then(numReplaced => {
                             console.log(`New '${numReplaced}' episodes for ${showCollectionCrawled.name}`)
 
@@ -124,6 +125,8 @@ function _refreshFromPersistence(htmlElementID) {
 
             var actions = docWithshowCollectionList.map(
                 newDocWithShowCollection => {
+                    //return renderShowCollectionBox(newDocWithShowCollection, CRAWL_TV_SHOWS_FAVORITES_LIMIT)
+
                     return renderShowCollectionBox(newDocWithShowCollection)
                 })
 
