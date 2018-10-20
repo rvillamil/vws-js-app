@@ -87,7 +87,6 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
                             showCollectionCrawled.name,
                             showCollectionCrawled.shows
                         ).then(numReplaced => {
-                            // showCollectionCrawled.shows
                             console.log(`New '${numReplaced}' episodes for ${showCollectionCrawled.name}`)
                         })
                         .catch(err => {
@@ -109,21 +108,6 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
 }
 
 
-function _refreshFromPersistence2(htmlElementID) {
-
-    return favoriteRepository.findAll().then(
-        docWithshowCollectionList => {
-            docWithshowCollectionList.forEach(newDocWithShowCollection => {
-                //console.log(`RENDER: ${JSON.stringify (newDocWithShowCollection)}`)
-                // console.log(`docWithshowCollectionList.length: ${JSON.stringify (docWithshowCollectionList.length)}`)
-                // Primero los capitulos nuevos
-                document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(
-                    newDocWithShowCollection, CRAWL_TV_SHOWS_FAVORITES_LIMIT);
-            })
-        })
-}
-
-
 function _refreshFromPersistence(htmlElementID) {
 
     return favoriteRepository.findAll().then(
@@ -132,11 +116,6 @@ function _refreshFromPersistence(htmlElementID) {
 
             var actions = docWithshowCollectionList.map(
                 newDocWithShowCollection => {
-
-                    newDocWithShowCollection.shows.forEach(show => {
-                        console.log(`Pintando: ${show.currentSession} - ${show.currentEpisode}`)
-                    })
-
                     document.getElementById(htmlElementID).innerHTML += renderShowCollectionBox(
                         newDocWithShowCollection);
 
@@ -144,7 +123,7 @@ function _refreshFromPersistence(htmlElementID) {
 
             return Promise.all(actions)
                 .then(
-                    console.log('Refresh all...')
+                    console.log('Refresh all!!')
                 )
                 .catch(err => {
                     console.log(`ERROR! - _refreshFromPersistence - ${err}`)
