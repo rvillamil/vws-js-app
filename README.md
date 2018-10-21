@@ -39,7 +39,7 @@ Third step: [Link npm module](https://goo.gl/fppRvN)
 
 ```sh
 $cd vws-js-app
-$npm link ../vws-js-lib && npm install && npm link ../vws-js-lib # npm install breaks the link ..
+$npm install && npm link ../vws-js-lib # npm install breaks the link ..
 ```
 
 and finally...
