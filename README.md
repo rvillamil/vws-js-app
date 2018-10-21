@@ -31,21 +31,21 @@ You'll need install [wvs-js-lib](https://github.com/rvillamil/vws-js-lib) at sam
 
 ```sh
 -- vws-js
-    -- vws-js-lib
-    -- vws-js-app
+    + vws-js-lib
+    + vws-js-app
 ```
 
 Third step: [Link npm module](https://goo.gl/fppRvN)
 
 ```sh
 $cd vws-js-app
-$npm link ../vws-js-lib
+$npm link ../vws-js-lib && npm install && npm link ../vws-js-lib # npm install breaks the link ..
 ```
 
 and finally...
 
 ```sh
-$npm install && npm start
+$npm start
 ```
 
 ### Electron packager

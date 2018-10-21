@@ -88,7 +88,7 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
                             showCollectionCrawled,
                             showCollectionCrawled.name
                         ).then(numReplaced => {
-                            console.log(`New '${numReplaced}' episodes for ${showCollectionCrawled.name}`)
+                            console.log(`New episodes for ${showCollectionCrawled.name}`)
 
                             return numReplaced
                         })
@@ -102,7 +102,7 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
                     _refreshFromPersistence(htmlElementID).then(
                         fullHTML => {
                             document.getElementById(htmlElementID).innerHTML = fullHTML
-                            console.log("End refresh!")
+                            console.log("** End refresh favorites tv shows!")
                             closeModalWindow(modalWindow)
                         }
                     )
@@ -126,13 +126,11 @@ function _refreshFromPersistence(htmlElementID) {
             var actions = docWithshowCollectionList.map(
                 newDocWithShowCollection => {
                     return renderShowCollectionBox(newDocWithShowCollection, CRAWL_TV_SHOWS_FAVORITES_LIMIT)
-
-                    //return renderShowCollectionBox(newDocWithShowCollection)
                 })
 
             return Promise.all(actions)
                 .then(showCollectionListHTML => {
-                    return showCollectionListHTML
+                    return showCollectionListHTML // Realmente es un array de elementos <div> separados por coma. Si te fijas, se ve la coma al mostrar los favoritos
                 })
                 .catch(err => {
                     console.log(`ERROR! - _refreshFromPersistence - ${err}`)
