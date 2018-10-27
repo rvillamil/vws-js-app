@@ -7,10 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.7.0] - ?¿?¿?¿
+## [1.7.0] - 2018-10-27
 
 - New feature!! Now we can know what episodes have been downloaded and which ones have not been
-- Number of Shows on screen has been change to 25 
+- Number of Shows on screen has been change to 25
 
 ## [1.6.1] - 2018-10-07
 
