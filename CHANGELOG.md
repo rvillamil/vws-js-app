@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Minor bugs
+
 ## [1.7.0] - 2018-10-27
 
 - New feature!! Now we can know what episodes have been downloaded and which ones have not been
