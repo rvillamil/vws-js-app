@@ -8,24 +8,21 @@
         "start": "npm install && npm link ../vws-js-lib && electron .",
         "pack": "build --dir",
         "package-mac": "build --platform=darwin",
-        "package-win": "build --platform=win32",
+        "package-win": "build --platform=win",
         "package-linux": "build --platform=linux",
         "package-all": "npm install && npm run package-mac && npm run package-win && npm run package-linux"
     },
     "build": {
-        "appId": "org.develar.onshape",
+        "appId": "es.rvp.scraper",
         "files": [
             "app"
         ],
         "mac": {
-            "category": "public.app-category.graphics-design"
-        },
-        "nsis": {
-            "createDesktopShortcut": "always"
+            "category": "public.app-category.utilities",
+            "target": "zip"
         },
         "dmg": {
-            "contents": [
-                {
+            "contents": [{
                     "x": 110,
                     "y": 150
                 },
@@ -37,8 +34,19 @@
                 }
             ]
         },
+        "win": {
+            "target": [{
+                "target": "portable",
+                "arch": [
+                    "x64"
+                ]
+            }]
+        },
         "linux": {
-            "category": "Graphics"
+            "category": "Utility",
+            "target": [
+                "snap"
+            ]
         }
     },
     "repository": {
@@ -56,8 +64,8 @@
     "license": "MIT",
     "homepage": "https://github.com/rvillamil/vws-js-app",
     "devDependencies": {
-        "electron": "3.0.7",
-        "electron-builder": "^20.31.2"
+        "electron": "3.0.9",
+        "electron-builder": "^20.36.2"
     },
     "dependencies": {
         "vws-js-lib": "git+https://github.com/rvillamil/vws-js-lib.git"
