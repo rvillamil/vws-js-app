@@ -1,11 +1,11 @@
 //
 // npm modules required
 //
-IMDB_ICON_PATH = 'app/components/show/logo_IMDB.svg'
-TMDB_ICON_PATH = 'app/components/show/logo_TMDB.svg'
-ROTTEN_ICON_PATH = 'app/components/show/logo_rottentomatoes.svg'
-ARROW_DOWN_IMAGE_PATH = 'app/components/show/arrow_down.png'
-CHECKED_SYMBOL_IMAGE_PATH = 'app/components/show/checked-symbol.svg'
+IMDB_ICON_PATH = 'components/show/logo_IMDB.svg'
+TMDB_ICON_PATH = 'components/show/logo_TMDB.svg'
+ROTTEN_ICON_PATH = 'components/show/logo_rottentomatoes.svg'
+ARROW_DOWN_IMAGE_PATH = 'components/show/arrow_down.png'
+CHECKED_SYMBOL_IMAGE_PATH = 'components/show/checked-symbol.svg'
 NULL_RATING_STRING = "----"
 
 /**
