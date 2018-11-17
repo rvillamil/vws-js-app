@@ -22,7 +22,8 @@
             "target": "zip"
         },
         "dmg": {
-            "contents": [{
+            "contents": [
+                {
                     "x": 110,
                     "y": 150
                 },
@@ -35,12 +36,14 @@
             ]
         },
         "win": {
-            "target": [{
-                "target": "portable",
-                "arch": [
-                    "x64"
-                ]
-            }]
+            "target": [
+                {
+                    "target": "portable",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
         },
         "linux": {
             "category": "Utility",
