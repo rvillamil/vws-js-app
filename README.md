@@ -48,32 +48,47 @@ and finally...
 $npm start
 ```
 
-### Electron packager
+### Electron builder
 
-We will look at how to create MacOS, Windows and Linux executables with an app icon. Maybe you need read [official documentation](https://github.com/electron-userland/electron-packager) on packaging problems
+We will look at how to create MacOS, Windows and Linux executables with an app icon. Maybe you need read [official documentation](https://www.electron.build/) on packaging problems
 
-#### OSX
+####  Package on platform
+
+##### OSX
 
 ```sh
 $npm run package-mac
 ```
 
-#### Windows
+##### Windows
 
 ```sh
 $npm run package-win
 ```
 
-#### Linux
+##### Linux
 
 ```sh
 $npm run package-linux
 ```
 
-#### All platforms
+##### All platforms
 
 ```sh
 $npm run package-all
+```
+
+#### How-to publish on GitHub: Draft Release
+
+First update text files:
+
+- Update CHANGELOG.md
+- Update package.json with the new version
+
+Draft on GitHub
+
+```sh
+$npm run release
 ```
 
 ## Versioning

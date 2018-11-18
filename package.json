@@ -6,24 +6,30 @@
     "main": "./app/main.js",
     "scripts": {
         "start": "npm install && npm link ../vws-js-lib && electron .",
-        "pack": "build --dir",
-        "package-mac": "build --platform=darwin",
-        "package-win": "build --platform=win",
-        "package-linux": "build --platform=linux",
-        "package-all": "npm install && npm run package-mac && npm run package-win && npm run package-linux"
+        "postinstall": "electron-builder install-app-deps",
+        "package-mac": "electron-builder --platform=darwin",
+        "package-win": "electron-builder  --platform=win",
+        "package-linux": "electron-builder --platform=linux",
+        "package-all": "npm install && npm run package-mac && npm run package-win && npm run package-linux",
+        "release": "electron-builder --platform=win && electron-builder --platform=linux &&  electron-builder --platform=darwin"
     },
     "build": {
         "appId": "es.rvp.scraper",
         "files": [
             "app"
         ],
+
+        "publish": {
+            "provider": "github",
+            "token": "60d511ee79651eea587875f401c3602774c9648c"
+        },
+
         "mac": {
             "category": "public.app-category.utilities",
             "target": "zip"
         },
         "dmg": {
-            "contents": [
-                {
+            "contents": [{
                     "x": 110,
                     "y": 150
                 },
@@ -36,14 +42,12 @@
             ]
         },
         "win": {
-            "target": [
-                {
-                    "target": "portable",
-                    "arch": [
-                        "x64"
-                    ]
-                }
-            ]
+            "target": [{
+                "target": "portable",
+                "arch": [
+                    "x64"
+                ]
+            }]
         },
         "linux": {
             "category": "Utility",
