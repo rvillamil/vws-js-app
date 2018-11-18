@@ -104,6 +104,13 @@ function loadAndRenderFavoritesTVShowCollection(htmlElementID) {
                             document.getElementById(htmlElementID).innerHTML = fullHTML
                             console.log("** End refresh favorites tv shows!")
                             closeModalWindow(modalWindow)
+                            if (fullHTML.length == 0) {
+                                showModalWindow(
+                                    "No hay series favoritas!",
+                                    "Vete a la sección de series y selecciona las que mas te gusten, haciendo doble click sobre la portada",
+                                    "")
+                            }
+
                         }
                     )
                 })
@@ -130,6 +137,7 @@ function _refreshFromPersistence(htmlElementID) {
 
             return Promise.all(actions)
                 .then(showCollectionListHTML => {
+                    console.log(`Tienes ${showCollectionListHTML.length} series favoritas`)
                     return showCollectionListHTML // Realmente es un array de elementos <div> separados por coma. Si te fijas, se ve la coma al mostrar los favoritos
                 })
                 .catch(err => {

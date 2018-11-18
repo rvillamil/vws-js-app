@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Electron builder support
+- Show new dialog when there's no favoritos
+- Show version app on top bar
 
 ### Changed
 

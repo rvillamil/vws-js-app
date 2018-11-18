@@ -3,12 +3,21 @@
 //
 var Show = require('vws-js-lib/lib/show');
 var crawler = require('vws-js-lib/lib/crawler');
+var pkginfo = require('../package.json');
+
+function getAppVersion() {
+    console.log(`Obteniendo la version de la aplicacion del fichero package.json ${pkginfo.version}`)
+    return pkginfo.version
+}
 
 // -------------------------------------------------------------------
 /**
  * Init home
  */
 function init() {
+    // Title and version
+    document.getElementById("main-topbar").innerHTML = `<p>VWS: Video websites scraper ${getAppVersion()}</p>`
+
     //loadAndRenderShows(event, 'tvshows-content');
     //loadAndRenderShows(event, 'videopremieres-content');
     loadAndRenderShows(event, 'favorites-tvshows-content');
