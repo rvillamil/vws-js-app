@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>VWS: Video websites scraper</title>
+    <!-- JavaScript -->
+    <script src="home/constants.js"></script>
+    <script src="home/home.js"></script>
+    <script src="home/favorites.js"></script>
+    <script src="components/modal/modal.js"></script>
+    <script src="components/show/show-box.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="home/home.css">
+    <link rel="stylesheet" href="components/modal/modal.css">
+    <link rel="stylesheet" href="components/show/show-box.css">
+
+</head>
+
+<body onload="init()">
+    <!-- Zone: Top -->
+    <div class="topbar">
+        <p>VWS: Video websites scraper</p>
+    </div>
+
+    <!-- Zone: Left (Button zone) -->
+    <div class="menubar">
+        <button class="tablinks" onclick="loadAndRenderShows(event, 'videopremieres-content')">Estrenos de Video</button>
+        <button class="tablinks" onclick="loadAndRenderShows(event, 'billboardfilms-content')">Estrenos de cine</button>
+        <button class="tablinks" onclick="loadAndRenderShows(event, 'tvshows-content')">Series</button>
+        <button class="tablinks" onclick="loadAndRenderShows(event, 'favorites-tvshows-content')">Mis series favoritas</button>
+    </div>
+
+    <!-- Zone: Center  -->
+    <div id="videopremieres-content" class="main-content"></div>
+    <div id="billboardfilms-content" class="main-content"></div>
+    <div id="tvshows-content" class="main-content"></div>
+    <div id="favorites-tvshows-content" class="main-content"></div>
+
+    <!-- Zone: Right  -->
+    <div class="about-show">
+        <div id="about-show-empty-zone">Vacio</div>
+
+        <div id="about-show-title">
+            <p>Titulo</p>
+        </div>
+        <div id="about-show-year">
+            <p>Año</p>
+        </div>
+        <div id="about-show-description">
+            <p>Descripcion</p>
+        </div>
+        <div id="about-show-sinopsis">
+            <p>Sinopsis</p>
+        </div>
+    </div>
+
+    <!-- Modal Window -->
+    <div id="modalWindow" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h3>Modal Header</h3>
+            </div>
+            <div class="modal-text">
+                <p>Some text in the Modal Body</p>
+                <p>Some other text...</p>
+            </div>
+            <div class="modal-footer">
+                <h4>Modal Footer</h4>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // You can also require other files to run in this process
+        require('./renderer.js')
+    </script>
+</body>
+
+</html>

@@ -3,14 +3,58 @@
     "productName": "Video Website Scraper",
     "version": "1.8.0",
     "description": "Electron application for web-scraping on torrent video websites",
-    "main": "main.js",
+    "main": "./app/main.js",
     "scripts": {
-        "test": "mocha",
-        "start": "electron .",
-        "package-mac": "npm install && npm link ../vws-js-lib && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=app/assets/icons/mac/icon.icns --no-prune --out=release-builds",
-        "package-win": "npm install && npm link ../vws-js-lib && electron-packager .  --overwrite --asar=true --platform=win32 --arch=ia32 --icon=app/assets/icons/win/icon.ico --no-prune --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Video Website Scraper\"",
-        "package-linux": "npm install && npm link ../vws-js-lib && electron-packager .  --overwrite --asar=true --platform=linux --arch=x64 --icon=app/assets/icons/png/1024x1024.png --no-prune --out=release-builds --executable-name=vws",
-        "package-all": "npm install && npm run package-mac && npm run package-win && npm run package-linux"
+        "start": "npm install && npm link ../vws-js-lib && electron .",
+        "postinstall": "electron-builder install-app-deps",
+        "package-mac": "electron-builder --platform=darwin",
+        "package-win": "electron-builder  --platform=win",
+        "package-linux": "electron-builder --platform=linux",
+        "package-all": "npm install && npm run package-mac && npm run package-win && npm run package-linux",
+        "release": "electron-builder --platform=win && electron-builder --platform=linux &&  electron-builder --platform=darwin"
+    },
+    "build": {
+        "appId": "es.rvp.scraper",
+        "files": [
+            "app"
+        ],
+
+        "publish": {
+            "provider": "github",
+            "token": "60d511ee79651eea587875f401c3602774c9648c"
+        },
+
+        "mac": {
+            "category": "public.app-category.utilities",
+            "target": "zip"
+        },
+        "dmg": {
+            "contents": [{
+                    "x": 110,
+                    "y": 150
+                },
+                {
+                    "x": 240,
+                    "y": 150,
+                    "type": "link",
+                    "path": "/Applications"
+                }
+            ]
+        },
+        "win": {
+            "target": [{
+                "target": "portable",
+                "arch": [
+                    "x64"
+                ]
+            }]
+        },
+        "linux": {
+            "category": "Utility",
+            "target": [
+                "snap"
+            ]
+        }
     },
     "repository": {
         "type": "git",
@@ -27,11 +71,10 @@
     "license": "MIT",
     "homepage": "https://github.com/rvillamil/vws-js-app",
     "devDependencies": {
-        "mocha": "^5.0.1",
-        "electron": "~1.4.15",
-        "electron-packager": "^12.2.0"
+        "electron": "3.0.9",
+        "electron-builder": "^20.36.2"
     },
     "dependencies": {
-        "vws-js-app": "git+https://github.com/rvillamil/vws-js-lib.git"
+        "vws-js-lib": "git+https://github.com/rvillamil/vws-js-lib.git"
     }
 }
