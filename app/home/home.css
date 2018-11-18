@@ -24,6 +24,7 @@ body {
     margin: 0;
 }
 
+
 /* -------------------------- Zone: Top ------------------------- */
 
 div.topbar {
@@ -66,6 +67,7 @@ div.form-logout {
     top: 15px;
 }
 
+
 /* --------------------- Zone: Left (Button zone) -------------------------- */
 
 div.menubar {
@@ -77,6 +79,7 @@ div.menubar {
     top: var(--topbar-height);
     height: 100vh;
 }
+
 
 /* Style the buttons inside the tab */
 
@@ -94,6 +97,7 @@ div.menubar button {
     font-size: var(--menubar-font-size);
 }
 
+
 /* Change background color of buttons on hover */
 
 div.menubar button:hover {
@@ -101,11 +105,13 @@ div.menubar button:hover {
     color: white;
 }
 
+
 /* Create an active/current "tab button" class */
 
 div.menubar button.active {
     color: var(--topbar-text-color);
 }
+
 
 /* -------------------------- Zone: CENTER ------------------------- */
 
@@ -119,6 +125,7 @@ div.menubar button.active {
     overflow-y: auto;
     overflow-x: hidden;
 }
+
 
 /* -------------------------- Zone: Right -------------------------- */
 
