@@ -19,16 +19,14 @@
             "app"
         ],
         "publish": {
-            "provider": "github",
-            "token": "60d511ee79651eea587875f401c3602774c9648c"
+            "provider": "github"
         },
         "mac": {
             "category": "public.app-category.utilities",
             "target": "zip"
         },
         "dmg": {
-            "contents": [
-                {
+            "contents": [{
                     "x": 110,
                     "y": 150
                 },
@@ -41,14 +39,12 @@
             ]
         },
         "win": {
-            "target": [
-                {
-                    "target": "portable",
-                    "arch": [
-                        "x64"
-                    ]
-                }
-            ]
+            "target": [{
+                "target": "portable",
+                "arch": [
+                    "x64"
+                ]
+            }]
         },
         "linux": {
             "category": "Utility",

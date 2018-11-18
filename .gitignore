@@ -336,3 +336,6 @@ $RECYCLE.BIN/
 
 # My link
 current_db
+
+# Publish file
+publish.sh
