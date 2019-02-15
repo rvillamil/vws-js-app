@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.8.3] - 2019-02-15
+
+### Changed
+
+- Fix error, www.tumejortorrent  has changed to 'https' url
+
+
 ## [1.8.2] - 2018-12-16
 
 ### Changed
