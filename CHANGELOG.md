@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.8.4] - 2019-02-24
+
+### Changed
+
+- tumejortorrent site, has been replaced by newpct video web site
+
 ## [1.8.3] - 2019-02-15
 
 ### Changed
