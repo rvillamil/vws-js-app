@@ -26,7 +26,8 @@
             "target": "zip"
         },
         "dmg": {
-            "contents": [{
+            "contents": [
+                {
                     "x": 110,
                     "y": 150
                 },
@@ -39,12 +40,14 @@
             ]
         },
         "win": {
-            "target": [{
-                "target": "portable",
-                "arch": [
-                    "x64"
-                ]
-            }]
+            "target": [
+                {
+                    "target": "portable",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
         },
         "linux": {
             "category": "Utility",
@@ -69,7 +72,7 @@
     "homepage": "https://github.com/rvillamil/vws-js-app",
     "devDependencies": {
         "electron": "3.0.9",
-        "electron-builder": "^20.38.5"
+        "electron-builder": "^20.44.1"
     },
     "dependencies": {
         "vws-js-lib": "git+https://github.com/rvillamil/vws-js-lib.git"
