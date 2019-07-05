@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Change the portal to parse: Now is 'descargas2020.org'
+- The refactor for library base vws-js-lib, change paths. Updating..
 
 ## [1.8.5] - 2019-02-24
 
@@ -29,8 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Fix error, www.tumejortorrent  has changed to 'https' url
-
+- Fix error, www.tumejortorrent has changed to 'https' url
 
 ## [1.8.2] - 2018-12-16
 
@@ -38,13 +38,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Fix error on parse tvshow title
 
-
 ## [1.8.1] - 2018-12-06
 
 ### Changed
 
 - Fix error on parse covers
-
 
 ## [1.8.0] - 2018-11-18
 
@@ -113,7 +111,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Package manager errors fixed 
+- Package manager errors fixed
 
 ## [0.0.2] - 2018-03-10
 
