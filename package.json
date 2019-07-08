@@ -71,6 +71,7 @@
     "license": "MIT",
     "homepage": "https://github.com/rvillamil/vws-js-app",
     "devDependencies": {
+        "eslint": "*",
         "electron": "3.0.9",
         "electron-builder": "^20.44.1"
     },
