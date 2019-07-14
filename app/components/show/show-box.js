@@ -6,7 +6,7 @@ TMDB_ICON_PATH = 'components/show/logo_TMDB.svg'
 ROTTEN_ICON_PATH = 'components/show/logo_rottentomatoes.svg'
 ARROW_DOWN_IMAGE_PATH = 'components/show/arrow_down.png'
 CHECKED_SYMBOL_IMAGE_PATH = 'components/show/checked-symbol.svg'
-NULL_RATING_STRING = "----"
+NULL_RATING_STRING = '----'
 
 /**
  * Render Show with film or video information
@@ -43,7 +43,7 @@ function renderTVShow(show) {
                                                          "${show.description}",
                                                          "${show.sinopsis}")'>
 
-        ${_renderCoverWithNoLink(show, "Haz doble click para añadir a favoritos")}
+        ${_renderCoverWithNoLink(show, 'Haz doble click para añadir a favoritos')}
         ${_renderTitle(show)}
         ${_renderQuality(show)} 
         ${_renderReleaseDateAndFileSize(show)}        
@@ -69,11 +69,11 @@ function renderShowCollectionBox(showCollection, limit) {
                                                          "${firstShow.year}",
                                                          "${firstShow.description}",
                                                          "${firstShow.sinopsis}")'>
-        ${_renderCoverWithNoLink(firstShow, "Haz doble click para eliminar de favoritos")}
+        ${_renderCoverWithNoLink(firstShow, 'Haz doble click para eliminar de favoritos')}
         ${_renderTitle(firstShow)}
         ${_renderQuality(firstShow)}
         ${_renderReleaseDateAndFileSize(firstShow)}
-        ${_renderSessionsCollection(showCollection,limit)}
+        ${_renderSessionsCollection(showCollection, limit)}
     </div>`
 }
 
@@ -108,53 +108,53 @@ function _renderTitle(show) {
 }
 
 function _renderQuality(show) {
-    var quality = show.quality;
+    var quality = show.quality
     if (quality == null) {
-        quality = "Desconocida";
+        quality = 'Desconocida'
     }
     return `<div class='show-box-quality'>${quality}</div>`
 }
 
 function _renderReleaseDateAndFileSize(show) {
 
-    var date = show.releaseDate;
+    var date = show.releaseDate
     if (date == null) {
-        date = 'unknow';
+        date = 'unknow'
     }
-    var size = show.fileSize;
+    var size = show.fileSize
     if (size == null) {
-        size = 'unknow';
+        size = 'unknow'
     }
     return `<div class='show-box-text'>${date} - ${size}</div>`
 }
 
 function _renderAllRatingPoints(show) {
-    var htmlShow = `<div class='show-box-ratings'>`
+    var htmlShow = '<div class=\'show-box-ratings\'>'
 
-    var imdbrating = show.imdbRating;
+    var imdbrating = show.imdbRating
     if (imdbrating == null) {
-        imdbrating = NULL_RATING_STRING;
+        imdbrating = NULL_RATING_STRING
     }
-    htmlShow += this._renderRatingPoints(imdbrating, IMDB_ICON_PATH, "show-box-rating-imdb");
+    htmlShow += this._renderRatingPoints(imdbrating, IMDB_ICON_PATH, 'show-box-rating-imdb')
 
-    var rottentomatoes = show.rottenTomatoes;
+    var rottentomatoes = show.rottenTomatoes
     if (rottentomatoes == null) {
-        rottentomatoes = NULL_RATING_STRING;
+        rottentomatoes = NULL_RATING_STRING
     }
-    htmlShow += this._renderRatingPoints(rottentomatoes, ROTTEN_ICON_PATH, "show-box-rating-rottentomatoes");
+    htmlShow += this._renderRatingPoints(rottentomatoes, ROTTEN_ICON_PATH, 'show-box-rating-rottentomatoes')
 
-    var tmdbrating = show.tmdbRating;
+    var tmdbrating = show.tmdbRating
     if (tmdbrating == null) {
-        tmdbrating = NULL_RATING_STRING;
+        tmdbrating = NULL_RATING_STRING
     }
-    htmlShow += this._renderRatingPoints(tmdbrating, TMDB_ICON_PATH, "show-box-rating-tmdb");
+    htmlShow += this._renderRatingPoints(tmdbrating, TMDB_ICON_PATH, 'show-box-rating-tmdb')
 
-    htmlShow += "</div>" // </div> show-box-ratings
+    htmlShow += '</div>' // </div> show-box-ratings
     return htmlShow
 }
 
 function _renderRatingPoints(rating, iconPath, className) {
-    var ratingFilled = rating + "";
+    var ratingFilled = rating + ''
     if (ratingFilled.length < 2) {
         ratingFilled = rating + '.0'
     }
@@ -165,7 +165,7 @@ function _renderRatingPoints(rating, iconPath, className) {
 }
 
 function _renderSession(show) {
-    var htmlShow = ""
+    var htmlShow = ''
     if (show.session != null) {
         htmlShow += `<div class='show-box-session'>Temporada ${show.session}</div>`
     }
@@ -195,7 +195,7 @@ function _renderSessionAndEpisode(show) {
 }
 
 function _renderSessionsCollection(showCollection, limit) {
-    var htmlFragment = "<div class='show-box-session'>"
+    var htmlFragment = '<div class=\'show-box-session\'>'
     var counter = 0
     showCollection.shows.forEach(show => {
         if (limit != undefined) {
@@ -207,15 +207,15 @@ function _renderSessionsCollection(showCollection, limit) {
         }
         counter += 1
     })
-    htmlFragment += "</div>"
+    htmlFragment += '</div>'
     return htmlFragment
 }
 
 function _newToolTipTex(show) {
-    var tooltiptext = show.title;
+    var tooltiptext = show.title
     if (show.originalTitle != null) {
         if (show.originalTitle.trim().toUpperCase() != show.title.trim().toUpperCase()) {
-            tooltiptext = show.title + "(" + show.originalTitle + ")";
+            tooltiptext = show.title + '(' + show.originalTitle + ')'
         }
     }
     return tooltiptext
