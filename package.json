@@ -72,8 +72,8 @@
     "homepage": "https://github.com/rvillamil/vws-js-app",
     "devDependencies": {
         "eslint": "*",
-        "electron": "3.0.9",
-        "electron-builder": "^20.44.1"
+        "electron": "*",
+        "electron-builder": "*"
     },
     "dependencies": {
         "vws-js-lib": "git+https://github.com/rvillamil/vws-js-lib.git"
