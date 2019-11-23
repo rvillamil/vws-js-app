@@ -1,7 +1,7 @@
 {
     "name": "vws-js-app",
     "productName": "Video Website Scraper",
-    "version": "1.9.1",
+    "version": "1.10.0",
     "description": "Electron application for web-scraping on torrent video websites",
     "main": "./app/main.js",
     "scripts": {
@@ -72,8 +72,8 @@
     "homepage": "https://github.com/rvillamil/vws-js-app",
     "devDependencies": {
         "eslint": "*",
-        "electron": "*",
-        "electron-builder": "*"
+        "electron": "7.1.2",
+        "electron-builder": "21.2.0"
     },
     "dependencies": {
         "vws-js-lib": "git+https://github.com/rvillamil/vws-js-lib.git"
