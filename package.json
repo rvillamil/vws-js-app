@@ -7,11 +7,11 @@
     "scripts": {
         "start": "npm install && npm link ../vws-js-lib && electron .",
         "postinstall": "electron-builder install-app-deps",
-        "package-mac": "electron-builder --platform=darwin",
-        "package-win": "electron-builder  --platform=win",
-        "package-linux": "electron-builder --platform=linux",
+        "package-mac": "electron-builder --mac",
+        "package-win": "electron-builder  --win",
+        "package-linux": "electron-builder --linux",
         "package-all": "npm install && npm run package-mac && npm run package-win && npm run package-linux",
-        "release": "electron-builder --platform=win && electron-builder --platform=linux &&  electron-builder --platform=darwin"
+        "release": "electron-builder --mac && electron-builder  --win && electron-builder --linux"
     },
     "build": {
         "appId": "es.rvp.scraper",
@@ -23,7 +23,7 @@
         },
         "mac": {
             "category": "public.app-category.utilities",
-            "target": "zip"
+            "target": "dmg"
         },
         "dmg": {
             "contents": [
