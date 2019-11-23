@@ -1,43 +1,43 @@
- /**
+/**
   * Create a modal window
   * 
   * @param {*} modalHeader Text on header
   * @param {*} modalText Main text
   * @param {*} modalFooter Text on footer
   */
- function showModalWindow(modalHeader, modalText, modalFooter) {
-     // Get the modal
-     var modal = document.getElementById('modalWindow');
-     modal.style.display = "block";
+function showModalWindow(modalHeader, modalText, modalFooter) {
+    // Get the modal
+    var modal = document.getElementById('modalWindow')
+    modal.style.display = 'block'
 
-     if (modalHeader != null) {
-         document.getElementsByClassName('modal-header')[0].innerHTML = "<span class=\"close\">&times;</span><h3>" + modalHeader + "</h3>"
-     }
-     document.getElementsByClassName('modal-text')[0].innerHTML = "<p>" + modalText + "</p>";
+    if (modalHeader != null) {
+        document.getElementsByClassName('modal-header')[0].innerHTML = '<span class="close">&times;</span><h3>' + modalHeader + '</h3>'
+    }
+    document.getElementsByClassName('modal-text')[0].innerHTML = '<p>' + modalText + '</p>'
 
-     if (modalFooter != null) {
-         document.getElementsByClassName('modal-footer')[0].innerHTML = "<p>" + modalFooter + "</p>";
-     }
-     // Get the <span> element that closes the modal
-     var span = document.getElementsByClassName("close")[0];
-     // When the user clicks on <span> (x), close the modal
-     span.onclick = function () {
-         modal.style.display = "none";
-     }
+    if (modalFooter != null) {
+        document.getElementsByClassName('modal-footer')[0].innerHTML = '<p>' + modalFooter + '</p>'
+    }
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName('close')[0]
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = 'none'
+    }
 
-     // When the user clicks anywhere outside of the modal, close it
-     window.onclick = function (event) {
-         if (event.target == modal) {
-             modal.style.display = "none";
-         }
-     }
-     return modal;
- }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none'
+        }
+    }
+    return modal
+}
 
- /**
+/**
   * Close the modal window 
   * @param {*} modal moal object
   */
- function closeModalWindow(modal) {
-     modal.style.display = "none";
- }
+function closeModalWindow(modal) {
+    modal.style.display = 'none'
+}
