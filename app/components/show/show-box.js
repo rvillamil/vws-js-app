@@ -23,7 +23,8 @@ function renderFilm(show) {
         ${_renderCoverWithToolTipText(show)}
         ${_renderTitle(show)}
         ${_renderQuality(show)} 
-        ${_renderReleaseDateAndFileSize(show)}        
+        ${_renderReleaseDateAndFileSize(show)}
+        ${_renderDomain(show)}
         ${_renderAllRatingPoints(show)}
     </div>`
 }
@@ -46,7 +47,8 @@ function renderTVShow(show) {
         ${_renderCoverWithNoLink(show, 'Haz doble click para añadir a favoritos')}
         ${_renderTitle(show)}
         ${_renderQuality(show)} 
-        ${_renderReleaseDateAndFileSize(show)}        
+        ${_renderReleaseDateAndFileSize(show)}
+        ${_renderDomain(show)}
         ${_renderAllRatingPoints(show)}
         ${_renderSession(show)}
     </div>`
@@ -126,6 +128,14 @@ function _renderReleaseDateAndFileSize(show) {
         size = 'unknow'
     }
     return `<div class='show-box-text'>${date} - ${size}</div>`
+}
+
+function _renderDomain(show) {
+    var domain = show.domain
+    if (domain == null) {
+        domain = 'Dominio?'
+    }
+    return `<div class='show-box-domain'>${domain}</div>`
 }
 
 function _renderAllRatingPoints(show) {
@@ -220,3 +230,4 @@ function _newToolTipTex(show) {
     }
     return tooltiptext
 }
+

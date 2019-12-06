@@ -14,7 +14,6 @@ You can [download the latest release](https://github.com/rvillamil/vws-js-app/re
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-
 ### Prerequisites
 
 You'll need [Node.js](https://nodejs.org/es/) installed on your computer in order to build this library.
@@ -99,5 +98,6 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## Acknowledgments 
-* [Christian Engvall](https://github.com/crilleengvall) and his [electron-tutorial-app]( https://github.com/crilleengvall/electron-tutorial-app)
+## Acknowledgments
+
+- [Christian Engvall](https://github.com/crilleengvall) and his [electron-tutorial-app](https://github.com/crilleengvall/electron-tutorial-app)
