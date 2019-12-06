@@ -2,142 +2,144 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>ShowCase - show-box</title>
-  <!-- JavaScript -->
-  <script src="show-box.js"></script>
-  <!-- CSS -->
-  <link rel="stylesheet" href="show-box.css">
+    <meta charset="UTF-8">
+    <title>ShowCase - show-box</title>
+    <!-- JavaScript -->
+    <script src="show-box.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="show-box.css">
 
-  <style>
-    body {
-      font-family: "Lato", sans-serif;
-      margin: 0;
-    }
-  </style>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            margin: 0;
+        }
+    </style>
 
 </head>
 
 <body bgcolor="#E6E6FA">
-  <div id="show-box-in-rows" class="main-content">
-  </div>
+    <div id="show-box-in-rows" class="main-content">
+    </div>
 
-  <script>
-    IMDB_ICON_PATH = './logo_IMDB.svg'
-    TMDB_ICON_PATH = './logo_TMDB.svg'
-    ROTTEN_ICON_PATH = './logo_rottentomatoes.svg'
-    ARROW_DOWN_IMAGE_PATH = './arrow_down.png'
-    CHECKED_SYMBOL_IMAGE_PATH = './checked-symbol.svg'
+    <script>
+        IMDB_ICON_PATH = './logo_IMDB.svg'
+        TMDB_ICON_PATH = './logo_TMDB.svg'
+        ROTTEN_ICON_PATH = './logo_rottentomatoes.svg'
+        ARROW_DOWN_IMAGE_PATH = './arrow_down.png'
+        CHECKED_SYMBOL_IMAGE_PATH = './checked-symbol.svg'
 
-    var show1 = {
-      title: "prueba",
-      year: "2017",
-      originalTitle: "The firm",
-      urlBase: "http://wwww.google.es",
-      description: "Descripcion de palo",
-      sinopsis: "Sinopsis sinopsis",
-      quality: "8K 4098p",
-      urlwithCover: "http://tumejortorrent.com/pictures/c/1869_the-big-bang-theory-.jpg",
-      fileSize: "2,4 Gb",
-      releaseDate: "09-03-2016",
-      urltodownload: "http://tumejortorrent.com/pictures/c/1092_the-big-bang-theory.jpg",
-      imdbRating: "3.9",
-      imdbID: "2081",
-      rottenTomatoes: "16%",
-      tmdbRating: "4.6",
-      allreadyDownloaded: true
-    };
-    document.getElementById("show-box-in-rows").innerHTML += renderFilm(show1)
+        var show1 = {
+            title: "prueba1",
+            year: "2017",
+            originalTitle: "The firm",
+            urlBase: "http://wwww.google.es",
+            domain: "descargas2020.org",
+            description: "Descripcion de palo",
+            sinopsis: "Sinopsis sinopsis",
+            quality: "8K 4098p",
+            urlwithCover: "https://blazing.network/imagenes/peliculas/Una%20Cenicienta%20Moderna%20Un%20Deseo%20de%20Navidad.jpg",
+            fileSize: "2,4 Gb",
+            releaseDate: "09-03-2016",
+            urltodownload: "http://tumejortorrent.com/pictures/c/1092_the-big-bang-theory.jpg",
+            imdbRating: "3.9",
+            imdbID: "2081",
+            rottenTomatoes: "16%",
+            tmdbRating: "4.6",
+            allreadyDownloaded: true
+        };
+        document.getElementById("show-box-in-rows").innerHTML += renderFilm(show1)
 
-    var show2 = {
-      title: "prueba",
-      year: "2017",
-      originalTitle: "The firm",
-      urlBase: "http://wwww.google.es",
-      description: "Descripcion de palo",
-      sinopsis: "Sinopsis sin opsis",
-      quality: "3K 1098p",
-      urlwithCover: "http://tumejortorrent.com/pictures/c/2261_modern-family.jpg",
-      fileSize: "2,8 Gb",
-      releaseDate: "23-06-2018",
-      urltodownload: "http://tumejortorrent.com/pictures/c/1303_modern-family.jpg",
-      imdbRating: "8.9",
-      imdbID: "4081",
-      rottenTomatoes: "66%",
-      tmdbRating: "1.6",
-      allreadyDownloaded: false
-    };
-    document.getElementById("show-box-in-rows").innerHTML += renderFilm(show2)
+        var show2 = {
+            title: "prueba2",
+            year: "2017",
+            originalTitle: "The firm",
+            urlBase: "http://wwww.google.es",
+            domain: "dontorrent.org",
+            description: "Descripcion de palo",
+            sinopsis: "Sinopsis sin opsis",
+            quality: "3K 1098p",
+            urlwithCover: "http://tumejortorrent.com/pictures/c/2261_modern-family.jpg",
+            fileSize: "2,8 Gb",
+            releaseDate: "23-06-2018",
+            urltodownload: "http://tumejortorrent.com/pictures/c/1303_modern-family.jpg",
+            imdbRating: "8.9",
+            imdbID: "4081",
+            rottenTomatoes: "66%",
+            tmdbRating: "1.6",
+            allreadyDownloaded: false
+        };
+        document.getElementById("show-box-in-rows").innerHTML += renderFilm(show2)
 
-    var showCollection1 = {
-      "name": "la-resistencia/4133",
-      "url": null,
-      "shows": [{
-        "title": "La Resistencia",
-        "year": "2018",
-        "urlBase": "http://tumejortorrent.com/descargar/serie-en-hd/la-resistencia/temporada-2/capitulo-20/",
-        "description": "La Resistencia es un programa de televisi?n espa?ol , entrevitas y comedia.",
-        "sinopsis": "",
-        "quality": "HDTV 720p",
-        "urlwithCover": "http://tumejortorrent.com/pictures/c/4133_la-resistencia.jpg",
-        "fileSize": "1.9 GB",
-        "releaseDate": "12-10-2018",
-        "urltodownload": "http://tumejortorrent.com/descargar-torrent/112141_-1539337780-la-resistencia---temporada-2--hdtv-720p-ac3-5-1/",
-        "imdbRating": null,
-        "imdbID": null,
-        "rottenTomatoes": null,
-        "tmdbRating": null,
-        "error": 0,
-        "currentSession": "2",
-        "currentEpisode": "20",
-        "collectionName": "la-resistencia/4133",
-        "allreadyDownloaded": false
-      }, {
-        "title": "La Resistencia",
-        "year": "2018",
-        "urlBase": "http://tumejortorrent.com/descargar/serie-en-hd/la-resistencia/temporada-2/capitulo-19/",
-        "description": "La Resistencia es un programa de televisi?n espa?ol , entrevitas y comedia.",
-        "sinopsis": "",
-        "quality": "HDTV 720p",
-        "urlwithCover": "http://tumejortorrent.com/pictures/c/4133_la-resistencia.jpg",
-        "fileSize": "1.8 GB",
-        "releaseDate": "11-10-2018",
-        "urltodownload": "http://tumejortorrent.com/descargar-torrent/112076_-1539259898-la-resistencia---temporada-2--hdtv-720p-ac3-5-1/",
-        "imdbRating": null,
-        "imdbID": null,
-        "rottenTomatoes": null,
-        "tmdbRating": null,
-        "error": 0,
-        "currentSession": "2",
-        "currentEpisode": "19",
-        "collectionName": "la-resistencia/4133",
-        "allreadyDownloaded": true
-      }, {
-        "title": "La Resistencia",
-        "year": "2018",
-        "urlBase": "http://tumejortorrent.com/descargar/serie-en-hd/la-resistencia/temporada-2/capitulo-18/",
-        "description": "La Resistencia es un programa de televisi?n espa?ol , entrevitas y comedia.",
-        "sinopsis": "",
-        "quality": "HDTV 720p",
-        "urlwithCover": "http://tumejortorrent.com/pictures/c/4133_la-resistencia.jpg",
-        "fileSize": "2 GB",
-        "releaseDate": "10-10-2018",
-        "urltodownload": "http://tumejortorrent.com/descargar-torrent/112034_-1539170442-la-resistencia---temporada-2--hdtv-720p-ac3-5-1/",
-        "imdbRating": null,
-        "imdbID": null,
-        "rottenTomatoes": null,
-        "tmdbRating": null,
-        "error": 0,
-        "currentSession": "2",
-        "currentEpisode": "18",
-        "collectionName": "la-resistencia/4133",
-        "allreadyDownloaded": false
-      }],
-      "_id": "ZjohfgBEc5q7uLxw"
-    };
+        var showCollection1 = {
+            "name": "la-resistencia/4133",
+            "url": null,
+            "shows": [{
+                "title": "La Resistencia",
+                "year": "2018",
+                "urlBase": "http://tumejortorrent.com/descargar/serie-en-hd/la-resistencia/temporada-2/capitulo-20/",
+                "description": "La Resistencia es un programa de televisi?n espa?ol , entrevitas y comedia.",
+                "sinopsis": "",
+                "quality": "HDTV 720p",
+                "urlwithCover": "http://tumejortorrent.com/pictures/c/4133_la-resistencia.jpg",
+                "fileSize": "1.9 GB",
+                "releaseDate": "12-10-2018",
+                "urltodownload": "http://tumejortorrent.com/descargar-torrent/112141_-1539337780-la-resistencia---temporada-2--hdtv-720p-ac3-5-1/",
+                "imdbRating": "8.9",
+                "imdbID": null,
+                "rottenTomatoes": "16 %",
+                "tmdbRating": null,
+                "error": 0,
+                "currentSession": "2",
+                "currentEpisode": "20",
+                "collectionName": "la-resistencia/4133",
+                "allreadyDownloaded": false
+            }, {
+                "title": "La Resistencia",
+                "year": "2018",
+                "urlBase": "http://tumejortorrent.com/descargar/serie-en-hd/la-resistencia/temporada-2/capitulo-19/",
+                "description": "La Resistencia es un programa de televisi?n espa?ol , entrevitas y comedia.",
+                "sinopsis": "",
+                "quality": "HDTV 720p",
+                "urlwithCover": "http://tumejortorrent.com/pictures/c/4133_la-resistencia.jpg",
+                "fileSize": "1.8 GB",
+                "releaseDate": "11-10-2018",
+                "urltodownload": "http://tumejortorrent.com/descargar-torrent/112076_-1539259898-la-resistencia---temporada-2--hdtv-720p-ac3-5-1/",
+                "imdbRating": "8.4",
+                "imdbID": null,
+                "rottenTomatoes": null,
+                "tmdbRating": null,
+                "error": 0,
+                "currentSession": "2",
+                "currentEpisode": "19",
+                "collectionName": "la-resistencia/4133",
+                "allreadyDownloaded": true
+            }, {
+                "title": "La Resistencia",
+                "year": "2018",
+                "urlBase": "http://tumejortorrent.com/descargar/serie-en-hd/la-resistencia/temporada-2/capitulo-18/",
+                "description": "La Resistencia es un programa de televisi?n espa?ol , entrevitas y comedia.",
+                "sinopsis": "",
+                "quality": "HDTV 720p",
+                "urlwithCover": "http://tumejortorrent.com/pictures/c/4133_la-resistencia.jpg",
+                "fileSize": "2 GB",
+                "releaseDate": "10-10-2018",
+                "urltodownload": "http://tumejortorrent.com/descargar-torrent/112034_-1539170442-la-resistencia---temporada-2--hdtv-720p-ac3-5-1/",
+                "imdbRating": "8.9",
+                "imdbID": null,
+                "rottenTomatoes": null,
+                "tmdbRating": null,
+                "error": 0,
+                "currentSession": "2",
+                "currentEpisode": "18",
+                "collectionName": "la-resistencia/4133",
+                "allreadyDownloaded": false
+            }],
+            "_id": "ZjohfgBEc5q7uLxw"
+        };
 
-    document.getElementById("show-box-in-rows").innerHTML += renderShowCollectionBox(showCollection1)
-  </script>
+        document.getElementById("show-box-in-rows").innerHTML += renderShowCollectionBox(showCollection1)
+    </script>
 
 </body>
 
