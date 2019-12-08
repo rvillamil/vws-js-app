@@ -2,7 +2,7 @@
 //
 // npm modules required
 //
-var crawler = require('vws-js-lib/lib/crawler')
+var crawler = require('./vws-js-lib/lib/crawler')
 var pkginfo = require('../package.json')
 
 function getAppVersion() {
@@ -117,7 +117,7 @@ function loadAndRenderLatestTVShows(htmlElementID) {
         ''
     )
     return crawler
-        .crawlTVShows(CRAWL_TV_SHOWS_LIMIT, show => {
+        .crawlTVShowCollections(CRAWL_TV_SHOWS_LIMIT, show => {
             //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
             document.getElementById(htmlElementID).innerHTML += renderTVShow(show)
         })
