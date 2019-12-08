@@ -38,7 +38,7 @@ function renderFilm(show) {
 function renderTVShow(show) {
     return `
     <div class='show-container' 
-                    ondblclick='saveFavoriteTVshow ("${show.collectionName}")' 
+                    ondblclick='saveFavoriteTVshow ("${show.collectionName}", "${show.urlCollection}", "${show.domain}")' 
                     onmouseover='renderAboutShowSection("${show.title}", 
                                                          "${show.year}",
                                                          "${show.description}",
