@@ -15,8 +15,7 @@ function createWindow() {
         icon: path.join(__dirname, '../build/icons/64x64.png'),
         webPreferences: {
             nodeIntegration: true,
-            preload: path.join(__dirname, 'preload.js'),
-            allowRunningInsecureContent: true
+            preload: path.join(__dirname, 'preload.js')
         }
     })
 
