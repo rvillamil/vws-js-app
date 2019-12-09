@@ -29,30 +29,26 @@ function searchShows() {
 
         var modalWindow = showModalWindow(
             'Espere por favor..',
-            'Buscando ...',
+            'Buscando películas y series ...',
             ''
         )
-        //
-        // TODO: Hacer publicas las funci0ones del Crawler y usar en el searcher.js : _doCrawlDataFilmAndSearchFrom y _doCrawlTVShowCollectionAndSearchFrom y usarlas pues buscan en themoviedb y ponenn bien las fotos
-        //
-        return searcher
-            .searchShows(textSearch, SEARCHER_MAX_RESULTS, searchResult => {
-                console.log(`onSearchResult !!  --> ${JSON.stringify(searchResult)}\n\n`)
-                if (searchResult.type == 'film') {
 
-                    document.getElementById("show-search-results").innerHTML += renderFilm(searchResult.show)
-                } else if (searchResult.type == 'tvshowcollection') {
-                    document.getElementById("show-search-results").innerHTML += renderShowCollectionBox(searchResult.show, 1)
-                }
-            })
-            .then(searchShows => {
-                console.log(
-                    `searcher.js - searchShows - results found: ${searchShows.length}`
-                )
-                closeModalWindow(modalWindow)
-            })
-            .catch(err => {
-                onLoadAndRenderShowsError(htmlElementID, modalWindow, err)
-            })
+        return searcher.searchShows(textSearch, SEARCHER_MAX_RESULTS, searchResult => {
+            //console.log(`onSearchResult !!  --> ${JSON.stringify(searchResult)}\n\n`)
+            if (searchResult.type == 'film') {
+                document.getElementById("show-search-results").innerHTML += renderFilm(searchResult.show)
+            } else if (searchResult.type == 'tvshowcollection') {
+                document.getElementById("show-search-results").innerHTML += renderTVShow(searchResult.show)
+            } else {
+                console.log('No deberia de pasar por aqui')
+            }
+        }).then(searchShows => {
+            console.log(
+                `searcher.js - searchShows - results found: ${searchShows.length}`
+            )
+            closeModalWindow(modalWindow)
+        }).catch(err => {
+            onLoadAndRenderShowsError("searching-shows-content", modalWindow, err)
+        })
     }
 }

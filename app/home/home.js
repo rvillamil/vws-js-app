@@ -149,9 +149,8 @@ function onLoadAndRenderShowsError(htmlElementID, modalWindow, err) {
     closeModalWindow(modalWindow)
     modalWindow = showModalWindow(
         'Error grave',
-        'Reinicie la aplicacion. Compruebe en un navegador, que el portal www.tumejortorrent.com esta disponible',
-        'OMG!'
-    )
+        'Prueba otra vez o bien compruebe en un navegador, que los portales \'descargas2020\' y \'dontorrent\' estan disponibles',
+        `${err}`)
 }
 
 /**
