@@ -25,18 +25,21 @@ function searchShows() {
     const textSearch = document.getElementById("search-box").value
 
     if (textSearch) {
-        //document.getElementById("show-search-results").innerHTML = ''
+        document.getElementById("show-search-results").innerHTML = ''
 
         var modalWindow = showModalWindow(
             'Espere por favor..',
             'Buscando ...',
             ''
         )
-
+        //
+        // TODO: Hacer publicas las funci0ones del Crawler y usar en el searcher.js : _doCrawlDataFilmAndSearchFrom y _doCrawlTVShowCollectionAndSearchFrom y usarlas pues buscan en themoviedb y ponenn bien las fotos
+        //
         return searcher
             .searchShows(textSearch, SEARCHER_MAX_RESULTS, searchResult => {
                 console.log(`onSearchResult !!  --> ${JSON.stringify(searchResult)}\n\n`)
                 if (searchResult.type == 'film') {
+
                     document.getElementById("show-search-results").innerHTML += renderFilm(searchResult.show)
                 } else if (searchResult.type == 'tvshowcollection') {
                     document.getElementById("show-search-results").innerHTML += renderShowCollectionBox(searchResult.show, 1)
