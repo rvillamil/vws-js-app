@@ -4,6 +4,7 @@
 //
 var searcher = require('vws-js-lib/lib/searcher')
 
+// TODO: Poner mas bonito el buscador y distinguir entre peliculas y series
 function loadAndRenderShowSearch(htmlElementID) {
 
     //document.getElementById("search-box").value = ''
