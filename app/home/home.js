@@ -57,7 +57,10 @@ function loadAndRenderShows(evt, htmlElementID) {
         loadAndRenderLatestTVShows(htmlElementID)
     } else if (htmlElementID == 'favorites-tvshows-content') {
         loadAndRenderFavoritesTVShowCollection(htmlElementID)
-    } else {
+    } else if (htmlElementID == 'searching-shows-content') {
+        loadAndRenderShowSearch(htmlElementID)
+    }
+    else {
         alert(`ERROR !! 'main-content' does not exists '${htmlElementID}'`)
     }
 }

@@ -12,6 +12,7 @@
     <script src="home/constants.js"></script>
     <script src="home/home.js"></script>
     <script src="home/favorites.js"></script>
+    <script src="home/searcher.js"></script>
     <script src="components/modal/modal.js"></script>
     <script src="components/show/show-box.js"></script>
     <!-- CSS -->
@@ -33,6 +34,7 @@
         <button class="tablinks" onclick="loadAndRenderShows(event, 'tvshows-content')">Series</button>
         <button class="tablinks" onclick="loadAndRenderShows(event, 'favorites-tvshows-content')">Mis series
             favoritas</button>
+        <button class="tablinks" onclick="loadAndRenderShowSearch(event, 'searching-shows-content')">Buscador</button>
     </div>
 
     <!-- Zone: Center  -->
@@ -40,6 +42,7 @@
     <div id="billboardfilms-content" class="main-content"></div>
     <div id="tvshows-content" class="main-content"></div>
     <div id="favorites-tvshows-content" class="main-content"></div>
+    <div id="searching-shows-content" class="main-content"></div>
 
     <!-- Zone: Right  -->
     <div class="about-show">
