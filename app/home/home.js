@@ -2,7 +2,7 @@
 //
 // npm modules required
 //
-var crawler = require('./vws-js-lib/lib/crawler')
+var crawler = require('vws-js-lib/lib/crawler')
 var pkginfo = require('../package.json')
 
 function getAppVersion() {
