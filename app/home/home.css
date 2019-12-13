@@ -122,7 +122,7 @@ div.menubar button.active {
     padding: 0px 0px;
     width: var(--main-content-width);
     height: 90vh;
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
@@ -138,7 +138,7 @@ div.about-show {
     width: var(--about-show-width);
     height: 100vh;
     font-size: 0.775em;
-    font-weight: lighter;
+    /*font-weight: lighter*/
 }
 
 #about-show-empty-zone {

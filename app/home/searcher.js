@@ -53,8 +53,8 @@ function searchShows() {
     const textSearch = document.getElementById("search-box").value
 
     if ((textSearch) && (textSearch.length > 2)) {
-        document.getElementById("films-search-results").innerHTML = 'sdasd'
-        document.getElementById("tvshow-search-results").innerHTML = 'asdasd'
+        document.getElementById("films-search-results").innerHTML = ''
+        document.getElementById("tvshow-search-results").innerHTML = ''
 
         var modalWindow = showModalWindow(
             'Espere por favor..',
