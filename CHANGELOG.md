@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.11.0] - 2019-12-13
+
 - New dontorrent.com crawler!
 - New search option! Search tvshows or films and donwload or add to favorites!
 - Upgrading to minor electron version
