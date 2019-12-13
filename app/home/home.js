@@ -57,7 +57,10 @@ function loadAndRenderShows(evt, htmlElementID) {
         loadAndRenderLatestTVShows(htmlElementID)
     } else if (htmlElementID == 'favorites-tvshows-content') {
         loadAndRenderFavoritesTVShowCollection(htmlElementID)
-    } else {
+    } else if (htmlElementID == 'searching-shows-content') {
+        loadAndRenderShowSearch(htmlElementID)
+    }
+    else {
         alert(`ERROR !! 'main-content' does not exists '${htmlElementID}'`)
     }
 }
@@ -117,7 +120,7 @@ function loadAndRenderLatestTVShows(htmlElementID) {
         ''
     )
     return crawler
-        .crawlTVShows(CRAWL_TV_SHOWS_LIMIT, show => {
+        .crawlTVShowCollections(CRAWL_TV_SHOWS_LIMIT, show => {
             //console.log(`onShowFoundEvent - Show crawled !!  --> ${JSON.stringify(show)}\n\n`)
             document.getElementById(htmlElementID).innerHTML += renderTVShow(show)
         })
@@ -146,9 +149,8 @@ function onLoadAndRenderShowsError(htmlElementID, modalWindow, err) {
     closeModalWindow(modalWindow)
     modalWindow = showModalWindow(
         'Error grave',
-        'Reinicie la aplicacion. Compruebe en un navegador, que el portal www.tumejortorrent.com esta disponible',
-        'OMG!'
-    )
+        'Prueba otra vez o bien compruebe en un navegador, que los portales \'descargas2020\' y \'dontorrent\' estan disponibles',
+        `${err}`)
 }
 
 /**

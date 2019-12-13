@@ -138,7 +138,7 @@ div.about-show {
     width: var(--about-show-width);
     height: 100vh;
     font-size: 0.775em;
-    font-weight: lighter;
+    /*font-weight: lighter*/
 }
 
 #about-show-empty-zone {
@@ -196,4 +196,39 @@ div.about-show {
     margin: 0px;
     font-size: 1.2em;
     color: var(--topbar-text-color);
+}
+
+/* -------------------------- Searcher -------------------------- */
+div.show-searcher {
+    position: absolute;
+    top: 8px;
+    left: 30%;
+}
+
+input:invalid ~ span:after {
+    content: '✖';
+    padding-left: 5px;
+    position: absolute:
+}
+
+input:valid ~ span:after {
+    content: '✓';    
+    padding-left: 5px;
+    position: absolute:
+}
+
+input {
+    border: 1px solid var(--menubar-button-text-color);
+    color:  var(--topbar-text-color);
+    background-color:  var(--topbar-background-color);
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    font-weight: lighter;        
+}
+
+div.search-results p {
+    color:  var(--topbar-text-color);
+    padding: 5px;
+    
 }
