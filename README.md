@@ -51,7 +51,7 @@ $npm start
 
 We will look at how to create MacOS, Windows and Linux executables with an app icon. Maybe you need read [official documentation](https://www.electron.build/) on packaging problems
 
-####  Package on platform
+#### Package on platform
 
 ##### OSX
 
@@ -75,6 +75,24 @@ $npm run package-linux
 
 ```sh
 $npm run package-all
+```
+
+### Development tools
+
+#### http-server
+
+For testing the UI, whithout Electron, you can use http server, like [http-server](https://www.npmjs.com/package/http-server) and run on local
+
+- Install http-server
+  
+```sh
+$npm install -g http-server
+```
+
+- Run on directory /app
+  
+```sh
+$http-server .
 ```
 
 #### How-to publish on GitHub: Draft Release

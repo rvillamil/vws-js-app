@@ -72,7 +72,7 @@
     "homepage": "https://github.com/rvillamil/vws-js-app",
     "devDependencies": {
         "eslint": "*",
-        "electron": "7.1.3",
+        "electron": "7.1.4",
         "electron-builder": "21.2.0"
     },
     "dependencies": {
