@@ -14,7 +14,6 @@ You can [download the latest release](https://github.com/rvillamil/vws-js-app/re
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-
 ### Prerequisites
 
 You'll need [Node.js](https://nodejs.org/es/) installed on your computer in order to build this library.
@@ -52,7 +51,7 @@ $npm start
 
 We will look at how to create MacOS, Windows and Linux executables with an app icon. Maybe you need read [official documentation](https://www.electron.build/) on packaging problems
 
-####  Package on platform
+#### Package on platform
 
 ##### OSX
 
@@ -78,6 +77,24 @@ $npm run package-linux
 $npm run package-all
 ```
 
+### Development tools
+
+#### http-server
+
+For testing the UI, whithout Electron, you can use http server, like [http-server](https://www.npmjs.com/package/http-server) and run on local
+
+- Install http-server
+  
+```sh
+$npm install -g http-server
+```
+
+- Run on directory /app
+  
+```sh
+$http-server .
+```
+
 #### How-to publish on GitHub: Draft Release
 
 First update text files:
@@ -99,5 +116,6 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## Acknowledgments 
-* [Christian Engvall](https://github.com/crilleengvall) and his [electron-tutorial-app]( https://github.com/crilleengvall/electron-tutorial-app)
+## Acknowledgments
+
+- [Christian Engvall](https://github.com/crilleengvall) and his [electron-tutorial-app](https://github.com/crilleengvall/electron-tutorial-app)

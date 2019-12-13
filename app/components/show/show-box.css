@@ -74,6 +74,15 @@ a:active {
     font-size: var(--show-box-font-default-size);
 }
 
+.show-box-domain {
+    display: block;
+    margin: 1px;
+    padding: 1px;
+    border: 1px;
+    text-align: center;
+    font-size: var(--show-box-font-default-size);
+}
+
 /* Titulo del show con Tooltip y recortado por puntos */
 
 .show-box-title {

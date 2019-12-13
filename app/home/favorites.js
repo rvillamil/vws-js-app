@@ -28,18 +28,19 @@ var favoriteRepository = new FavoriteRepository(
 function crawlMyFavoritesTVShowCollection(limit, htmlElementID) {
     return favoriteRepository.findAll().then(showCollectionFavoriteList => {
         //console.log(`Loading my favorites: ${JSON.stringify(showCollectionFavoriteList)}\n`)
-        return crawler.crawlTVShowCollections(limit, showCollectionFavoriteList)
+        return crawler.crawlTVShowCollectionsBy(limit, showCollectionFavoriteList)
     })
 }
 
-function saveFavoriteTVshow(collectionName) {
+function saveFavoriteTVshow(collectionName, urlCollection, domain) {
     var r = confirm(
         `¿Quieres añadir la serie '${collectionName}' a tus favoritos?!`
     )
     if (r == true) {
         var showCollection = new ShowCollection()
         showCollection.name = collectionName
-
+        showCollection.url = urlCollection
+        showCollection.domain = domain
         return favoriteRepository
             .save(showCollection)
             .then(newShowCollection => {
