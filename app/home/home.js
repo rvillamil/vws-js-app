@@ -24,8 +24,8 @@ function init() {
     ).innerHTML = `<p>VWS: Video websites scraper ${getAppVersion()}</p>`
 
     //loadAndRenderShows(event, 'tvshows-content');
-    //loadAndRenderShows(event, 'videopremieres-content');
-    loadAndRenderShows(event, 'favorites-tvshows-content')
+    loadAndRenderShows(event, 'videopremieres-content')
+    //loadAndRenderShows(event, 'favorites-tvshows-content')
 }
 
 /**

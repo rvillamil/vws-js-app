@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 - Bug fixed on films with title between '[]'
+- Fix vulnerabilities
 
 ## [1.11.0] - 2019-12-13
 
