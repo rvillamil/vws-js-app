@@ -101,9 +101,14 @@ First update text files:
 
 - Update CHANGELOG.md
 - Update package.json with the new version
+- Export Github Token
+  
+```sh
+$export GH_TOKEN="Github Token"
+```
 
-Draft on GitHub
-
+- Publish release
+  
 ```sh
 $npm run release
 ```
