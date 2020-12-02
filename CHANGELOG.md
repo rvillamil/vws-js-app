@@ -7,8 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.11.3] - 2020-12-02
+
+- pctmix.com site replace descargas2020 site
 - Bug fixed on films with title between '[]'
 - Fix vulnerabilities
+
+## [1.11.2] - 2020-08-13
+
+- Bug fixed on films with title between '[]'
+- Fix vulnerabilities
+- update electron version
+- Video as default view
 
 ## [1.11.0] - 2019-12-13
 
