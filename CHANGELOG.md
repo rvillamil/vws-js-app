@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.11.4] - 2021-02-25
+
+- New URL to download
+- Minor bug fixed
+
 ## [1.11.3] - 2020-12-02
 
 - pctmix.com site replace descargas2020 site

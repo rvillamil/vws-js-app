@@ -224,9 +224,14 @@ function _renderSessionsCollection(showCollection, limit) {
 function _newToolTipTex(show) {
     var tooltiptext = show.title
     if (show.originalTitle != null) {
-        if (show.originalTitle.trim().toUpperCase() != show.title.trim().toUpperCase()) {
-            tooltiptext = show.title + '(' + show.originalTitle + ')'
+        if (show.originalTitle.trim()!='') {
+           if (show.originalTitle.trim().toUpperCase() != show.title.trim().toUpperCase()) {
+                tooltiptext = show.title + '(' + show.originalTitle + ')'
+            }
         }
+    }
+    if (show.urltodownload != null) {
+        tooltiptext = tooltiptext + " - " + show.urltodownload 
     }
     return tooltiptext
 }
