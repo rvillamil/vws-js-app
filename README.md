@@ -14,7 +14,7 @@ You can [download the latest release](https://github.com/rvillamil/vws-js-app/re
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
+### Run local
 
 You'll need [Node.js](https://nodejs.org/es/) installed on your computer in order to build this library.
 
@@ -34,62 +34,23 @@ and finally ..
 $npm start
 ```
 
-Second step
+### Development
 
-You'll need install [wvs-js-lib](https://github.com/rvillamil/vws-js-lib) at same level folder. e.g.
-
-```sh
--- vws-js
-    + vws-js-lib
-    + vws-js-app
-```
-
-Third step: [Link npm module](https://goo.gl/fppRvN)
+Maybe you'll need install [wvs-js-lib](https://github.com/rvillamil/vws-js-lib) at same level folder. e.g.
 
 ```sh
-$cd vws-js-app
-$npm install && npm link ../vws-js-lib # npm install breaks the link ..
+vws-js
+ + vws-js-lib
+ + vws-js-app
 ```
 
-and finally...
+..then [Link npm module](https://goo.gl/fppRvN) before 'start'
 
 ```sh
-$npm start
+$npm install && npm link ../vws-js-lib && electron .
 ```
 
-### Electron builder
-
-We will look at how to create MacOS, Windows and Linux executables with an app icon. Maybe you need read [official documentation](https://www.electron.build/) on packaging problems
-
-#### Package on platform
-
-##### OSX
-
-```sh
-$npm run package-mac
-```
-
-##### Windows
-
-```sh
-$npm run package-win
-```
-
-##### Linux
-
-```sh
-$npm run package-linux
-```
-
-##### All platforms
-
-```sh
-$npm run package-all
-```
-
-### Development tools
-
-#### http-server
+#### Development tools: http-server
 
 For testing the UI, whithout Electron, you can use http server, like [http-server](https://www.npmjs.com/package/http-server) and run on local
 
@@ -105,7 +66,9 @@ $npm install -g http-server
 $http-server .
 ```
 
-#### How-to publish on GitHub: Draft Release
+### Release on Github
+
+We will look at how to create MacOS, Windows and Linux executables with an app icon. Maybe you need read [official documentation](https://www.electron.build/) on packaging problems
 
 First update text files:
 
@@ -114,13 +77,41 @@ First update text files:
 - Export Github Token
   
 ```sh
-$export GH_TOKEN="Github Token"
+$export GH_TOKEN="{{Github Token}}"
 ```
 
 - Publish release
   
 ```sh
 $npm run release
+```
+
+### How-to create package on several platforms
+
+Maybe need create a package for :
+
+#### OSX
+
+```sh
+$npm run package-mac
+```
+
+#### Windows
+
+```sh
+$npm run package-win
+```
+
+#### Linux
+
+```sh
+$npm run package-linux
+```
+
+#### All platforms
+
+```sh
+$npm run package-all
 ```
 
 ## Versioning
