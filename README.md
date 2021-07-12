@@ -18,10 +18,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 You'll need [Node.js](https://nodejs.org/es/) installed on your computer in order to build this library.
 
-First step
-
 ```sh
 $git clone https://github.com/rvillamil/vws-js-app
+```
+
+then ..
+
+```sh
+$npm install
+```
+
+and finally ..
+
+```sh
+$npm start
 ```
 
 Second step

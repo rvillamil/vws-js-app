@@ -2,7 +2,7 @@
 //
 // npm modules required
 //
-var searcher = require('vws-js-lib/lib/searcher')
+var searcher = require('@vws-js-lib/crawler/lib/searcher')
 
 // TODO: Distinguir entre peliculas y series
 function loadAndRenderShowSearch(htmlElementID) {

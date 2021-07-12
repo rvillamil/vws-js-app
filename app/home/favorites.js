@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 //
 // npm modules required
-//
-var ShowCollection = require('vws-js-lib/lib/model/showCollection')
-var crawler = require('vws-js-lib/lib/crawler')
-var FavoriteRepository = require('vws-js-lib/lib/repositories/favoriteRepository')
+
+var ShowCollection = require('@vws-js-lib/crawler/lib/model/showCollection')
+var crawler = require('@vws-js-lib/crawler/lib/crawler')
+var FavoriteRepository = require('@vws-js-lib/crawler/lib/repositories/favoriteRepository')
 const path = require('path')
 const electron = require('electron')
 
