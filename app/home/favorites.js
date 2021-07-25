@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 //
 // npm modules required
 
